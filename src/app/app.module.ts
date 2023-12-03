@@ -13,7 +13,7 @@ import { LoginComponent } from './pages/login/login/login.component';
     AppComponent,
     LoginPageComponent,
     ForgotPwComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

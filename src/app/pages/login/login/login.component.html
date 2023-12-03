@@ -1,45 +1,47 @@
-<div class="login-container">
-  <div class="headline">Sign in</div>
-  <div class="login-input">
-    <div class="input-box">
-      <div class="input">
-        <input type="email" placeholder="Email" />
+<div class="wrapper">
+  <div class="login-container">
+    <div class="headline">Sign in</div>
+    <div class="login-input">
+      <div class="input-box">
+        <div class="input">
+          <input type="email" placeholder="Email" />
+        </div>
+        <div class="icon">
+          <img src="assets/images/mail_icon.svg" alt="email" />
+        </div>
       </div>
-      <div class="icon">
-        <img src="assets/images/mail_icon.svg" alt="email" />
+      <!--  -->
+      <div class="input-box">
+        <div class="input">
+          <input type="password" placeholder="Password" />
+        </div>
+        <div class="icon">
+          <img src="assets/images/key_icon.svg" alt="key" />
+        </div>
       </div>
     </div>
-    <!--  -->
-    <div class="input-box">
-      <div class="input">
-        <input type="password" placeholder="Password" />
-      </div>
-      <div class="icon">
-        <img src="assets/images/key_icon.svg" alt="key" />
-      </div>
+    <!-- Buttons -->
+    <div class="forgot-password mb-3">
+      <a
+        routerLink="/forgot-password"
+        class="text-sm cursor-pointer"
+        style="text-decoration: underline"
+        >Forgot Password?</a
+      >
     </div>
+    <!-- Login Button -->
+    <button class="btn-primary w-full text-center mb-3">
+      <a routerLink="/forgot-password">Sign in</a>
+    </button>
+    <!-- Guest Login -->
+    <button class="btn-secondary w-full text-center mb-3">
+      <a routerLink="/dashboard">Guest</a>
+    </button>
   </div>
-  <!-- Buttons -->
-  <div class="forgot-password mb-3">
-    <a
-      routerLink="/forgot-password"
-      class="text-sm cursor-pointer"
-      style="text-decoration: underline"
-      >Forgot Password?</a
-    >
-  </div>
-  <!-- Login Button -->
-  <button class="btn-primary w-full text-center mb-3">
-    <a routerLink="/forgot-password">Sign in</a>
-  </button>
-  <!-- Guest Login -->
-  <button class="btn-secondary w-full text-center mb-3">
-    <a routerLink="/dashboard">Guest</a>
+  <button class="sign-up-container mt-3" style="gap: 2px !important">
+    <span class="text-xs text-right">Don't have an account?</span>
+    <div class="btn-primary scale-75">
+      <a routerLink="/sign-up">Sign Up</a>
+    </div>
   </button>
 </div>
-<button class="sign-up-container mt-3" style="gap: 2px !important">
-  <span class="text-xs text-right">Don't have an account?</span>
-  <div class="btn-primary scale-75">
-    <a routerLink="/sign-up">Sign Up</a>
-  </div>
-</button>
