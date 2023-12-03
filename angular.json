@@ -3,18 +3,20 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "KanbaNg": {
+    "kanba-ng": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "skipTests": true
+          "skipTests": true,
+          "standalone": false
         },
         "@schematics/angular:class": {
           "skipTests": true
         },
         "@schematics/angular:directive": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": false
         },
         "@schematics/angular:guard": {
           "skipTests": true
@@ -23,7 +25,8 @@
           "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": false
         },
         "@schematics/angular:resolver": {
           "skipTests": true
@@ -39,7 +42,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/kanba-ng",
+            "outputPath": "dist/normaler-name",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -54,12 +57,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -89,10 +87,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "KanbaNg:build:production"
+              "buildTarget": "kanba-ng:build:production"
             },
             "development": {
-              "buildTarget": "KanbaNg:build:development"
+              "buildTarget": "kanba-ng:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -100,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "KanbaNg:build"
+            "buildTarget": "kanba-ng:build"
           }
         },
         "test": {
