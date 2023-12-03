@@ -1,23 +1,22 @@
-<div class="container">
+<div class="content">
   <!-- HEADER START -->
   <div class="header">
     <div class="logo-container">
       <img src="assets/images/logo.svg" alt="logo" width="150em" />
       <span>Task Mastery</span>
     </div>
-    <div class="sign-up-container">
+    <button *ngIf="windowSize > 800" class="sign-up-container">
       <span>Don't have an account?</span>
-
-      <div class="button btn-hover">
+      <div class="btn-primary">
         <a routerLink="/sign-up">Sign Up</a>
       </div>
-    </div>
+    </button>
   </div>
   <!-- HEADER END / LOGIN BOX START -->
 
   <div class="login-container">
-    <div class="headline">Login</div>
-    <div class="input-container">
+    <div class="headline">Sign in</div>
+    <div class="login-input">
       <div class="input-box">
         <div class="input">
           <input type="email" placeholder="Email" />
@@ -29,7 +28,7 @@
       <!--  -->
       <div class="input-box">
         <div class="input">
-          <input type="email" placeholder="Password" />
+          <input type="password" placeholder="Password" />
         </div>
         <div class="icon">
           <img src="assets/images/key_icon.svg" alt="key" />
@@ -37,12 +36,25 @@
       </div>
     </div>
     <!-- Buttons -->
-    <div class="forgot-password">
-      <a href="#">Forgot Password?</a>
+    <div class="forgot-password mb-3">
+      <a href="#" class="text-sm" style="text-decoration: underline"
+        >Forgot Password?</a
+      >
     </div>
-    <div class="button btn-hover">
-      <a routerLink="/dashboard">Login</a>
-    </div>
+    <!-- Login Button -->
+    <button class="btn-primary w-full text-center mb-3">
+      <a routerLink="/dashboard">Sign in</a>
+    </button>
+    <!-- Guest Login -->
+    <button class="btn-secondary w-full text-center mb-3">
+      <a routerLink="/dashboard">Guest</a>
+    </button>
   </div>
+  <button class="sign-up-container mt-3" style="gap: 2px !important">
+    <span class="text-xs text-right">Don't have an account?</span>
+    <div class="btn-primary scale-75">
+      <a routerLink="/sign-up">Sign Up</a>
+    </div>
+  </button>
   <!-- LOGIN BOX END / LOGIN BUTTON START -->
 </div>
