@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login/login.component';
+import { LoginPageComponent } from './pages/login/login-page/login-page.component';
 import { ForgotPwComponent } from './pages/login/forgot-pw/forgot-pw.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: LoginPageComponent },
   { path: 'forgot-password', component: ForgotPwComponent },
 ];
 
