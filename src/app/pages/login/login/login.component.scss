@@ -28,6 +28,15 @@
     font-weight: bold;
     margin-bottom: 20px;
   }
+  .forgot-password {
+    a {
+      text-decoration: underline;
+      &:hover {
+        color: #29abe2;
+        text-decoration: none;
+      }
+    }
+  }
   @media (max-width: 400px) {
     padding: 20px 8px;
   }
