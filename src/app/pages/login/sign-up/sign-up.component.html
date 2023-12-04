@@ -5,37 +5,80 @@
       Sign up to get started.
     </div>
     <!-- Name -->
-    <div class="login-input">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="login-input">
       <div class="input-box">
         <div class="input">
-          <input type="text" placeholder="Full Name" />
+          <input
+            type="text"
+            placeholder="Full Name"
+            formControlName="username"
+          />
         </div>
         <div class="icon">
           <img src="assets/images/person.svg" alt="email" />
         </div>
       </div>
+      <div
+        class="form-err"
+        *ngIf="
+          signupForm.controls['username'].invalid &&
+          signupForm.controls['username'].touched
+        "
+      >
+        Please enter your full name (min {{ minNameLength }} characters)
+      </div>
       <!-- Email -->
       <div class="login-input">
         <div class="input-box">
           <div class="input">
-            <input type="email" placeholder="Email" />
+            <input type="email" placeholder="Email" formControlName="email" />
           </div>
           <div class="icon">
             <img src="assets/images/mail_icon.svg" alt="email" />
           </div>
         </div>
+        <div
+          class="form-err"
+          *ngIf="
+            signupForm.controls['email'].invalid &&
+            signupForm.controls['email'].touched
+          "
+        >
+          Please enter a valid email
+        </div>
         <!-- Password -->
         <div class="login-input">
           <div class="input-box">
             <div class="input">
-              <input type="password" placeholder="Password" />
+              <input
+                type="password"
+                placeholder="Password"
+                formControlName="password"
+              />
             </div>
             <div class="icon">
               <img src="assets/images/key_icon.svg" alt="email" />
             </div>
           </div>
+          <div
+            class="form-err"
+            *ngIf="
+              signupForm.controls['password'].invalid &&
+              signupForm.controls['password'].touched
+            "
+          >
+            Password required (min {{ minPasswordLength }} characters)
+          </div>
           <!-- Login Button -->
-          <button routerLink="" class="btn-primary w-full text-center mb-3">
+          <button
+            [ngClass]="{
+              'btn-primary': signupForm.valid,
+              'btn-primary-disabled': !signupForm.valid
+            }"
+            type="submit"
+            [disabled]="!signupForm.valid"
+            class="w-full text-center mb-3"
+          >
             Sign Up
           </button>
           <!-- Guest Login -->
@@ -47,6 +90,6 @@
           </button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>

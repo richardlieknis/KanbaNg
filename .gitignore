@@ -41,6 +41,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Owner files
+
 .gitignore
 /environments/*
 /environments
+/backend/config.php
