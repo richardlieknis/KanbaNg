@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './pages/login/login-page/login-page.component';
 import { ForgotPwComponent } from './pages/login/forgot-pw/forgot-pw.component';
 import { LoginComponent } from './pages/login/login/login.component';
+import { SignUpComponent } from './pages/login/sign-up/sign-up.component';
+import { ResetPwComponent } from './pages/login/reset-pw/reset-pw.component';
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import { LoginComponent } from './pages/login/login/login.component';
     LoginPageComponent,
     ForgotPwComponent,
     LoginComponent,
+    SignUpComponent,
+    ResetPwComponent,
   ],
   imports: [
     BrowserModule,
