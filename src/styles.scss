@@ -18,6 +18,11 @@ a {
   color: unset;
 }
 
+.poppins {
+  font-family: "Poppins", sans-serif;
+  opacity: 0.8;
+}
+
 .btn-primary {
   background-color: #2a3647;
   color: #fff;
@@ -85,4 +90,16 @@ a {
       }
     }
   }
+}
+
+// FONT SECTION
+
+@font-face {
+  font-family: "Poppins";
+  src: url(assets/fonts/Poppins.ttf);
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url(assets/fonts/Roboto.ttf);
 }
