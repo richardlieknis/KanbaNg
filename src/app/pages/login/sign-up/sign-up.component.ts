@@ -20,8 +20,8 @@ export class SignUpComponent {
 
   onSubmit() {
     this.http.post('http://localhost/backend/create_user_db.php', this.signupForm.value)
-      .subscribe((res: any) => {
-        console.log(res);
+      .subscribe((result) => {
+        // console.warn('result: ', result.toLocaleString());
       });
   }
 }
