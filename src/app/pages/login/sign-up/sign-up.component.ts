@@ -1,7 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { min } from 'rxjs';
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -11,6 +10,8 @@ export class SignUpComponent {
   minNameLength = 5;
   minPasswordLength = 5;
 
+  constructor(private http: HttpClient) { }
+
   signupForm: FormGroup = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(this.minNameLength)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
@@ -18,7 +19,9 @@ export class SignUpComponent {
   });
 
   onSubmit() {
-    console.log(this.signupForm.valid);
-    console.log(this.signupForm.value);
+    this.http.post('http://localhost/backend/create_user_db.php', this.signupForm.value)
+      .subscribe((res: any) => {
+        console.log(res);
+      });
   }
 }

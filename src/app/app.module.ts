@@ -9,8 +9,7 @@ import { ForgotPwComponent } from './pages/login/forgot-pw/forgot-pw.component';
 import { LoginComponent } from './pages/login/login/login.component';
 import { SignUpComponent } from './pages/login/sign-up/sign-up.component';
 import { ResetPwComponent } from './pages/login/reset-pw/reset-pw.component';
-
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +24,7 @@ import { ResetPwComponent } from './pages/login/reset-pw/reset-pw.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
 
   ],
   providers: [],
