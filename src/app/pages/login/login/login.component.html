@@ -1,10 +1,10 @@
 <div class="wrapper">
   <div class="login-container">
     <div class="headline poppins">Sign in</div>
-    <div class="login-input">
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="login-input">
       <div class="input-box">
         <div class="input">
-          <input type="email" placeholder="Email" />
+          <input type="email" placeholder="Email" formControlName="email" />
         </div>
         <div class="icon">
           <img src="assets/images/mail_icon.svg" alt="email" />
@@ -13,28 +13,43 @@
       <!--  -->
       <div class="input-box">
         <div class="input">
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+          />
         </div>
         <div class="icon">
           <img src="assets/images/key_icon.svg" alt="key" />
         </div>
       </div>
-    </div>
-    <!-- Buttons -->
-    <div routerLink="/forgot-password" class="forgot-password mb-3">
-      <a class="text-sm cursor-pointer">Forgot Password?</a>
-    </div>
-    <!-- Login Button -->
-    <button routerLink="/sign-in" class="btn-primary w-full text-center mb-3">
-      Sign In
-    </button>
-    <!-- Guest Login -->
-    <button
-      routerLink="/dashboard"
-      class="btn-secondary w-full text-center mb-3"
-    >
-      Guest
-    </button>
+
+      <!-- Buttons -->
+      <div
+        routerLink="/forgot-password"
+        class="forgot-password mb-3 text-center"
+      >
+        <a class="text-sm cursor-pointer">Forgot Password?</a>
+      </div>
+      <!-- Login Button -->
+      <button
+        type="submit"
+        [ngClass]="{
+          'btn-primary': signinForm.valid,
+          'btn-primary-disabled': !signinForm.valid
+        }"
+        class="w-full text-center mb-3"
+      >
+        Sign In
+      </button>
+      <!-- Guest Login -->
+      <button
+        routerLink="/dashboard"
+        class="btn-secondary w-full text-center mb-3"
+      >
+        Guest
+      </button>
+    </form>
   </div>
   <div class="sign-up-container mt-3" style="gap: 2px !important">
     <span class="text-xs text-right">Don't have an account?</span>
