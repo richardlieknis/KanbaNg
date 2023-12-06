@@ -8,7 +8,6 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 include("config.php");
 
-$username = $data['username'];
 $email = $data['email'];
 $user_pw = $data['password'];
 
@@ -19,21 +18,26 @@ if ($connection->connect_error) {
 }
 
 // Prepared Statement, um SQL-Injections zu verhindern
-$sql = "INSERT INTO users (name, password, email) VALUES (?, ?, ?)";
+$sql = "SELECT name, password FROM users WHERE email=?";
 $stmt = $connection->prepare($sql);
 
 if (!$stmt) {
     die("Prepare failed: " . $connection->error);
 }
 
-$stmt->bind_param('sss', $username, $user_pw, $email);
+$stmt->bind_param('s', $email);
 
 // Führe das Prepared Statement aus
-if ($stmt->execute()) {
-    echo json_encode(['status' => 'success', 'message' => 'New record created successfully']);
+$stmt->execute();
+
+// Binden Sie die Ergebnisse an Variablen
+$stmt->bind_result($username, $storedHash);
+
+// Überprüfen Sie das Passwort
+if ($stmt->fetch() && password_verify($user_pw, $storedHash)) {
+    echo json_encode(['status' => 'success', 'message' => 'User verified successfully', 'username' => $username]);
 } else {
-    // Wenn die Einfügeoperation fehlschlägt, gib einen Fehler aus
-    echo json_encode(['status' => 'error', 'message' => 'Error creating new record']);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid credentials']);
 }
 
 $stmt->close();
