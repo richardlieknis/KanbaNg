@@ -1,0 +1,26 @@
+.snackbar {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.snackbar-content {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  .snackbar-message {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+  }
+}

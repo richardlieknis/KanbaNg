@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login/login.component';
 import { SignUpComponent } from './pages/login/sign-up/sign-up.component';
 import { ResetPwComponent } from './pages/login/reset-pw/reset-pw.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     SignUpComponent,
     ResetPwComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
