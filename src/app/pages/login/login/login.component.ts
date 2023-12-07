@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -8,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   signinForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
@@ -16,6 +17,9 @@ export class LoginComponent {
   });
 
   onSubmit() {
-    console.log(this.signinForm.value);
+    this.http.post('http://localhost/backend/verify_user.php', this.signinForm.value)
+      .subscribe((result) => {
+        console.warn('result: ', result);
+      });
   }
 }

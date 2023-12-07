@@ -33,11 +33,16 @@ $stmt->execute();
 // Binden Sie die Ergebnisse an Variablen
 $stmt->bind_result($username, $storedHash);
 
-// Überprüfen Sie das Passwort
+echo $username;
+echo $storedHash;
+
+// Überprüfen Sie das Passwort 
+// TODO: password_verfiy funktioniert nicht?! 
+// Kein True oder False wird zurückgegeben
 if ($stmt->fetch() && password_verify($user_pw, $storedHash)) {
     echo json_encode(['status' => 'success', 'message' => 'User verified successfully', 'username' => $username]);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Invalid credentials']);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid credentials' . password_verify($user_pw, $storedHash) . "       " . $storedHash . "               " . $user_pw]);
 }
 
 $stmt->close();
