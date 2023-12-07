@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  snackbarState: 'visible' | 'hidden' = 'visible';
+
+  showSnackbar() {
+    this.snackbarState = 'visible';
+    setTimeout(() => {
+      this.hideSnackbar();
+    }, 3000);
+  }
+
+  hideSnackbar() {
+    this.snackbarState = 'hidden';
+  }
 
   constructor(
     private http: HttpClient,

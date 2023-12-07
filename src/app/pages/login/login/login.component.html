@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper overflow-hidden">
   <div class="login-container">
     <div class="headline poppins">Sign in</div>
     <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="login-input">
@@ -43,18 +43,18 @@
         Sign In
       </button>
       <!-- Guest Login -->
-      <button
-        routerLink="/dashboard"
-        class="btn-secondary w-full text-center mb-3"
-      >
-        Guest
-      </button>
     </form>
+    <button
+      (click)="hideSnackbar()"
+      class="btn-secondary w-full text-center mb-3"
+    >
+      Guest
+    </button>
+    <button (click)="showSnackbar()">TEST</button>
   </div>
   <div class="sign-up-container mt-3" style="gap: 2px !important">
     <span class="text-xs text-right">Don't have an account?</span>
     <button routerLink="/sign-up" class="btn-primary scale-75">Sign Up</button>
   </div>
+  <app-snackbar [state]="snackbarState"></app-snackbar>
 </div>
-
-<app-snackbar></app-snackbar>

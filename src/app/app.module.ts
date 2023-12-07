@@ -11,6 +11,9 @@ import { SignUpComponent } from './pages/login/sign-up/sign-up.component';
 import { ResetPwComponent } from './pages/login/reset-pw/reset-pw.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,8 @@ import { SnackbarComponent } from './shared/components/snackbar/snackbar.compone
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
 
   ],
   providers: [],
