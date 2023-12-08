@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class SignUpComponent {
   public minNameLength = 5;
   public minPasswordLength = 5;
-  private httpPost: any;
+
   private backendUrl = 'http://localhost/backend/';
 
 
@@ -32,7 +32,7 @@ export class SignUpComponent {
    * and returns a success/error message via snackbar
    */
   onSubmit() {
-    this.httpPost = this.http.post(this.backendUrl + 'create_user.php',
+    this.http.post(this.backendUrl + 'create_user.php',
       this.signupForm.value, { responseType: 'text' })
       .subscribe((result: any) => {
         result = JSON.parse(result);

@@ -30,7 +30,7 @@ export class LoginComponent {
         if (result.status === 'success') {
           this.snackbar.show('You are logged in', 'success');
           setTimeout(() => {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/home']);
           }, 1000);
         } else {
           this.snackbar.show('Something went wrong. Wrong password?', 'error');

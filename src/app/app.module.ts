@@ -12,6 +12,9 @@ import { ResetPwComponent } from './pages/login/reset-pw/reset-pw.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashboardComponent } from './pages/home/dashboard/dashboard.component';
+import { HomeComponent } from './pages/home/home/home.component';
+import { BoardComponent } from './pages/home/board/board.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignUpComponent,
     ResetPwComponent,
     SnackbarComponent,
+    DashboardComponent,
+    HomeComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,9 @@ import { ForgotPwComponent } from './pages/login/forgot-pw/forgot-pw.component';
 import { LoginComponent } from './pages/login/login/login.component';
 import { SignUpComponent } from './pages/login/sign-up/sign-up.component';
 import { ResetPwComponent } from './pages/login/reset-pw/reset-pw.component';
+import { HomeComponent } from './pages/home/home/home.component';
+import { DashboardComponent } from './pages/home/dashboard/dashboard.component';
+import { BoardComponent } from './pages/home/board/board.component';
 
 const routes: Routes = [
   {
@@ -14,6 +17,12 @@ const routes: Routes = [
       { path: 'sign-up', component: SignUpComponent },
       { path: 'forgot-password', component: ForgotPwComponent },
       { path: 'reset-password', component: ResetPwComponent },
+    ]
+  },
+  {
+    path: '', component: HomeComponent, children: [
+      { path: 'home', component: DashboardComponent },
+      { path: 'board', component: BoardComponent },
     ]
   },
 ];
