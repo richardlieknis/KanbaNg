@@ -1,7 +1,7 @@
 <div *ngIf="show" @state [ngClass]="['snackbar', type]">
   <div class="snackbar-content">
     <div class="snackbar-icon">
-      <img src="assets/images/check.svg" alt="check" />
+      <img src="assets/images/{{ icon }}.svg" alt="check" />
     </div>
     <div class="snackbar-message">
       <span class="snackbar-message-text">{{ msg }}</span>

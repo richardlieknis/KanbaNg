@@ -22,6 +22,7 @@ import { Subscription } from 'rxjs';
 
 export class SnackbarComponent implements OnInit, OnDestroy {
   public show = false;
+  public icon = 'error';
   public msg: string = '';
   public type: string = '';
   private snackbarSub: Subscription = new Subscription();
@@ -31,7 +32,6 @@ export class SnackbarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log("TEST");
     this.snackbarSub = this.snackbarService.snackbarState
       .subscribe((state) => {
         if (state.type) {
@@ -39,11 +39,23 @@ export class SnackbarComponent implements OnInit, OnDestroy {
         } else {
           this.type = 'success';
         }
+
+        if (this.type === 'success') {
+          this.icon = 'check';
+        } else if (this.type === 'error') {
+          this.icon = 'error';
+        }
+        // else if (this.type === 'warning') {
+        //   this.icon = 'warning';
+        // } else if (this.type === 'info') {
+        //   this.icon = 'info';
+        // }
+
         this.msg = state.msg;
         this.show = state.show;
         setTimeout(() => {
           this.show = false;
-        }, 3000)
+        }, 4000)
       });
   }
 
