@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent {
   constructor(
     private http: HttpClient,
     private snackbar: SnackbarService,
+    private router: Router
   ) { }
 
   signinForm: FormGroup = new FormGroup({
@@ -24,8 +26,15 @@ export class LoginComponent {
   //TODO: Error handling
   onSubmit() {
     this.http.post('http://localhost/backend/verify_user.php', this.signinForm.value)
-      .subscribe((result) => {
-        console.warn('result: ', result);
+      .subscribe((result: any) => {
+        if (result.status === 'success') {
+          this.snackbar.show('You are logged in', 'success');
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1000);
+        } else {
+          this.snackbar.show('Something went wrong. Wrong password?', 'error');
+        }
       });
   }
 

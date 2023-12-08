@@ -1,4 +1,3 @@
-use function password_hash;
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -35,10 +34,10 @@ $stmt->bind_param('sss', $username, $salt, $email);
 
 // Führe das Prepared Statement aus
 if ($stmt->execute()) {
-    echo json_encode(['status' => 'success', 'message' => 'New record created successfully']);
+    echo json_encode(['status' => 'success', 'message' => 'Your account has been created successfully!']);
 } else {
     // Wenn die Einfügeoperation fehlschlägt, gib einen Fehler aus
-    echo json_encode(['status' => 'error', 'message' => 'Error creating new record']);
+    echo json_encode(['status' => 'error', 'message' => 'Something went wrong! :(']);
 }
 
 $stmt->close();
