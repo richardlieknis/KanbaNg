@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -8,21 +9,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  snackbarState: 'visible' | 'hidden' = 'visible';
-
-  showSnackbar() {
-    this.snackbarState = 'visible';
-    setTimeout(() => {
-      this.hideSnackbar();
-    }, 3000);
-  }
-
-  hideSnackbar() {
-    this.snackbarState = 'hidden';
-  }
 
   constructor(
     private http: HttpClient,
+    private snackbar: SnackbarService,
   ) { }
 
   signinForm: FormGroup = new FormGroup({
@@ -30,10 +20,16 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(5)])
   });
 
+
+  //TODO: Error handling
   onSubmit() {
     this.http.post('http://localhost/backend/verify_user.php', this.signinForm.value)
       .subscribe((result) => {
         console.warn('result: ', result);
       });
+  }
+
+  showSnackbar() {
+    this.snackbar.show('This is a test message', 'success');
   }
 }

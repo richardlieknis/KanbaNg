@@ -10,6 +10,12 @@
   border: 1px solid #eee;
   border-radius: 6px;
   overflow: hidden;
+  &.success {
+    background-color: #fff;
+  }
+  &.danger {
+    background-color: #ec6969;
+  }
 }
 
 .snackbar-content {
