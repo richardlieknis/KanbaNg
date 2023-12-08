@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnDestroy {
-  minNameLength = 5;
-  minPasswordLength = 5;
-  httpPost: any;
+export class SignUpComponent {
+  public minNameLength = 5;
+  public minPasswordLength = 5;
+  private httpPost: any;
+  private backendUrl = 'http://localhost/backend/';
+
 
   constructor(
     private http: HttpClient,
@@ -25,13 +27,17 @@ export class SignUpComponent implements OnDestroy {
     password: new FormControl('', [Validators.required, Validators.minLength(this.minPasswordLength)]),
   });
 
+  /**
+   * Creates a new user in SQL database via PHP
+   * and returns a success/error message via snackbar
+   */
   onSubmit() {
-    this.httpPost = this.http.post('http://localhost/backend/create_user.php',
+    this.httpPost = this.http.post(this.backendUrl + 'create_user.php',
       this.signupForm.value, { responseType: 'text' })
       .subscribe((result: any) => {
         result = JSON.parse(result);
         if (result.status === 'success') {
-          this.snackbar.show('You are signed up', 'success');
+          this.snackbar.show('Your account has been created successfully!', 'success');
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 1000);
@@ -39,9 +45,5 @@ export class SignUpComponent implements OnDestroy {
           this.snackbar.show('Something went wrong. :(', 'error');
         }
       });
-  }
-
-  ngOnDestroy() {
-    this.httpPost.unsubscribe();
   }
 }
