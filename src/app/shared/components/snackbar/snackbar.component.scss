@@ -12,10 +12,10 @@
   border-radius: 6px;
   z-index: 9999;
   &.success {
-    background: linear-gradient(0deg, #5ed87a6a 0%, #a1fbae 100%);
+    background: linear-gradient(0deg, #5ed87a6a 30%, #a1fbae 100%);
   }
   &.error {
-    background: linear-gradient(0deg, #ec6969 0%, #ff9a9a 100%);
+    background: linear-gradient(0deg, #ec6969 30%, #ff9a9a 100%);
   }
 }
 
@@ -30,5 +30,8 @@
     font-family: "OpenSans", sans-serif;
     font-size: 16px;
     color: #333;
+  }
+  img {
+    filter: opacity(0.5);
   }
 }
