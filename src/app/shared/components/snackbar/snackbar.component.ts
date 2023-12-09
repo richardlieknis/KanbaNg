@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
     trigger('state', [
       transition(':enter', [
         style({ bottom: '-100px', opacity: 0 }),
-        animate('300ms ease-in', style({ bottom: '0', opacity: 1 }))
+        animate('300ms ease-in', style({ bottom: '70px', opacity: 1 }))
       ]),
       transition(':leave', [
         animate('150ms cubic-bezier(0.4, 0.0, 0.2, 1)', style({ bottom: '-100px', opacity: 0 }))
@@ -21,6 +21,7 @@ import { Subscription } from 'rxjs';
 })
 
 export class SnackbarComponent implements OnInit, OnDestroy {
+  private testo = '-100px';
   public show = false;
   public icon = 'error';
   public msg: string = '';

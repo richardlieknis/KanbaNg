@@ -26,6 +26,6 @@ export class HomeComponent {
   ) { }
 
   showSnackbar() {
-    this.snackbar.show('Snackbar opened!', 'error');
+    this.snackbar.show('Snackbar opened!', 'success');
   }
 }

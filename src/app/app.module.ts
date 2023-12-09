@@ -15,6 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './pages/home/dashboard/dashboard.component';
 import { HomeComponent } from './pages/home/home/home.component';
 import { BoardComponent } from './pages/home/board/board.component';
+import { AddTaskComponent } from './pages/home/add-task/add-task.component';
+import { ContactsComponent } from './pages/home/contacts/contacts.component';
+import { LegalNoticeComponent } from './pages/home/legal-notice/legal-notice.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +30,9 @@ import { BoardComponent } from './pages/home/board/board.component';
     DashboardComponent,
     HomeComponent,
     BoardComponent,
+    AddTaskComponent,
+    ContactsComponent,
+    LegalNoticeComponent,
   ],
   imports: [
     BrowserModule,
