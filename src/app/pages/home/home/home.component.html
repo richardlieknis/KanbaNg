@@ -3,35 +3,40 @@
   <div class="sidenav">
     <div class="top-corner">
       <div class="logo">
-        <img src="assets/images/logo.svg" alt="logo" />
+        <img src="assets/images/logo_w.svg" width="180em" alt="logo" />
+        <span>Task Mastery</span>
       </div>
     </div>
     <div class="nav-links">
-      <div class="top-nav">
+      <!-- Top links -->
+      <div class="links">
         <ul>
-          <li>
-            <a routerLink="/home" routerLinkActive="active">Summary</a>
-          </li>
-          <li>
-            <a routerLink="/board" routerLinkActive="active">Board</a>
-          </li>
-          <li>
-            <a
-              routerLink="/contact"
-              (click)="showSnackbar()"
-              routerLinkActive="active"
-              >Contact</a
-            >
+          <li
+            routerLink="{{ nav.path }}"
+            (click)="showSnackbar()"
+            routerLinkActive="active"
+            *ngFor="let nav of navLinks; let i = index"
+          >
+            <div class="icon">
+              <img src="assets/images/{{ nav.icon }}.svg" alt="icon" />
+            </div>
+            <span>{{ nav.label }}</span>
           </li>
         </ul>
       </div>
-      <div class="bottom-nav">
+      <!-- Bottom links -->
+      <div class="links">
         <ul>
-          <li>
-            <a href="#">Privacy Policy</a>
-          </li>
-          <li>
-            <a href="#">Terms & Conditions</a>
+          <li
+            routerLink="{{ nav.path }}"
+            (click)="showSnackbar()"
+            routerLinkActive="active"
+            *ngFor="let nav of legalLinks; let i = index"
+          >
+            <div class="icon">
+              <img src="assets/images/{{ nav.icon }}.svg" alt="icon" />
+            </div>
+            <span>{{ nav.label }}</span>
           </li>
         </ul>
       </div>
