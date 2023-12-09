@@ -1,5 +1,57 @@
-<p>home works!</p>
-
-<div routerLink="home">DASHBOARD</div>
-<div routerLink="board">DASHBOARD</div>
-<router-outlet></router-outlet>
+<div class="wrapper">
+  <!-- SideNav -->
+  <div class="sidenav">
+    <div class="top-corner">
+      <div class="logo">
+        <img src="assets/images/logo.svg" alt="logo" />
+      </div>
+    </div>
+    <div class="nav-links">
+      <div class="top-nav">
+        <ul>
+          <li>
+            <a routerLink="/home" routerLinkActive="active">Summary</a>
+          </li>
+          <li>
+            <a routerLink="/board" routerLinkActive="active">Board</a>
+          </li>
+          <li>
+            <a
+              routerLink="/contact"
+              (click)="showSnackbar()"
+              routerLinkActive="active"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="bottom-nav">
+        <ul>
+          <li>
+            <a href="#">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="#">Terms & Conditions</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Right Side Content -->
+  <div class="content">
+    <!-- NavBar -->
+    <div class="navbar">
+      <div>Kanban Project Management Tool</div>
+      <div class="user">
+        <div class="user-name">John Doe</div>
+        <div class="user-avatar">
+          <img src="assets/images/person.svg" alt="avatar" />
+        </div>
+      </div>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
