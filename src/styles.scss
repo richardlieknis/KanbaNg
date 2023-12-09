@@ -19,6 +19,17 @@ a {
   color: unset;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  h1 {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(2rem, 10vw, 3.5rem);
+    color: #000c;
+  }
+}
+
 .poppins {
   font-family: "Poppins", sans-serif;
   opacity: 0.8;
@@ -150,4 +161,9 @@ a {
 @font-face {
   font-family: "OpenSans";
   src: url(assets/fonts/OpenSans.ttf);
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url(assets/fonts/Inter.ttf);
 }
