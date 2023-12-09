@@ -4,7 +4,12 @@
     <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="login-input">
       <div class="input-box">
         <div class="input">
-          <input type="email" placeholder="Email" formControlName="email" />
+          <input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+            spellcheck="false"
+          />
         </div>
         <div class="icon">
           <img src="assets/images/mail_icon.svg" alt="email" />
