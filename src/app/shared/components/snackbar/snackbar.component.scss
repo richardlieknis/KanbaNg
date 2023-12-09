@@ -7,15 +7,15 @@
   width: fit-content;
   padding: 10px 20px;
   background-color: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0 0 10px #ddd;
+  border: 1px solid #eee8;
+  box-shadow: 0 0 10px #0001;
   border-radius: 6px;
-  overflow: hidden;
+  z-index: 9999;
   &.success {
-    background-color: #5ed87a6a;
+    background: linear-gradient(0deg, #5ed87a6a 0%, #a1fbae 100%);
   }
   &.error {
-    background-color: #ec6969;
+    background: linear-gradient(0deg, #ec6969 0%, #ff9a9a 100%);
   }
 }
 

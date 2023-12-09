@@ -28,7 +28,7 @@ export class LoginComponent {
     this.http.post('http://localhost/backend/verify_user.php', this.signinForm.value)
       .subscribe((result: any) => {
         if (result.status === 'success') {
-          this.snackbar.show('You are logged in', 'success');
+          this.snackbar.show('You logged in seccussfully.', 'success');
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 1000);
