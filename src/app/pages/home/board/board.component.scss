@@ -1,0 +1,17 @@
+.right-input {
+  display: flex;
+  gap: 10px;
+  .search {
+    min-width: 120px;
+    display: flex;
+    padding: 5px 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    input {
+      border: none;
+      outline: none;
+      width: 100%;
+    }
+  }
+}

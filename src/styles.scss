@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.placeholder {
+  background-color: #f00;
+  width: 100%;
+  height: 100%;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,11 +29,26 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   margin-bottom: 20px;
   h1 {
     font-family: "Inter", sans-serif;
     font-size: clamp(2rem, 10vw, 3rem);
     color: #000c;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: clamp(5px, 2vw, 30px);
+  @media screen and (max-width: 768px) {
+    padding-bottom: 80px;
   }
 }
 
