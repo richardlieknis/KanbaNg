@@ -49,6 +49,10 @@
       .line {
         background-color: #fff;
       }
+      .symbol {
+        filter: invert(1);
+        background-color: #000;
+      }
     }
   }
 }
@@ -81,6 +85,30 @@
       flex-direction: column;
       align-items: center;
     }
+  }
+}
+
+.bottom {
+  flex-direction: row !important;
+  .symbol {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2a3647;
+    border-radius: 50%;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+    img {
+      width: 80%;
+      height: 80%;
+    }
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
