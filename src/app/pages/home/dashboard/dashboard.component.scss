@@ -49,6 +49,14 @@
       }
     }
   }
+
+  @media screen and (max-width: 370px) {
+    flex-direction: column;
+    .right,
+    .line {
+      display: none !important;
+    }
+  }
 }
 
 .middle {
