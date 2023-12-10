@@ -22,12 +22,17 @@ a {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
   h1 {
     font-family: "Inter", sans-serif;
-    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-size: clamp(2rem, 10vw, 3rem);
     color: #000c;
   }
+}
+
+.content-wrapper {
+  height: 100%;
 }
 
 .poppins {
