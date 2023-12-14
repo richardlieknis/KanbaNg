@@ -1,10 +1,6 @@
 <div class="content-wrapper">
   <header>
     <h1>Add Task</h1>
-    <div class="buttons">
-      <button class="btn btn-secondary">Clear</button>
-      <button class="btn btn-primary">Create Task</button>
-    </div>
   </header>
   <div class="content">
     <div class="add-task-wrapper">
@@ -26,32 +22,66 @@
         <!-- Catagory -->
         <div class="form-input">
           <label for="title">Catagory</label>
-          <div class="input">
-            <input type="text" id="title" />
+          <div class="select">
+            <div class="input" (click)="toggleCategoryDropdown()">
+              <span class="selecter">Select or create a category</span>
+              <img src="assets/images/dropdown.svg" />
+            </div>
+            <div *ngIf="categoryDropdown" class="dropdown">
+              <ul>
+                <li *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]">
+                  <span>Catagory First</span>
+                  <div class="red-circle"></div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <!-- Assign to -->
         <div class="form-input">
           <label for="title">Assign to</label>
-          <div class="input">
-            <input type="text" id="title" />
+          <div class="select">
+            <div class="input" (click)="toggleAssigneeDropdown()">
+              <span class="selecter">Select or invite contact to assign</span>
+              <img src="assets/images/dropdown.svg" />
+            </div>
+            <div *ngIf="assigneeDropdown" class="dropdown">
+              <ul>
+                <li *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]">
+                  <span>Catagory First</span>
+                  <input type="checkbox" />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+      <!-- Divide Line -->
       <div class="divide-line"></div>
       <div class="right">
         <!-- Due Date -->
         <div class="form-input">
           <label for="title">Due Date</label>
           <div class="input">
-            <input type="text" id="title" />
+            <input type="date" id="title" />
           </div>
         </div>
         <!-- Priority -->
         <div class="form-input">
           <label for="title">Priority</label>
-          <div class="input">
-            <input type="text" id="title" />
+          <div class="prio">
+            <button #low class="btn btn-secondary">
+              Low
+              <img src="assets/images/low.svg" alt="" />
+            </button>
+            <button #medium class="btn btn-secondary">
+              Medium
+              <img src="assets/images/medium.svg" alt="" />
+            </button>
+            <button #high class="btn btn-secondary">
+              Urgent
+              <img src="assets/images/urgent.svg" alt="" />
+            </button>
           </div>
         </div>
         <!-- Subtasks -->
@@ -59,8 +89,35 @@
           <label for="title">Subtasks</label>
           <div class="input">
             <input type="text" id="title" />
+            <img src="assets/images/plus.svg" />
+          </div>
+          <div class="output">
+            <ul>
+              <li>
+                <div class="list-content">
+                  <span>Subtask 1</span>
+                  <img src="assets/images/delete.svg" alt="" />
+                </div>
+              </li>
+              <li>
+                <div class="list-content">
+                  <span>Subtask 2</span>
+                  <img src="assets/images/delete.svg" alt="" />
+                </div>
+              </li>
+              <li>
+                <div class="list-content">
+                  <span>Subtask 3</span>
+                  <img src="assets/images/delete.svg" alt="" />
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
+      <div class="buttons">
+        <button class="btn btn-secondary">Clear</button>
+        <button class="btn btn-primary">Create Task</button>
       </div>
     </div>
   </div>
