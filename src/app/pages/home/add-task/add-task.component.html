@@ -25,7 +25,10 @@
           <div class="select">
             <div class="input" (click)="toggleCategoryDropdown()">
               <span class="selecter">Select or create a category</span>
-              <img src="assets/images/dropdown.svg" />
+              <img
+                [ngClass]="{ rotate90: categoryDropdown }"
+                src="assets/images/dropdown.svg"
+              />
             </div>
             <div *ngIf="categoryDropdown" class="dropdown">
               <ul>
@@ -43,7 +46,10 @@
           <div class="select">
             <div class="input" (click)="toggleAssigneeDropdown()">
               <span class="selecter">Select or invite contact to assign</span>
-              <img src="assets/images/dropdown.svg" />
+              <img
+                [ngClass]="{ rotate90: assigneeDropdown }"
+                src="assets/images/dropdown.svg"
+              />
             </div>
             <div *ngIf="assigneeDropdown" class="dropdown">
               <ul>
@@ -89,25 +95,20 @@
           <label for="title">Subtasks</label>
           <div class="input">
             <input type="text" id="title" />
-            <img src="assets/images/plus.svg" />
+            <div class="create-sub">
+              <img *ngIf="false" src="assets/images/plus.svg" />
+              <div *ngIf="true" class="cancel-accept">
+                <img src="assets/images/close.svg" />
+                <div class="divide"></div>
+                <img src="assets/images/check.svg" />
+              </div>
+            </div>
           </div>
           <div class="output">
             <ul>
-              <li>
+              <li *ngFor="let i of [1, 2, 3, 4, 5]">
                 <div class="list-content">
                   <span>Subtask 1</span>
-                  <img src="assets/images/delete.svg" alt="" />
-                </div>
-              </li>
-              <li>
-                <div class="list-content">
-                  <span>Subtask 2</span>
-                  <img src="assets/images/delete.svg" alt="" />
-                </div>
-              </li>
-              <li>
-                <div class="list-content">
-                  <span>Subtask 3</span>
                   <img src="assets/images/delete.svg" alt="" />
                 </div>
               </li>
@@ -115,10 +116,10 @@
           </div>
         </div>
       </div>
-      <div class="buttons">
-        <button class="btn btn-secondary">Clear</button>
-        <button class="btn btn-primary">Create Task</button>
-      </div>
+    </div>
+    <div class="buttons">
+      <button class="btn btn-secondary">Clear</button>
+      <button class="btn btn-primary">Create Task</button>
     </div>
   </div>
 </div>

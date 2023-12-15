@@ -1,8 +1,10 @@
 .buttons {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 20px;
+  margin-bottom: 20px;
 }
 
 .add-task-wrapper {
@@ -39,6 +41,7 @@
   margin-bottom: 20px;
   .select {
     position: relative;
+    cursor: pointer;
   }
   .input {
     display: flex;
@@ -47,7 +50,10 @@
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
-    cursor: pointer;
+    img {
+      cursor: pointer;
+      transition: all 300ms ease-in-out;
+    }
     input {
       border: none;
       outline: none;
@@ -66,6 +72,24 @@
       &::-webkit-resizer {
         background-color: #eee;
         border-radius: 50%;
+      }
+    }
+    .create-sub {
+      width: fit-content;
+      .cancel-accept {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        img {
+          width: 16px;
+        }
+        .divide {
+          width: 3px;
+          height: 20px;
+          border-left: 1px solid #ccc;
+        }
       }
     }
   }
@@ -120,11 +144,13 @@
         justify-content: space-between;
         padding: 5px 10px;
         img {
-          width: 18px;
+          width: 16px;
           margin-right: 10px;
+          filter: opacity(0.5);
           cursor: pointer;
+          transition: all 300ms ease-in-out;
           &:hover {
-            transform: rotate(15deg);
+            transform: rotate(10deg);
           }
         }
         &:hover {
@@ -155,4 +181,8 @@
   border-radius: 50%;
   border: 1px solid #888;
   background: #ff0000;
+}
+
+.rotate90 {
+  transform: rotate(180deg);
 }
