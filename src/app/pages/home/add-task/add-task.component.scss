@@ -5,10 +5,12 @@
   justify-content: flex-end;
   gap: 20px;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 .add-task-wrapper {
   width: 100%;
+  height: 100%;
   max-width: 1000px;
   display: flex;
   justify-content: space-between;
@@ -26,7 +28,7 @@
 
 .divide-line {
   width: 1px;
-  height: 380px;
+  height: 450px;
   background: #ccc;
   @media screen and (max-width: 890px) {
     display: none;
@@ -93,6 +95,7 @@
       }
     }
   }
+
   .dropdown {
     // position: absolute;
     width: 100%;
@@ -135,6 +138,7 @@
       }
     }
   }
+
   .output {
     ul {
       list-style: disc;

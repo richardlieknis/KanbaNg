@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AddTaskComponent {
   public categoryDropdown: boolean = false;
   public assigneeDropdown: boolean = false;
+  public selected = 'low';
 
   constructor() { }
 
@@ -17,5 +18,9 @@ export class AddTaskComponent {
 
   toggleAssigneeDropdown() {
     this.assigneeDropdown = !this.assigneeDropdown;
+  }
+
+  changePriority(priority: string) {
+    this.selected = priority;
   }
 }

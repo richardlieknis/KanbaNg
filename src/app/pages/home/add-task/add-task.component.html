@@ -3,7 +3,7 @@
     <h1>Add Task</h1>
   </header>
   <div class="content">
-    <div class="add-task-wrapper">
+    <form class="add-task-wrapper">
       <div class="left">
         <!-- Title -->
         <div class="form-input">
@@ -16,7 +16,7 @@
         <div class="form-input">
           <label for="title">Description</label>
           <div class="input textarea">
-            <textarea type="text" id="title"></textarea>
+            <textarea type="text" id="description"></textarea>
           </div>
         </div>
         <!-- Catagory -->
@@ -53,9 +53,12 @@
             </div>
             <div *ngIf="assigneeDropdown" class="dropdown">
               <ul>
-                <li *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]">
-                  <span>Catagory First</span>
-                  <input type="checkbox" />
+                <li
+                  (mouseup)="checkbox.checked = !checkbox.checked"
+                  *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"
+                >
+                  <span>Elon Musk</span>
+                  <input #checkbox type="checkbox" />
                 </li>
               </ul>
             </div>
@@ -69,22 +72,34 @@
         <div class="form-input">
           <label for="title">Due Date</label>
           <div class="input">
-            <input type="date" id="title" />
+            <input type="date" id="date" />
           </div>
         </div>
         <!-- Priority -->
         <div class="form-input">
           <label for="title">Priority</label>
           <div class="prio">
-            <button #low class="btn btn-secondary">
+            <button
+              #low
+              (click)="changePriority('low')"
+              [ngClass]="['btn-form', selected]"
+            >
               Low
               <img src="assets/images/low.svg" alt="" />
             </button>
-            <button #medium class="btn btn-secondary">
+            <button
+              #medium
+              (click)="changePriority('medium')"
+              [ngClass]="['btn-form', selected]"
+            >
               Medium
               <img src="assets/images/medium.svg" alt="" />
             </button>
-            <button #high class="btn btn-secondary">
+            <button
+              #urgent
+              (click)="changePriority('urgent')"
+              [ngClass]="['btn-form', selected]"
+            >
               Urgent
               <img src="assets/images/urgent.svg" alt="" />
             </button>
@@ -94,7 +109,7 @@
         <div class="form-input">
           <label for="title">Subtasks</label>
           <div class="input">
-            <input type="text" id="title" />
+            <input type="text" id="subtasks" />
             <div class="create-sub">
               <img *ngIf="false" src="assets/images/plus.svg" />
               <div *ngIf="true" class="cancel-accept">
@@ -115,11 +130,12 @@
             </ul>
           </div>
         </div>
+
+        <div class="buttons">
+          <button class="btn btn-secondary">Clear</button>
+          <button class="btn btn-primary">Create Task</button>
+        </div>
       </div>
-    </div>
-    <div class="buttons">
-      <button class="btn btn-secondary">Clear</button>
-      <button class="btn btn-primary">Create Task</button>
-    </div>
+    </form>
   </div>
 </div>
