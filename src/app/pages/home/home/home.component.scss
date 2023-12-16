@@ -122,17 +122,19 @@
   background-color: #fff;
   box-shadow: 0 5px 10px #0001;
   .user {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    position: relative;
     padding: 5px 10px;
     border-radius: 12px;
     transition: background-color 0.2s ease-in-out;
     &:hover {
       background-color: #f6f7f8;
       cursor: pointer;
+    }
+    .user-button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
     .user-name {
       font-size: 16px;
@@ -153,6 +155,44 @@
         width: 95%;
         height: 95%;
         border-radius: 50%;
+      }
+    }
+    .menu {
+      position: absolute;
+      width: 130px;
+      top: 80%;
+      right: 35%;
+      color: #fff;
+      font-family: "Inter", sans-serif;
+      border-radius: 12px 0 12px 12px;
+      cursor: default;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 20px #0001;
+      z-index: 100;
+      ul {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 10px;
+          color: #000;
+          img {
+            filter: invert(0);
+          }
+          &:hover {
+            background-color: #fffc;
+            cursor: pointer;
+            &:nth-child(1) {
+              border-radius: 12px 0 0 0;
+            }
+            &:nth-child(3) {
+              border-radius: 0 0 12px 12px;
+            }
+          }
+        }
       }
     }
   }

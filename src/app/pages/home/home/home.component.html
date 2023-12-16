@@ -55,9 +55,27 @@
         />
       </div>
       <div class="user">
-        <div class="user-name">John Doe</div>
-        <div class="user-avatar">
-          <img src="assets/images/1.png" alt="avatar" />
+        <div id="menu" (click)="toggleMenuDropdown()" class="user-button">
+          <div class="user-name">John Doe</div>
+          <div class="user-avatar">
+            <img src="assets/images/1.png" alt="avatar" />
+          </div>
+        </div>
+        <div *ngIf="menuDropdown" class="menu">
+          <ul>
+            <li>
+              <img src="assets/images/person.svg" alt="" />
+              <span>Profile</span>
+            </li>
+            <li routerLink="help">
+              <img src="assets/images/help.svg" alt="" />
+              <span>Help</span>
+            </li>
+            <li>
+              <img src="assets/images/logout.svg" alt="" />
+              <span>Logout</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
