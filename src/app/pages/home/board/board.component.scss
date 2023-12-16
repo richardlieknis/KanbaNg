@@ -40,9 +40,6 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        @media screen and (max-width: 300px) {
-          width: 150px;
-        }
       }
       .add {
         width: 25px;
@@ -57,7 +54,7 @@
     }
   }
 
-  @media screen and (max-width: 1245px) {
+  @media screen and (max-width: 1150px) {
     .task-box {
       flex: 1 1 49%;
     }
