@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  font-size: clamp(0.6rem, 4vw, 1rem);
   @media screen and (max-width: 890px) {
     flex-direction: column;
   }
@@ -41,6 +42,9 @@
   flex-direction: column;
   gap: 5px;
   margin-bottom: 20px;
+  .title {
+    font-family: "Inter", sans-serif;
+  }
   .select {
     position: relative;
     cursor: pointer;
@@ -49,6 +53,7 @@
     display: flex;
     padding: 10px 10px;
     justify-content: space-between;
+    align-items: center;
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -60,7 +65,6 @@
       border: none;
       outline: none;
       width: 100%;
-      font-size: 16px;
     }
     textarea {
       border: none;
@@ -68,7 +72,6 @@
       width: 100%;
       min-height: 30px;
       max-height: 200px;
-      font-size: 16px;
       height: 100px;
 
       &::-webkit-resizer {
@@ -139,7 +142,7 @@
     }
   }
 
-  .output {
+  .sub-output {
     ul {
       list-style: disc;
       padding-left: 20px;
@@ -169,7 +172,7 @@
 .prio {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: clamp(1px, 1vw, 10px);
   button {
     width: 100%;
     display: flex;

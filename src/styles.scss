@@ -135,31 +135,43 @@ header {
   color: #2a3647;
   font-weight: bold;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: clamp(3px, 2vw, 10px) clamp(6px, 2vw, 20px);
   white-space: nowrap;
   border: 1px solid #2a36471f;
   transition: all 0.125s ease-in-out;
+  img {
+    width: clamp(10px, 5vw, 16px);
+  }
   &:hover {
     cursor: pointer;
     scale: 0.98;
   }
   &.low {
-    background-color: #02cf2fcc;
-    color: #fff;
+    background-color: #02cf2f;
+    color: #fff !important;
+    img {
+      filter: brightness(0) invert(1);
+    }
   }
   &.medium {
-    background-color: #f5a623cc;
+    background-color: #f5a623;
     color: #fff;
+    img {
+      filter: brightness(0) invert(1);
+    }
   }
   &.urgent {
-    background-color: #d0021bcc;
+    background-color: #d0021b;
     color: #fff;
+    img {
+      filter: brightness(0) invert(1);
+    }
   }
 }
 
 .form-err {
   position: absolute;
-  color: #ff0000;
+  color: #d0021bcc;
   font-size: 12px;
   padding-left: 10px;
   transform: translateY(-24px);
