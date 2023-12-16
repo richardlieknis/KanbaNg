@@ -14,13 +14,11 @@
   </div>
   <div class="footer">
     <div class="contacts">
-      <div class="contact">
-        <img src="assets/images/1.png" alt="user" />
-      </div>
-      <div class="contact">
-        <img src="assets/images/1.png" alt="user" />
-      </div>
-      <div class="contact">
+      <div
+        *ngFor="let counter of [0, 0, 0, 0]; let i = index"
+        class="contact"
+        [style.left.px]="i * 20"
+      >
         <img src="assets/images/1.png" alt="user" />
       </div>
     </div>

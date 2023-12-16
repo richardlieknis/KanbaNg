@@ -3,7 +3,7 @@
   flex-direction: column;
   background-color: #fff;
   border-radius: 16px;
-  padding: clamp(10px, 2vw, 20px);
+  padding: clamp(5px, 2vw, 10px);
   border: 1px solid #eee;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   margin-bottom: 80px;
@@ -27,13 +27,14 @@
   }
   .title {
     font-family: "Inter", sans-serif;
-    font-size: clamp(1rem, 5vw, 1.2rem);
+    font-size: clamp(0.875rem, 5vw, 1rem);
     text-overflow: ellipsis;
   }
 }
 
 .description {
-  font-size: clamp(0.875rem, 5vw, 1rem);
+  font-size: clamp(0.725rem, 5vw, 1rem);
+  line-height: clamp(0.725rem, 5vw, 1.125rem);
   color: #0008;
   margin-bottom: 20px;
 }
@@ -49,32 +50,38 @@
     height: 8px;
   }
   span {
-    font-size: clamp(0.75rem, 5vw, 0.875rem);
+    font-size: clamp(0.625rem, 5vw, 0.75rem);
     color: #0008;
     white-space: nowrap;
   }
 }
 
 .footer {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 5px;
   .contacts {
+    position: relative;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    height: 2rem;
     .contact {
-      width: 35px;
-      height: 35px;
+      position: absolute;
+      top: 0;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
       background-color: #eee;
       border-radius: 50%;
       img {
-        border: 1px solid #fff;
         border-radius: 50%;
-        width: 95%;
-        height: 95%;
+        width: 97%;
+        height: 97%;
       }
     }
   }
