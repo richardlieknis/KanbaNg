@@ -19,6 +19,7 @@ import { AddTaskComponent } from './pages/home/add-task/add-task.component';
 import { ContactsComponent } from './pages/home/contacts/contacts.component';
 import { LegalNoticeComponent } from './pages/home/legal-notice/legal-notice.component';
 import { TaskBoxComponent } from './shared/components/task-box/task-box.component';
+import { HelpComponent } from './pages/home/help/help.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { TaskBoxComponent } from './shared/components/task-box/task-box.componen
     ContactsComponent,
     LegalNoticeComponent,
     TaskBoxComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,

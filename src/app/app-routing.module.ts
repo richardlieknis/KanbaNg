@@ -11,6 +11,7 @@ import { BoardComponent } from './pages/home/board/board.component';
 import { AddTaskComponent } from './pages/home/add-task/add-task.component';
 import { ContactsComponent } from './pages/home/contacts/contacts.component';
 import { LegalNoticeComponent } from './pages/home/legal-notice/legal-notice.component';
+import { HelpComponent } from './pages/home/help/help.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'add-task', component: AddTaskComponent },
       { path: 'contacts', component: ContactsComponent },
       { path: 'legal-notice', component: LegalNoticeComponent },
+      { path: 'help', component: HelpComponent },
     ]
   },
 ];
