@@ -1,0 +1,35 @@
+.legal {
+  max-width: 800px;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(0.725rem, 2vw, 1rem);
+  h3 {
+    font-size: clamp(1.5rem, 2vw, 2.2rem);
+    margin-bottom: 2rem;
+  }
+  h4 {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    margin-bottom: 2rem;
+  }
+  p {
+    font-family: "Roboto", sans-serif;
+    font-size: clamp(0.725rem, 2vw, 1rem);
+    margin-bottom: 2rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 2rem;
+    li {
+      font-family: "Roboto", sans-serif;
+      font-size: clamp(0.725rem, 2vw, 1rem);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  a {
+    color: #29abe2;
+  }
+}
