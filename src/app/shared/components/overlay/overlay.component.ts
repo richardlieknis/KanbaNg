@@ -61,10 +61,13 @@ export class OverlayComponent implements OnInit, OnDestroy {
     this.overlaySub.unsubscribe();
   }
 
-  test(event: any) {
+  /**
+   * set animation state to false when animation is done
+   * @param event - state of animation
+   */
+  overlayBoxAnimation(event: any) {
     if (event.toState === 'void') {
       this.animIsRunning = false;
     }
-    // event.stopPropagation();
   }
 }

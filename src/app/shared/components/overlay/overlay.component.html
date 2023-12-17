@@ -7,7 +7,7 @@
   <div
     *ngIf="show"
     [@state]="show ? 'visible' : 'hidden'"
-    (@state.done)="test($event)"
+    (@state.done)="overlayBoxAnimation($event)"
     (click)="$event.stopPropagation()"
     class="overlay"
   >
