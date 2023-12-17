@@ -22,6 +22,7 @@ import { TaskBoxComponent } from './shared/components/task-box/task-box.componen
 import { HelpComponent } from './pages/home/help/help.component';
 import { CommonModule } from '@angular/common';
 import { AddTaskCompComponent } from './shared/components/add-task/add-task.component';
+import { OverlayComponent } from './shared/components/overlay/overlay.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { AddTaskCompComponent } from './shared/components/add-task/add-task.comp
     TaskBoxComponent,
     HelpComponent,
     AddTaskCompComponent,
+    OverlayComponent,
   ],
   imports: [
     BrowserModule,

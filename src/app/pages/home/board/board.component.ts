@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OverlayService } from '../../../shared/services/overlay.service';
 
 @Component({
   selector: 'app-board',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './board.component.scss'
 })
 export class BoardComponent {
-
+  constructor(
+    public overlayService: OverlayService,
+  ) { }
 }

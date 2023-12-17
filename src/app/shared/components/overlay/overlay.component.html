@@ -1,0 +1,22 @@
+<div *ngIf="show" class="wrapper">
+  <div @state class="overlay">
+    <header>
+      <h1>Add Task</h1>
+      <img
+        (click)="overlayService.hide()"
+        src="assets/images/close.svg"
+        alt=""
+      />
+    </header>
+    <div *ngIf="component">
+      <ng-container [ngSwitch]="component">
+        <ng-container *ngSwitchCase="'add-task'">
+          <app-add-task-comp></app-add-task-comp>
+        </ng-container>
+        <ng-container *ngSwitchCase="'anotherComp'">
+          <app-add-task-comp></app-add-task-comp>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class OverlayService {
+  private overlaySubject = new Subject<any>();
+  public overlayState = this.overlaySubject.asObservable();
+
+  /** Its a function to show overlay
+   *  It takes one parameter component as string
+   * @param component as string, component name to show in overlay
+   */
+  show(component: string) {
+    this.overlaySubject.next({
+      show: true,
+      component
+    });
+  }
+
+  /** Its a function to hide overlay */
+  hide() {
+    this.overlaySubject.next({
+      show: false,
+      component: null
+    });
+  }
+
+  constructor() { }
+}
