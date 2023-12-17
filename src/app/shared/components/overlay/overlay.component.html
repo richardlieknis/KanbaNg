@@ -1,5 +1,10 @@
-<div *ngIf="show" class="wrapper">
-  <div @state class="overlay">
+<div *ngIf="animIsRunning" class="wrapper">
+  <div
+    [@state]="show ? 'visible' : 'hidden'"
+    *ngIf="show"
+    (@state.done)="test($event)"
+    class="overlay"
+  >
     <header>
       <h1>Add Task</h1>
       <img
@@ -13,6 +18,7 @@
         <ng-container *ngSwitchCase="'add-task'">
           <app-add-task-comp></app-add-task-comp>
         </ng-container>
+        <!-- // TODO: Add other Components -->
         <ng-container *ngSwitchCase="'anotherComp'">
           <app-add-task-comp></app-add-task-comp>
         </ng-container>
