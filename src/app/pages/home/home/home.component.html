@@ -13,7 +13,6 @@
         <ul>
           <li
             routerLink="{{ nav.path }}"
-            (click)="showSnackbar()"
             routerLinkActive="active"
             *ngFor="let nav of navLinks; let i = index"
           >
@@ -29,7 +28,6 @@
         <ul>
           <li
             routerLink="{{ nav.path }}"
-            (click)="showSnackbar()"
             routerLinkActive="active"
             *ngFor="let nav of legalLinks; let i = index"
           >
@@ -54,8 +52,8 @@
           alt="logo"
         />
       </div>
-      <div class="user">
-        <div id="menu" (click)="toggleMenuDropdown()" class="user-button">
+      <div (click)="toggleMenuDropdown()" class="user">
+        <div id="menu" class="user-button">
           <div class="user-name">John Doe</div>
           <div class="user-avatar">
             <img src="assets/images/1.png" alt="avatar" />
@@ -71,7 +69,7 @@
               <img src="assets/images/help.svg" alt="" />
               <span>Help</span>
             </li>
-            <li>
+            <li routerLink="login">
               <img src="assets/images/logout.svg" alt="" />
               <span>Logout</span>
             </li>

@@ -20,6 +20,8 @@ import { ContactsComponent } from './pages/home/contacts/contacts.component';
 import { LegalNoticeComponent } from './pages/home/legal-notice/legal-notice.component';
 import { TaskBoxComponent } from './shared/components/task-box/task-box.component';
 import { HelpComponent } from './pages/home/help/help.component';
+import { CommonModule } from '@angular/common';
+import { AddTaskCompComponent } from './shared/components/add-task/add-task.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,7 @@ import { HelpComponent } from './pages/home/help/help.component';
     LegalNoticeComponent,
     TaskBoxComponent,
     HelpComponent,
+    AddTaskCompComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { HelpComponent } from './pages/home/help/help.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CommonModule
 
   ],
   providers: [],
