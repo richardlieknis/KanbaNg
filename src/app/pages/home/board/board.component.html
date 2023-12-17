@@ -6,7 +6,7 @@
         <input type="text" placeholder="Find task" />
         <img src="assets/images/search.svg" alt="search" />
       </div>
-      <div class="add">
+      <div (click)="overlayService.show('add-task')" class="add">
         <button class="btn btn-primary">Add Task</button>
       </div>
     </div>

@@ -21,7 +21,6 @@ import { Subscription } from 'rxjs';
 })
 
 export class SnackbarComponent implements OnInit, OnDestroy {
-  private testo = '-100px';
   public show = false;
   public icon = 'error';
   public msg: string = '';

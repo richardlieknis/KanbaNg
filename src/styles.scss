@@ -34,6 +34,7 @@ header {
   h1 {
     font-family: "Inter", sans-serif;
     font-size: clamp(2rem, 10vw, 3rem);
+    white-space: nowrap;
     color: #000c;
   }
   @media screen and (max-width: 768px) {
