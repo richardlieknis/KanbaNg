@@ -12,16 +12,29 @@ import e from 'express';
   animations: [
     trigger('state', [
       transition(':enter', [
-        style({ transform: 'translate(100%, -50%)', opacity: 1 }),
+        style({ left: '100%', opacity: 0 }),
         animate('300ms ease-in', style({
-          transform: 'translate(-50%, -50%)',
+          left: '30%',
           opacity: 1
         }))
       ]),
       transition(':leave', [
-        animate('300ms ease-in', style({ transform: 'translate(100%, -50%)', opacity: 1 }))
+        animate('300ms ease-in', style({ left: '100%', opacity: 1 }))
       ])
     ]),
+    // BACKDROP ANIMATION
+    trigger('backdrop', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('200ms ease-in', style({
+          opacity: 1
+        }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ opacity: 0 }))
+      ])
+    ]),
+
   ]
 })
 export class OverlayComponent implements OnInit, OnDestroy {
