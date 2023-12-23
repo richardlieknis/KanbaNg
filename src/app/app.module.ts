@@ -23,6 +23,7 @@ import { HelpComponent } from './pages/home/help/help.component';
 import { CommonModule } from '@angular/common';
 import { AddTaskCompComponent } from './shared/components/add-task/add-task.component';
 import { OverlayComponent } from './shared/components/overlay/overlay.component';
+import { ProfileComponent } from './shared/components/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { OverlayComponent } from './shared/components/overlay/overlay.component'
     HelpComponent,
     AddTaskCompComponent,
     OverlayComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

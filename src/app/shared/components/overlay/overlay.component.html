@@ -12,7 +12,7 @@
     class="overlay"
   >
     <header>
-      <h1>Add Task</h1>
+      <h1>{{ title }}</h1>
       <img (click)="overlayService.hide()" src="assets/images/close.svg" />
     </header>
     <div *ngIf="component">
@@ -21,8 +21,8 @@
           <app-add-task-comp></app-add-task-comp>
         </ng-container>
         <!-- // TODO: Add other Components -->
-        <ng-container *ngSwitchCase="'anotherComp'">
-          <app-add-task-comp></app-add-task-comp>
+        <ng-container *ngSwitchCase="'profile'">
+          <app-profile></app-profile>
         </ng-container>
       </ng-container>
     </div>

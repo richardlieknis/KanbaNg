@@ -41,6 +41,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
   public show = false;
   public animIsRunning = false;
   public component: string | null = null;
+  public title: string = '';
   private overlaySub: Subscription = new Subscription();
 
   constructor(
@@ -54,6 +55,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
         this.component = state.component;
         this.show = state.show;
         this.animIsRunning = true;
+        this.setTitle(state.component);
       });
   }
 
@@ -69,5 +71,10 @@ export class OverlayComponent implements OnInit, OnDestroy {
     if (event.toState === 'void') {
       this.animIsRunning = false;
     }
+  }
+
+  setTitle(title: string) {
+    title = title.replace(/-/g, ' ');
+    this.title = title;
   }
 }

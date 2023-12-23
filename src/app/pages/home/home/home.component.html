@@ -61,7 +61,7 @@
         </div>
         <div *ngIf="menuDropdown" class="menu">
           <ul>
-            <li>
+            <li (click)="overlayService.show('profile')">
               <img src="assets/images/person.svg" alt="" />
               <span>Profile</span>
             </li>
