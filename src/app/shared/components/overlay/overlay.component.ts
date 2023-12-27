@@ -74,7 +74,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
   }
 
   setTitle(title: string) {
-    title = title.replace(/-/g, ' ');
+    title = title?.replace(/-/g, ' ');
     this.title = title;
   }
 }

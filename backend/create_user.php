@@ -23,22 +23,39 @@ if ($connection->connect_error) {
 }
 
 // Prepared Statement, um SQL-Injections zu verhindern
-$sql = "INSERT INTO users (name, password, email) VALUES (?, ?, ?)";
-$stmt = $connection->prepare($sql);
+$sqlUsers = "INSERT INTO users (name, password, email) VALUES (?, ?, ?)";
+$stmtUsers = $connection->prepare($sqlUsers);
 
-if (!$stmt) {
+if (!$stmtUsers) {
     die("Prepare failed: " . $connection->error);
 }
 
-$stmt->bind_param('sss', $username, $salt, $email);
+$stmtUsers->bind_param('sss', $username, $salt, $email);
 
 // Führe das Prepared Statement aus
-if ($stmt->execute()) {
-    echo json_encode(['status' => 'success', 'message' => 'Your account has been created successfully!']);
+if ($stmtUsers->execute()) {
+    $insertUserId = $stmtUsers->insert_id;
+    $sqlContacts = "INSERT INTO contacts (user_id, name, email) VALUES (?, ?, ?)";
+    $stmtContacts = $connection->prepare($sqlContacts);
+
+    if (!$stmtContacts) {
+        die("Prepare failed: " . $connection->error);
+    }
+
+    $stmtContacts->bind_param('iss', $insertUserId, $username, $email);
+
+    if ($stmtContacts->execute()) {
+        echo json_encode(['status' => 'success', 'message' => 'Your account has been created successfully!']);
+    } else {
+        // Wenn die Einfügeoperation fehlschlägt, gib einen Fehler aus
+        echo json_encode(['status' => 'error', 'message' => 'Something went wrong! :(']);
+        exit;
+    }
+    $stmtContacts->close();
 } else {
     // Wenn die Einfügeoperation fehlschlägt, gib einen Fehler aus
     echo json_encode(['status' => 'error', 'message' => 'Something went wrong! :(']);
 }
 
-$stmt->close();
+$stmtUsers->close();
 $connection->close();

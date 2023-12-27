@@ -30,15 +30,13 @@ $stmt->bind_param('s', $email);
 // Führe das Prepared Statement aus
 $stmt->execute();
 
-// Binden Sie die Ergebnisse an Variablen
+// Binde die Ergebnisse an Variablen
 $stmt->bind_result($username, $storedHash);
 
 echo $username;
 echo $storedHash;
 
-// Überprüfen Sie das Passwort 
-// TODO: password_verfiy funktioniert nicht?! 
-// Kein True oder False wird zurückgegeben
+
 if ($stmt->fetch() && password_verify($user_pw, $storedHash)) {
     echo json_encode(['status' => 'success', 'message' => 'User verified successfully', 'username' => $username]);
 } else {
