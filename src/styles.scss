@@ -55,6 +55,9 @@ header {
 
 .content-wrapper {
   height: 100%;
+  padding: 10px 20px 60px 20px;
+  height: calc(100% - 80px);
+  overflow-y: auto;
 }
 
 .poppins {

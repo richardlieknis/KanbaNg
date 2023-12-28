@@ -203,12 +203,6 @@
   }
 }
 
-.main-content {
-  padding: 10px 20px 60px 20px;
-  height: calc(100% - 80px);
-  overflow-y: auto;
-}
-
 .mobile {
   @media screen and (max-width: 768px) {
     display: none !important;
