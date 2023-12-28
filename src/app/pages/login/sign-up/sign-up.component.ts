@@ -28,7 +28,7 @@ export class SignUpComponent {
   });
 
   /**
-   * Creates a new user in SQL database via PHP
+   * Creates a new user & contact in SQL database via PHP
    * and returns a success/error message via snackbar
    */
   onSubmit() {
