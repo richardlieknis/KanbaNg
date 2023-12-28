@@ -1,3 +1,28 @@
 <div class="contact-wrapper">
-  <div class="contact-list"></div>
+  <div class="contact-list">
+    <ng-container *ngFor="let i of [0, 0, 0, 0, 0, 0, 0, 0]">
+      <div class="header">
+        <div class="header-letter">A</div>
+      </div>
+      <div class="item">
+        <div class="avatar">
+          <img src="assets/images/1.jpg" alt="avatar" />
+        </div>
+        <div class="info">
+          <div class="name">Amanda Smith</div>
+          <div class="email">amanda.smith&#64;kanbang.com</div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="content-wrapper">
+    <header>
+      <h1>Contacts</h1>
+      <div class="right-input">
+        <div class="add">
+          <button class="btn btn-primary">Add contact</button>
+        </div>
+      </div>
+    </header>
+  </div>
 </div>

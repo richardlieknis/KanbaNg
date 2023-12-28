@@ -1,16 +1,72 @@
 header {
   flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.content-wrapper {
+  @media screen and (max-width: 960px) {
+    display: none;
+  }
 }
 
 .contact-wrapper {
+  display: flex;
   width: 100%;
   height: 100%;
   .contact-list {
     overflow-y: scroll;
-    width: 30%;
+    width: 350px;
     height: calc(100% - 80px);
     background: linear-gradient(180deg, #fff0, #fff);
     box-shadow: 5px 0 10px #0001;
+    padding: 0.625rem 1.25rem;
+    @media screen and (max-width: 960px) {
+      padding-bottom: 80px;
+      width: 100%;
+    }
+    .header {
+      padding: 0.3125rem 0.625rem;
+      border-bottom: 1px solid #0001;
+      margin-bottom: 10px;
+      font-family: "Inter", sans-serif;
+    }
+    .item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 0.625rem 1rem;
+      border-radius: 12px;
+      transition: background-color 0.2s ease-in-out;
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 95%;
+          height: 95%;
+          border-radius: 50%;
+        }
+      }
+      .info {
+        flex: 1;
+        font-family: "Poppins", sans-serif;
+        .email {
+          font-size: 0.75rem;
+          color: #29abe2;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: #00000008;
+      }
+    }
   }
 }
 
