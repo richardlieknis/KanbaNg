@@ -52,6 +52,7 @@ header {
           width: 95%;
           height: 95%;
           border-radius: 50%;
+          object-fit: cover;
         }
       }
       .info {
@@ -73,11 +74,86 @@ header {
 .contact-content {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  .contacts {
-    width: fit-content;
-    max-height: fit-content;
-    background-color: #fff;
+  flex-direction: column;
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+  .avatar {
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    .name {
+      font-size: 1.5rem;
+      font-family: "Inter", sans-serif;
+    }
+    .add-task {
+      display: flex;
+      align-items: center;
+      font-size: 0.875rem;
+      filter: invert(61%) sepia(26%) saturate(1310%) hue-rotate(155deg) brightness(92%) contrast(93%);
+      img {
+        width: 18px;
+        height: 18px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.contact-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  .head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    .edit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      img {
+        width: 18px;
+        height: 18px;
+        filter: invert(1);
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .infos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    .info {
+      .label {
+        font-weight: 600;
+      }
+    }
+    a {
+      color: #29abe2;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
