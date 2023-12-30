@@ -21,14 +21,17 @@
   </div>
   <div class="content-wrapper">
     <header>
-      <h1>Contacts</h1>
+      <h1 (click)="test()">Contacts</h1>
       <div class="right-input">
         <div class="add">
           <button class="btn btn-primary">Add contact</button>
         </div>
       </div>
     </header>
-    <div class="contact-content" *ngIf="showContact">
+    <div
+      class="contact-content"
+      *ngIf="showContact && selectedContact.name.length > 0"
+    >
       <div class="contact-header">
         <div class="avatar">
           <img
@@ -74,6 +77,12 @@
             <div class="value">{{ selectedContact.location }}</div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="contact-content" *ngIf="selectedContact.name.length === 0">
+      <div class="placeholder">
+        <span>Better with a team</span>
+        <span>Select or add a new contact.</span>
       </div>
     </div>
   </div>

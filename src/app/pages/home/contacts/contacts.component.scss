@@ -5,7 +5,7 @@ header {
 }
 
 .content-wrapper {
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 1024px) {
     display: none;
   }
 }
@@ -21,7 +21,7 @@ header {
     background: linear-gradient(180deg, #fff0, #fff);
     box-shadow: 5px 0 10px #0001;
     padding: 0.625rem 1.25rem;
-    @media screen and (max-width: 960px) {
+    @media screen and (max-width: 1024px) {
       padding-bottom: 80px;
       width: 100%;
     }
@@ -59,6 +59,8 @@ header {
         flex: 1;
         font-family: "Poppins", sans-serif;
         .email {
+          max-width: fit-content;
+          white-space: nowrap;
           font-size: 0.75rem;
           color: #29abe2;
         }
@@ -75,6 +77,20 @@ header {
   width: 100%;
   display: flex;
   flex-direction: column;
+  .placeholder {
+    span:nth-child(1) {
+      width: fit-content;
+      font-size: 1rem;
+      font-family: "Inter", sans-serif;
+      border-right: #29abe2 3px solid;
+      padding-right: 1rem;
+      margin-right: 1rem;
+    }
+    // @media screen and (max-width: 1054px) {
+    //   display: flex;
+    //   flex-direction: column;
+    // }
+  }
 }
 
 .contact-header {

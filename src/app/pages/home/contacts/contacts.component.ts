@@ -56,18 +56,20 @@ export class ContactsComponent implements OnInit {
     console.log(id);
     this.contacts.forEach((contact: any) => {
       if (contact.contact_id === id) {
-        this.setSelectedContact(contact);
+        this.selectedContact = contact;
       }
     });
-  }
-
-  setSelectedContact(contact: any) {
-    this.selectedContact = contact;
   }
 
   triggerShowContact() {
     this.showContact = !this.showContact;
   }
+
+  test() {
+    console.log(this.selectedContact);
+  }
+
+
 
   getCurrentWindowWidth() {
     console.log(window.innerWidth);
