@@ -12,9 +12,12 @@ export class AddTaskCompComponent implements OnInit {
   public categoryDropdown: boolean = false;
   public assigneeDropdown: boolean = false;
   public categoryInputActive: boolean = false;
+  public subtaskInputActive: boolean = false;
   public currentDate: string = '';
   public selectedPriority: string = 'low';
   public selectedColor: string = 'red';
+
+  public subtasks: Array<string> = ['Subtask 1', 'Subtask 2', 'Subtask 3'];
 
   testDatensatz = [
     {
@@ -47,8 +50,8 @@ export class AddTaskCompComponent implements OnInit {
     let input = (document.getElementById('category') as HTMLInputElement).value;
     if (input.length <= 0) {
       this.snackbar.show('Please enter a category name', 'error');
-    } else if (input.length > 10) {
-      this.snackbar.show('Category name is too long', 'error');
+    } else if (input.length >= 10) {
+      this.snackbar.show('Category name is too long. Max 10 characters', 'error');
     } else {
       this.snackbar.show('Category created', 'success');
       this.categoryInputActive = false;
@@ -58,6 +61,27 @@ export class AddTaskCompComponent implements OnInit {
         color: this.selectedColor,
       });
     }
+  }
+
+  addSubtask() {
+    let input = (document.getElementById('subtask') as HTMLInputElement).value;
+    if (input.length <= 0) {
+      this.snackbar.show('Please enter a subtask name', 'error');
+    } else if (input.length >= 50) {
+      this.snackbar.show('Subtask name is too long. Max 50 characters', 'error');
+    } else {
+      this.subtasks.push(input);
+      this.subtaskInputActive = false;
+      (document.getElementById('subtask') as HTMLInputElement).value = '';
+    }
+  }
+
+  deleteSubtask(index: number) {
+    this.subtasks.splice(index, 1);
+  }
+
+  toggleSubtaskInput() {
+    this.subtaskInputActive = !this.subtaskInputActive;
   }
 
   toggleNewCategory() {

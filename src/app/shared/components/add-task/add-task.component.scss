@@ -155,6 +155,12 @@
         display: flex;
         justify-content: space-between;
         padding: 5px 10px;
+        span {
+          max-width: 300px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
         img {
           width: 16px;
           margin-right: 10px;
@@ -162,6 +168,7 @@
           cursor: pointer;
           transition: all 300ms ease-in-out;
           &:hover {
+            filter: invert(19%) sepia(87%) saturate(5663%) hue-rotate(345deg) brightness(78%) contrast(112%);
             transform: rotate(10deg);
           }
         }

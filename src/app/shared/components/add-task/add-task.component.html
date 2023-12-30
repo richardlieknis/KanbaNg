@@ -139,22 +139,30 @@
     <div class="form-input">
       <label class="title">Subtasks</label>
       <div class="input">
-        <input type="text" id="subtasks" />
+        <input type="text" id="subtask" />
         <div class="create-sub">
-          <img *ngIf="false" src="assets/images/plus.svg" />
-          <div *ngIf="true" class="cancel-accept">
-            <img src="assets/images/close.svg" />
+          <img
+            (click)="toggleSubtaskInput()"
+            *ngIf="!subtaskInputActive"
+            src="assets/images/plus.svg"
+          />
+          <div *ngIf="subtaskInputActive" class="cancel-accept">
+            <img (click)="toggleSubtaskInput()" src="assets/images/close.svg" />
             <div class="divide"></div>
-            <img src="assets/images/check.svg" />
+            <img (click)="addSubtask()" src="assets/images/check.svg" />
           </div>
         </div>
       </div>
       <div class="sub-output">
         <ul>
-          <li *ngFor="let i of [1, 2, 3, 4, 5]">
+          <li *ngFor="let subtask of subtasks; let i = index">
             <div class="list-content">
-              <span>Subtask 1</span>
-              <img src="assets/images/delete.svg" alt="" />
+              <span>{{ subtask }}</span>
+              <img
+                (click)="deleteSubtask(i)"
+                src="assets/images/delete.svg"
+                alt=""
+              />
             </div>
           </li>
         </ul>
