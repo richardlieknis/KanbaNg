@@ -82,6 +82,10 @@
     }
     .create-sub {
       width: fit-content;
+      img {
+        width: 18px;
+        margin-right: 10px;
+      }
       .cancel-accept {
         height: 100%;
         display: flex;
@@ -152,6 +156,7 @@
   }
 
   .sub-output {
+    min-height: 120px;
     ul {
       list-style: disc;
       padding-left: 20px;

@@ -16,10 +16,10 @@
     </div>
     <!-- Catagory -->
     <div class="form-input">
-      <label class="title">Catagory</label>
+      <label class="title">Category</label>
       <div *ngIf="!categoryInputActive" class="select">
         <div class="input" (click)="toggleCategoryDropdown()">
-          <span class="selecter">Select or create a category</span>
+          <span class="selecter">{{ categoryText }}</span>
           <img
             [ngClass]="{ rotate180: categoryDropdown }"
             src="assets/images/dropdown.svg"
@@ -31,7 +31,10 @@
               <span>Create new category</span>
               <img class="dropdown-add" src="assets/images/plus.svg" alt="" />
             </li>
-            <li *ngFor="let category of testDatensatz.reverse()">
+            <li
+              (click)="addCategory(category)"
+              *ngFor="let category of categories"
+            >
               <span>{{ category.name }}</span>
               <div class="circle-box">
                 <div class="circle {{ category.color }}"></div>
@@ -159,7 +162,10 @@
             src="assets/images/plus.svg"
           />
           <div *ngIf="subtaskInputActive" class="cancel-accept">
-            <img (click)="toggleSubtaskInput()" src="assets/images/close.svg" />
+            <img
+              (click)="toggleSubtaskInput(); clearSubtaskInput()"
+              src="assets/images/close.svg"
+            />
             <div class="divide"></div>
             <img (click)="addSubtask()" src="assets/images/check.svg" />
           </div>

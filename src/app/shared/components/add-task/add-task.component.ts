@@ -3,6 +3,7 @@ import { SnackbarService } from '../../services/snackbar.service';
 import test from 'node:test';
 import { FetchSqlService } from '../../services/fetch-sql.service';
 import { get } from 'http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-task-comp',
@@ -18,49 +19,44 @@ export class AddTaskCompComponent implements OnInit {
   public selectedPriority: string = 'low';
   public selectedColor: string = 'red';
 
+  public categoryText = 'Select or create a category';
+
   public currentDate: string = '';
   public contacts: Array<any> = [];
 
   // data to process add task form
   public subtasks: Array<string> = ['Subtask 1', 'Subtask 2', 'Subtask 3'];
-  public assignees: Array<any> = [];
+  public assignees: Array<number> = [];
+  public category?: number;
 
-  testDatensatz = [
-    {
-      categrory_id: 1,
-      name: 'Test',
-      color: 'red',
-    },
-    {
-      categrory_id: 2,
-      name: 'Test2',
-      color: 'blue',
-    },
-    {
-      categrory_id: 3,
-      name: 'Test3',
-      color: 'orange',
-    }
-  ]
+  newCategory: any;
+  categories: Array<any> = [];
 
 
   constructor(
     private snackbar: SnackbarService,
     private sql: FetchSqlService,
+    private http: HttpClient,
   ) { }
 
   ngOnInit() {
     this.setCurrentDate();
     this.getContacts();
-
+    this.getCategories();
   }
 
   getContacts() {
     this.sql.getContacts().subscribe((data) => {
       this.contacts = data.contacts;
-      // this.processContactData(data.contacts);
     });
   }
+
+  getCategories() {
+    this.sql.getCategories().subscribe((data) => {
+      this.categories = data.categories;
+    });
+  }
+
 
   // processContactData(contacts: any) {
   //   contacts.forEach((contact: any) => {
@@ -77,12 +73,29 @@ export class AddTaskCompComponent implements OnInit {
     } else {
       this.snackbar.show('Category created', 'success');
       this.categoryInputActive = false;
-      this.testDatensatz.push({
-        categrory_id: 4,
+      this.newCategory = {
+        category_id: Number(this.findLastCategoryId()) + 1,
         name: input,
         color: this.selectedColor,
-      });
+      };
+      this.categories.push(this.newCategory);
+      this.writeOnDatabase(this.newCategory);
     }
+  }
+
+
+
+  writeOnDatabase(category: any) {
+    this.http.post('http://localhost/backend/create_category.php',
+      category, { responseType: 'text' })
+      .subscribe((result: any) => {
+        result = JSON.parse(result);
+        if (result.status === 'success') {
+          this.snackbar.show('New category has been created successfully!', 'success');;
+        } else {
+          this.snackbar.show('Something went wrong. :(', 'error');
+        }
+      });
   }
 
   addSubtask() {
@@ -99,21 +112,45 @@ export class AddTaskCompComponent implements OnInit {
   }
 
   /**
-   * Add or remove assignee from task
+   * Add or remove assignee with its ID
    * @param checkbox HTMLInputElement
    * @param id contact id
    */
+  // TODO: checkboxes are not working properly
+  // Evtl für jede einzelne Checkbox eine ID vergeben, sodass man sie auch alle clearen kann
   addAssignee(checkbox: HTMLInputElement, id: number) {
     checkbox.checked = !checkbox.checked;
+    const nummericId = Number(id);
     if (checkbox.checked) {
-      this.assignees.push(id);
+      this.assignees.push(nummericId);
     } else {
       this.assignees.splice(this.assignees.indexOf(id), 1);
     }
   }
 
+  addCategory(category: any) {
+    this.categoryText = category.name;
+    this.category = category.category_id;
+    this.toggleCategoryDropdown();
+  }
+
+
+  findLastCategoryId() {
+    let lastId = 0;
+    this.categories.forEach((category: any) => {
+      if (category.category_id > lastId) {
+        lastId = category.category_id;
+      }
+    });
+    return lastId;
+  }
+
   deleteSubtask(index: number) {
     this.subtasks.splice(index, 1);
+  }
+
+  clearSubtaskInput() {
+    (document.getElementById('subtask') as HTMLInputElement).value = '';
   }
 
   inviteContact() {
