@@ -11,7 +11,7 @@
 body {
   font-family: "Roboto", sans-serif;
   background: #f6f7f8;
-  // overflow: hidden;
+  overflow: hidden; // NOTE: Machte Probleme mit dem Scrollen
 }
 
 a {
@@ -56,7 +56,7 @@ header {
   height: 100%;
   max-width: 100%;
   padding: 10px 20px 60px 20px;
-  overflow-y: scroll !important;
+  overflow-y: scroll;
 }
 
 .poppins {
