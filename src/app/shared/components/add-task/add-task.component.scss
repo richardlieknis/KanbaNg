@@ -178,7 +178,7 @@
   display: flex;
   justify-content: space-between;
   gap: clamp(1px, 1vw, 10px);
-  button {
+  .prio-btn {
     width: 100%;
     display: flex;
     align-items: center;

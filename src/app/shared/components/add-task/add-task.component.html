@@ -106,33 +106,33 @@
     <div class="form-input">
       <label class="title">Priority</label>
       <div class="prio">
-        <button
+        <div
           #low
           (click)="changePriority('low')"
-          class="btn-form"
+          class="btn-form prio-btn"
           [ngClass]="{ low: selectedPriority === 'low' }"
         >
           Low
           <img src="assets/images/low.svg" alt="" />
-        </button>
-        <button
+        </div>
+        <div
           #medium
           (click)="changePriority('medium')"
-          class="btn-form"
+          class="btn-form prio-btn"
           [ngClass]="{ medium: selectedPriority === 'medium' }"
         >
           Medium
           <img src="assets/images/medium.svg" alt="" />
-        </button>
-        <button
+        </div>
+        <div
           #urgent
           (click)="changePriority('urgent')"
-          class="btn-form"
+          class="btn-form prio-btn"
           [ngClass]="{ urgent: selectedPriority === 'urgent' }"
         >
           Urgent
           <img src="assets/images/urgent.svg" alt="" />
-        </button>
+        </div>
       </div>
     </div>
     <!-- Subtasks -->

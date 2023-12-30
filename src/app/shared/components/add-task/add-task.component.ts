@@ -8,11 +8,12 @@ import test from 'node:test';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskCompComponent implements OnInit {
+  public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
   public categoryDropdown: boolean = false;
   public assigneeDropdown: boolean = false;
   public categoryInputActive: boolean = false;
   public currentDate: string = '';
-  public selectedPriority: string | null = null;
+  public selectedPriority: string = 'low';
   public selectedColor: string = 'red';
 
   testDatensatz = [
@@ -33,7 +34,6 @@ export class AddTaskCompComponent implements OnInit {
     }
   ]
 
-  public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
 
   constructor(
     private snackbar: SnackbarService,
@@ -47,14 +47,11 @@ export class AddTaskCompComponent implements OnInit {
     let input = (document.getElementById('category') as HTMLInputElement).value;
     if (input.length <= 0) {
       this.snackbar.show('Please enter a category name', 'error');
-      return;
-    } else if (input.length > 20) {
+    } else if (input.length > 10) {
       this.snackbar.show('Category name is too long', 'error');
-      return;
     } else {
       this.snackbar.show('Category created', 'success');
       this.categoryInputActive = false;
-      (document.getElementById('category') as HTMLInputElement).value = '';
       this.testDatensatz.push({
         categrory_id: 4,
         name: input,
