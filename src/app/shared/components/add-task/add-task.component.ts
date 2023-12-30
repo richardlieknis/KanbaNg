@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SnackbarService } from '../../services/snackbar.service';
+import test from 'node:test';
 
 @Component({
   selector: 'app-add-task-comp',
@@ -8,13 +10,61 @@ import { Component, OnInit } from '@angular/core';
 export class AddTaskCompComponent implements OnInit {
   public categoryDropdown: boolean = false;
   public assigneeDropdown: boolean = false;
+  public categoryInputActive: boolean = false;
   public currentDate: string = '';
-  public selected = '';
+  public selectedPriority: string | null = null;
+  public selectedColor: string = 'red';
 
-  constructor() { }
+  testDatensatz = [
+    {
+      categrory_id: 1,
+      name: 'Test',
+      color: 'red',
+    },
+    {
+      categrory_id: 2,
+      name: 'Test2',
+      color: 'blue',
+    },
+    {
+      categrory_id: 3,
+      name: 'Test3',
+      color: 'orange',
+    }
+  ]
+
+  public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
+
+  constructor(
+    private snackbar: SnackbarService,
+  ) { }
 
   ngOnInit() {
     this.setCurrentDate();
+  }
+
+  createNewCategory() {
+    let input = (document.getElementById('category') as HTMLInputElement).value;
+    if (input.length <= 0) {
+      this.snackbar.show('Please enter a category name', 'error');
+      return;
+    } else if (input.length > 20) {
+      this.snackbar.show('Category name is too long', 'error');
+      return;
+    } else {
+      this.snackbar.show('Category created', 'success');
+      this.categoryInputActive = false;
+      (document.getElementById('category') as HTMLInputElement).value = '';
+      this.testDatensatz.push({
+        categrory_id: 4,
+        name: input,
+        color: this.selectedColor,
+      });
+    }
+  }
+
+  toggleNewCategory() {
+    this.categoryInputActive = !this.categoryInputActive;
   }
 
   toggleCategoryDropdown() {
@@ -26,7 +76,11 @@ export class AddTaskCompComponent implements OnInit {
   }
 
   changePriority(priority: string) {
-    this.selected = priority;
+    this.selectedPriority = priority;
+  }
+
+  changeColor(color: string) {
+    this.selectedColor = this.selectedColor === color ? 'red' : color;
   }
 
   setCurrentDate() {

@@ -17,21 +17,48 @@
     <!-- Catagory -->
     <div class="form-input">
       <label class="title">Catagory</label>
-      <div class="select">
+      <div *ngIf="!categoryInputActive" class="select">
         <div class="input" (click)="toggleCategoryDropdown()">
           <span class="selecter">Select or create a category</span>
           <img
-            [ngClass]="{ rotate90: categoryDropdown }"
+            [ngClass]="{ rotate180: categoryDropdown }"
             src="assets/images/dropdown.svg"
           />
         </div>
         <div *ngIf="categoryDropdown" class="dropdown">
           <ul>
-            <li *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]">
-              <span>Catagory First</span>
-              <div class="red-circle"></div>
+            <li (click)="toggleNewCategory()">
+              <span>Create new category</span>
+              <img class="dropdown-add" src="assets/images/plus.svg" alt="" />
+            </li>
+            <li *ngFor="let category of testDatensatz.reverse()">
+              <span>{{ category.name }}</span>
+              <div class="circle-box">
+                <div class="circle {{ category.color }}"></div>
+              </div>
             </li>
           </ul>
+        </div>
+      </div>
+      <!-- own category input -->
+      <div *ngIf="categoryInputActive" class="input">
+        <input type="text" id="category" />
+        <div class="create-sub">
+          <div class="cancel-accept">
+            <img (click)="toggleNewCategory()" src="assets/images/close.svg" />
+            <div class="divide"></div>
+            <img (click)="createNewCategory()" src="assets/images/check.svg" />
+          </div>
+        </div>
+      </div>
+      <!-- Category Color Selection -->
+      <div *ngIf="categoryInputActive" class="select-color">
+        <div *ngFor="let color of categoryColors" class="circle-box">
+          <div
+            class="circle {{ color }}"
+            [class.selected]="color === selectedColor"
+            (click)="changeColor(color)"
+          ></div>
         </div>
       </div>
     </div>
@@ -42,7 +69,7 @@
         <div class="input" (click)="toggleAssigneeDropdown()">
           <span class="selecter">Select or invite contact to assign</span>
           <img
-            [ngClass]="{ rotate90: assigneeDropdown }"
+            [ngClass]="{ rotate180: assigneeDropdown }"
             src="assets/images/dropdown.svg"
           />
         </div>
@@ -83,7 +110,7 @@
           #low
           (click)="changePriority('low')"
           class="btn-form"
-          [ngClass]="{ low: selected === 'low' }"
+          [ngClass]="{ low: selectedPriority === 'low' }"
         >
           Low
           <img src="assets/images/low.svg" alt="" />
@@ -92,7 +119,7 @@
           #medium
           (click)="changePriority('medium')"
           class="btn-form"
-          [ngClass]="{ medium: selected === 'medium' }"
+          [ngClass]="{ medium: selectedPriority === 'medium' }"
         >
           Medium
           <img src="assets/images/medium.svg" alt="" />
@@ -101,7 +128,7 @@
           #urgent
           (click)="changePriority('urgent')"
           class="btn-form"
-          [ngClass]="{ urgent: selected === 'urgent' }"
+          [ngClass]="{ urgent: selectedPriority === 'urgent' }"
         >
           Urgent
           <img src="assets/images/urgent.svg" alt="" />

@@ -14,4 +14,12 @@ export class FetchSqlService {
   getContacts(): Observable<any> {
     return this.http.get(this.backendUrl + 'get_contacts.php');
   }
+
+  getTasks(): Observable<any> {
+    return this.http.get(this.backendUrl + 'get_tasks.php');
+  }
+
+  getCategories(): Observable<any> {
+    return this.http.get(this.backendUrl + 'get_categories.php');
+  }
 }
