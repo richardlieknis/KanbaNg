@@ -12,10 +12,11 @@ export class OverlayService {
    *  It takes one parameter component as string
    * @param component as string, component name to show in overlay
    */
-  show(component: string) {
+  show(component: string, subtitle?: string) {
     this.overlaySubject.next({
       show: true,
-      component
+      component,
+      subtitle
     });
   }
 

@@ -12,7 +12,10 @@
     class="overlay"
   >
     <header>
-      <h1>{{ title }}</h1>
+      <div class="header-title">
+        <h1>{{ title }}</h1>
+        <h5 *ngIf="subtitle.length > 0">{{ subtitle }}</h5>
+      </div>
       <img (click)="overlayService.hide()" src="assets/images/close.svg" />
     </header>
     <div *ngIf="component">

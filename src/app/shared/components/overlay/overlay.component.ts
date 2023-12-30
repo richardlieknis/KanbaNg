@@ -3,7 +3,6 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { SnackbarService } from '../../services/snackbar.service';
 import { OverlayService } from '../../services/overlay.service';
 import { Subscription } from 'rxjs';
-import e from 'express';
 
 @Component({
   selector: 'app-overlay',
@@ -42,6 +41,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
   public animIsRunning = false;
   public component: string | null = null;
   public title: string = '';
+  public subtitle: string = '';
   private overlaySub: Subscription = new Subscription();
 
   constructor(
@@ -53,6 +53,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
     this.overlayService.overlayState
       .subscribe((state) => {
         this.component = state.component;
+        this.subtitle = state.subtitle || '';
         this.show = state.show;
         this.animIsRunning = true;
         this.setTitle(state.component);

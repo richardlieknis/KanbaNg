@@ -27,6 +27,19 @@ header {
       background-color: #d5c9b8;
     }
   }
+  .header-title {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    h5 {
+      filter: opacity(0.5);
+    }
+    @media screen and (max-width: 490px) {
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 0.625rem;
+    }
+  }
   @media screen and (max-width: 768px) {
     flex-direction: row !important;
   }
