@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SnackbarService } from '../../services/snackbar.service';
 import test from 'node:test';
+import { FetchSqlService } from '../../services/fetch-sql.service';
+import { get } from 'http';
 
 @Component({
   selector: 'app-add-task-comp',
@@ -13,11 +15,15 @@ export class AddTaskCompComponent implements OnInit {
   public assigneeDropdown: boolean = false;
   public categoryInputActive: boolean = false;
   public subtaskInputActive: boolean = false;
-  public currentDate: string = '';
   public selectedPriority: string = 'low';
   public selectedColor: string = 'red';
 
+  public currentDate: string = '';
+  public contacts: Array<any> = [];
+
+  // data to process add task form
   public subtasks: Array<string> = ['Subtask 1', 'Subtask 2', 'Subtask 3'];
+  public assignees: Array<any> = [];
 
   testDatensatz = [
     {
@@ -40,11 +46,27 @@ export class AddTaskCompComponent implements OnInit {
 
   constructor(
     private snackbar: SnackbarService,
+    private sql: FetchSqlService,
   ) { }
 
   ngOnInit() {
     this.setCurrentDate();
+    this.getContacts();
+
   }
+
+  getContacts() {
+    this.sql.getContacts().subscribe((data) => {
+      this.contacts = data.contacts;
+      // this.processContactData(data.contacts);
+    });
+  }
+
+  // processContactData(contacts: any) {
+  //   contacts.forEach((contact: any) => {
+  //     this.contacts.push(contact);
+  //   });
+  // }
 
   createNewCategory() {
     let input = (document.getElementById('category') as HTMLInputElement).value;
@@ -76,8 +98,26 @@ export class AddTaskCompComponent implements OnInit {
     }
   }
 
+  /**
+   * Add or remove assignee from task
+   * @param checkbox HTMLInputElement
+   * @param id contact id
+   */
+  addAssignee(checkbox: HTMLInputElement, id: number) {
+    checkbox.checked = !checkbox.checked;
+    if (checkbox.checked) {
+      this.assignees.push(id);
+    } else {
+      this.assignees.splice(this.assignees.indexOf(id), 1);
+    }
+  }
+
   deleteSubtask(index: number) {
     this.subtasks.splice(index, 1);
+  }
+
+  inviteContact() {
+    this.snackbar.show('Sorry, this feature is not available yet.', 'error');
   }
 
   toggleSubtaskInput() {

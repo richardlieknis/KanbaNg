@@ -76,11 +76,23 @@
         <div *ngIf="assigneeDropdown" class="dropdown">
           <ul>
             <li
-              (mouseup)="checkbox.checked = !checkbox.checked"
-              *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"
+              (click)="addAssignee(checkbox, contact.contact_id)"
+              *ngFor="let contact of contacts"
             >
-              <span>Elon Musk</span>
-              <input #checkbox type="checkbox" />
+              <span>{{ contact.name }}</span>
+              <input
+                #checkbox
+                type="checkbox"
+                (click)="$event.stopPropagation()"
+              />
+            </li>
+            <li (click)="inviteContact()">
+              <span class="font-semibold">Invite new contact</span>
+              <img
+                class="dropdown-add"
+                src="assets/images/acc_box.svg"
+                alt=""
+              />
             </li>
           </ul>
         </div>

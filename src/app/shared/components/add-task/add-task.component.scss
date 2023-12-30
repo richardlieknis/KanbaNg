@@ -135,6 +135,10 @@
         padding: 4px 8px;
         transition: background 225ms ease-in-out;
 
+        img {
+          width: 16px;
+        }
+
         &:hover {
           background: #eee;
           border-radius: 5px;
