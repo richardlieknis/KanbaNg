@@ -1,1 +1,33 @@
-<p>overlay2 works!</p>
+<div
+  @backdrop
+  *ngIf="animIsRunning"
+  class="wrapper"
+  (click)="overlayService.hide()"
+>
+  <div
+    *ngIf="show"
+    [@state]="show ? 'visible' : 'hidden'"
+    (@state.done)="overlayBoxAnimation($event)"
+    (click)="$event.stopPropagation()"
+    class="overlay"
+  >
+    <header>
+      <div class="header-title">
+        <h1>{{ title }}HALLLOOO</h1>
+        <h5 *ngIf="subtitle.length > 0">{{ subtitle }}</h5>
+      </div>
+      <img (click)="overlayService.hide()" src="assets/images/close.svg" />
+    </header>
+    <div *ngIf="component">
+      <ng-container [ngSwitch]="component">
+        <ng-container *ngSwitchCase="'add-task'">
+          <app-add-task-comp></app-add-task-comp>
+        </ng-container>
+        <!-- // TODO: Add other Components -->
+        <ng-container *ngSwitchCase="'profile'">
+          <app-profile></app-profile>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
