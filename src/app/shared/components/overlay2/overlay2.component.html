@@ -11,17 +11,28 @@
     (click)="$event.stopPropagation()"
     class="overlay"
   >
-    <header>
-      <div class="header-title">
-        <h1>{{ title }}HALLLOOO</h1>
-        <h5 *ngIf="subtitle.length > 0">{{ subtitle }}</h5>
+    <img
+      class="close"
+      (click)="overlayService.hide()"
+      src="assets/images/close.svg"
+      alt=""
+    />
+    <div class="banner">
+      <div class="banner-title">
+        <img src="assets/images/logo.svg" alt="" />
+        <div>
+          <h1>{{ title }}</h1>
+          <span>{{ subtitle }}</span>
+        </div>
       </div>
-      <img (click)="overlayService.hide()" src="assets/images/close.svg" />
-    </header>
-    <div *ngIf="component">
+      <div class="contact-image">
+        <img src="assets/images/1.jpg" alt="" />
+      </div>
+    </div>
+    <div class="body" *ngIf="component">
       <ng-container [ngSwitch]="component">
-        <ng-container *ngSwitchCase="'add-task'">
-          <app-add-task-comp></app-add-task-comp>
+        <ng-container *ngSwitchCase="'contact'">
+          <app-contact></app-contact>
         </ng-container>
         <!-- // TODO: Add other Components -->
         <ng-container *ngSwitchCase="'profile'">
