@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchSqlService } from '../../../shared/services/fetch-sql.service';
+import { OverlayService } from '../../../shared/services/overlay.service';
 
 @Component({
   selector: 'app-contacts',
@@ -19,7 +20,10 @@ export class ContactsComponent implements OnInit {
     location: '',
   }
 
-  constructor(public sql: FetchSqlService) { }
+  constructor(
+    public sql: FetchSqlService,
+    public overlay: OverlayService,
+  ) { }
 
   ngOnInit(): void {
     this.sql.getContacts().subscribe((data: any) => {

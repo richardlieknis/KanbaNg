@@ -9,7 +9,7 @@ export class OverlayService {
   public overlayState = this.overlaySubject.asObservable();
 
   /** Its a function to show overlay
-   *  It takes one parameter component as string
+   *  It takes a parameter component as string and optional subtitle as string
    * @param component as string, component name to show in overlay
    */
   show(component: string, subtitle?: string) {

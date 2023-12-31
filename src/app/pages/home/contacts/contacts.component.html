@@ -25,7 +25,9 @@
       <h1 (click)="test()">Contacts</h1>
       <div class="right-input">
         <div class="add">
-          <button class="btn btn-primary">Add contact</button>
+          <button (click)="overlay.show('add-task')" class="btn btn-primary">
+            Add contact
+          </button>
         </div>
       </div>
     </header>
