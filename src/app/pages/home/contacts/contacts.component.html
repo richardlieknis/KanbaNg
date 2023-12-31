@@ -7,6 +7,7 @@
       <div
         class="item"
         *ngFor="let contact of contactDictionary[letter]"
+        [class.active]="selectedContact.contact_id === contact.contact_id"
         (click)="openContact(contact.contact_id)"
       >
         <div class="avatar" (click)="getCurrentWindowWidth()">

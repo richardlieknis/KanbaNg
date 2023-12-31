@@ -118,6 +118,7 @@ export class AddTaskCompComponent implements OnInit {
    */
   // TODO: checkboxes are not working properly
   // Evtl für jede einzelne Checkbox eine ID vergeben, sodass man sie auch alle clearen kann
+  // Checkboxen werden auch nicht gespeichert, sobald der dropdown zu ist
   addAssignee(checkbox: HTMLInputElement, id: number) {
     checkbox.checked = !checkbox.checked;
     const nummericId = Number(id);
