@@ -5,8 +5,26 @@ header {
 }
 
 .content-wrapper {
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1023px) {
     display: none;
+  }
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  img:nth-child(2) {
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      filter: invert(1);
+      background-color: #d5c9b8;
+    }
   }
 }
 
@@ -21,7 +39,7 @@ header {
     background: linear-gradient(180deg, #fff0, #fff);
     box-shadow: 5px 0 10px #0001;
     padding: 0.625rem 1.25rem;
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 1023px) {
       padding-bottom: 80px;
       width: 100%;
     }

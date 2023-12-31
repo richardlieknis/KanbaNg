@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FetchSqlService } from '../../../shared/services/fetch-sql.service';
 import { OverlayService } from '../../../shared/services/overlay.service';
 
@@ -8,6 +8,14 @@ import { OverlayService } from '../../../shared/services/overlay.service';
   styleUrl: './contacts.component.scss'
 })
 export class ContactsComponent implements OnInit {
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.showContact = true;
+    if (this.getCurrentWindowWidth() < 1024) {
+      this.showContact = false;
+    }
+  }
+
   private contacts = [];
   public showContact: boolean = true;
   public contactDictionary: { [letter: string]: any[] } = {};
@@ -26,6 +34,9 @@ export class ContactsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (this.getCurrentWindowWidth() < 1024) {
+      this.showContact = false;
+    }
     this.sql.getContacts().subscribe((data: any) => {
       this.contacts = data.contacts;
       this.processContactData(data.contacts);
@@ -57,7 +68,7 @@ export class ContactsComponent implements OnInit {
 
   //TODO: open contact in content area
   openContact(id: number) {
-    console.log(id);
+    this.changeContentMobile();
     this.contacts.forEach((contact: any) => {
       if (contact.contact_id === id) {
         this.selectedContact = contact;
@@ -65,18 +76,18 @@ export class ContactsComponent implements OnInit {
     });
   }
 
+  changeContentMobile() {
+    if (this.getCurrentWindowWidth() < 1024) {
+
+      this.showContact = !this.showContact;
+    }
+  }
+
   triggerShowContact() {
     this.showContact = !this.showContact;
   }
 
-  test() {
-    console.log(this.selectedContact);
-  }
-
-
-
   getCurrentWindowWidth() {
-    console.log(window.innerWidth);
     return window.innerWidth;
   }
 }

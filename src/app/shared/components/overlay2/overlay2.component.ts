@@ -76,6 +76,8 @@ export class Overlay2Component implements OnInit, OnDestroy {
 
   setTitle(title: string) {
     title = title?.replace(/-/g, ' ');
-    this.title = title;
+    if (title) {
+      this.title = title[0].toUpperCase() + title.slice(1);
+    }
   }
 }

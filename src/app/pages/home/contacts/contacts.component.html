@@ -1,5 +1,8 @@
 <div class="contact-wrapper">
-  <div class="contact-list" *ngIf="showContact">
+  <div
+    class="contact-list"
+    *ngIf="!showContact || getCurrentWindowWidth() > 1024"
+  >
     <ng-container *ngFor="let letter of getContactDictionaryKeys()">
       <div class="header">
         <div class="header-letter">{{ letter }}</div>
@@ -20,36 +23,47 @@
       </div>
     </ng-container>
   </div>
-  <div class="content-wrapper">
+  <div [style.display]="showContact ? 'block' : 'none'" class="content-wrapper">
     <header>
-      <h1 (click)="test()">Contacts</h1>
+      <h1>Contacts</h1>
       <div class="right-input">
         <div class="add">
-          <button (click)="overlay.show('profile')" class="btn btn-primary">
+          <button
+            (click)="
+              overlay.show('contact', '', 'Tasks are better with a team')
+            "
+            class="btn btn-primary"
+          >
             Add contact
           </button>
         </div>
       </div>
     </header>
-    <div
-      class="contact-content"
-      *ngIf="showContact && selectedContact.name.length > 0"
-    >
-      <div class="contact-header">
-        <div class="avatar">
-          <img
-            [src]="selectedContact.image || 'assets/images/1.jpg'"
-            alt="avatar"
-          />
-        </div>
-        <div class="info">
-          <div class="name">{{ selectedContact.name }}</div>
-          <div class="add-task">
-            <img src="assets/images/plus.svg" alt="" />
-            <span>Add task</span>
+    <div class="contact-content" *ngIf="selectedContact.name.length > 0">
+      <div class="top">
+        <div class="contact-header">
+          <div class="avatar">
+            <img
+              [src]="selectedContact.image || 'assets/images/1.jpg'"
+              alt="avatar"
+            />
+          </div>
+          <div class="info">
+            <div class="name">{{ selectedContact.name }}</div>
+            <div class="add-task">
+              <img src="assets/images/plus.svg" alt="" />
+              <span>Add task</span>
+            </div>
           </div>
         </div>
+        <img
+          *ngIf="getCurrentWindowWidth() < 1024"
+          (click)="triggerShowContact()"
+          src="assets/images/arrow_left.svg"
+          alt=""
+        />
       </div>
+
       <div class="contact-body">
         <div class="head">
           <div class="title">Contact information</div>
