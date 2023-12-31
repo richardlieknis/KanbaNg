@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { AddTaskCompComponent } from './shared/components/add-task/add-task.component';
 import { OverlayComponent } from './shared/components/overlay/overlay.component';
 import { ProfileComponent } from './shared/components/profile/profile.component';
+import { Overlay2Component } from './shared/components/overlay2/overlay2.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { ProfileComponent } from './shared/components/profile/profile.component'
     AddTaskCompComponent,
     OverlayComponent,
     ProfileComponent,
+    Overlay2Component,
   ],
   imports: [
     BrowserModule,
