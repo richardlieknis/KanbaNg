@@ -25,6 +25,7 @@ import { AddTaskCompComponent } from './shared/components/add-task/add-task.comp
 import { OverlayComponent } from './shared/components/overlay/overlay.component';
 import { ProfileComponent } from './shared/components/profile/profile.component';
 import { Overlay2Component } from './shared/components/overlay2/overlay2.component';
+import { ContactComponent } from './shared/components/contact/contact.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { Overlay2Component } from './shared/components/overlay2/overlay2.compone
     OverlayComponent,
     ProfileComponent,
     Overlay2Component,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
