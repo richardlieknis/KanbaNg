@@ -17,7 +17,7 @@ export class OverlayService {
    * @param type as string, type of overlay to show
    * @param subtitle as string, subtitle to show in overlay
    */
-  show(component: string, type?: string, subtitle?: string) {
+  show(component: string, type?: string, subtitle?: string, image?: string, contact?: any) {
     if (type === 'standard') {
       this.lastOverlay = 'standard';
       this.overlaySubject.next({
@@ -30,7 +30,9 @@ export class OverlayService {
       this.overlay2Subject.next({
         show: true,
         component,
-        subtitle
+        subtitle,
+        image,
+        contact
       });
     }
   }

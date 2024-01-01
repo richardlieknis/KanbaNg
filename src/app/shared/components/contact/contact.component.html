@@ -3,28 +3,42 @@
     <div class="input-box">
       <div class="input">
         <img src="assets/images/person.svg" />
-        <input value="Elon Musk" autocomplete="off" type="text" id="name" />
+        <input
+          value="{{ contact?.name || '' }}"
+          autocomplete="off"
+          type="text"
+          id="name"
+          placeholder="Full Name"
+        />
       </div>
       <div class="input">
         <img src="assets/images/mail_icon.svg" />
         <input
-          value="elon.musk@tesla.com"
+          value="{{ contact?.email || '' }}"
           autocomplete="off"
           type="email"
           id="email"
+          placeholder="Email"
         />
       </div>
       <div class="input">
         <img src="assets/images/phone.svg" />
-        <input value="0176828245" autocomplete="off" type="number" id="phone" />
+        <input
+          value="{{ contact?.phone || '' }}"
+          autocomplete="off"
+          type="number"
+          id="phone"
+          placeholder="Phone"
+        />
       </div>
       <div class="input">
         <img src="assets/images/location.svg" />
         <input
-          value="Düsseldorf, Germany"
+          value="{{ contact?.location || '' }}"
           autocomplete="off"
           type="text"
           id="location"
+          placeholder="Location"
         />
       </div>
     </div>

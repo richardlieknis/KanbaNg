@@ -26,17 +26,19 @@
         </div>
       </div>
       <div class="contact-image">
-        <img src="assets/images/1.jpg" alt="" />
+        <img [src]="image || 'assets/images/1.jpg'" alt="" />
       </div>
     </div>
     <div class="body" *ngIf="component">
       <ng-container [ngSwitch]="component">
-        <ng-container *ngSwitchCase="'contact'">
-          <app-contact></app-contact>
+        <ng-container *ngSwitchCase="'add-contact'">
+          <app-contact [type]="'add'"></app-contact>
         </ng-container>
-        <!-- // TODO: Add other Components -->
-        <ng-container *ngSwitchCase="'profile'">
-          <app-profile></app-profile>
+        <ng-container *ngSwitchCase="'edit-contact'">
+          <app-contact
+            [type]="'edit'"
+            [contact]="selectedContact"
+          ></app-contact>
         </ng-container>
       </ng-container>
     </div>

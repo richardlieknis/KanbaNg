@@ -42,7 +42,9 @@ export class Overlay2Component implements OnInit, OnDestroy {
   public component: string | null = null;
   public title: string = '';
   public subtitle: string = '';
+  public image: string = '';
   private overlaySub: Subscription = new Subscription();
+  public selectedContact: any = null;
 
   constructor(
     private snackbarService: SnackbarService,
@@ -54,6 +56,8 @@ export class Overlay2Component implements OnInit, OnDestroy {
       .subscribe((state) => {
         this.component = state.component;
         this.subtitle = state.subtitle || '';
+        this.image = state.image || '';
+        this.selectedContact = state.contact;
         this.show = state.show;
         this.animIsRunning = true;
         this.setTitle(state.component);
@@ -76,8 +80,11 @@ export class Overlay2Component implements OnInit, OnDestroy {
 
   setTitle(title: string) {
     title = title?.replace(/-/g, ' ');
+    let titlePieces = title?.split(' ');
     if (title) {
-      this.title = title[0].toUpperCase() + title.slice(1);
+      let firstPiece = titlePieces[0][0].toUpperCase() + titlePieces[0].slice(1);
+      let secondPiece = titlePieces[1][0].toUpperCase() + titlePieces[1].slice(1);
+      this.title = firstPiece + ' ' + secondPiece;
     }
   }
 }

@@ -30,7 +30,7 @@
         <div class="add">
           <button
             (click)="
-              overlay.show('contact', '', 'Tasks are better with a team')
+              overlay.show('add-contact', '', 'Tasks are better with a team')
             "
             class="btn btn-primary"
           >
@@ -52,7 +52,16 @@
             <div class="name">{{ selectedContact.name }}</div>
             <div class="add-task">
               <img src="assets/images/plus.svg" alt="" />
-              <span>Add task</span>
+              <span
+                (click)="
+                  overlay.show(
+                    'add-task',
+                    'standard',
+                    'Assign ' + selectedContact.name
+                  )
+                "
+                >Add task</span
+              >
             </div>
           </div>
         </div>
@@ -69,7 +78,18 @@
           <div class="title">Contact information</div>
           <div class="edit">
             <img src="assets/images/pencilToDo.svg" alt="" />
-            <span>Edit contact</span>
+            <span
+              (click)="
+                overlay.show(
+                  'edit-contact',
+                  '',
+                  'Change information',
+                  selectedContact.image,
+                  selectedContact
+                )
+              "
+              >Edit contact</span
+            >
           </div>
         </div>
         <div class="infos">
