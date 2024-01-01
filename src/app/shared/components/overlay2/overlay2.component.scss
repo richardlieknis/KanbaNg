@@ -90,13 +90,12 @@
 
 .body {
   width: 100%;
-  flex: 0 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   @media screen and (max-width: 768px) {
-    padding-top: 3.125rem;
+    padding-top: 4rem;
   }
 }
 

@@ -1,1 +1,42 @@
-<p>contact works!</p>
+<form action="" class="profile-wrapper">
+  <div class="infos">
+    <div class="input-box">
+      <div class="input">
+        <img src="assets/images/person.svg" />
+        <input value="Elon Musk" autocomplete="off" type="text" id="name" />
+      </div>
+      <div class="input">
+        <img src="assets/images/mail_icon.svg" />
+        <input
+          value="elon.musk@tesla.com"
+          autocomplete="off"
+          type="email"
+          id="email"
+        />
+      </div>
+      <div class="input">
+        <img src="assets/images/phone.svg" />
+        <input value="0176828245" autocomplete="off" type="number" id="phone" />
+      </div>
+      <div class="input">
+        <img src="assets/images/location.svg" />
+        <input
+          value="Düsseldorf, Germany"
+          autocomplete="off"
+          type="text"
+          id="location"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full">
+    <div *ngIf="type === 'add'" class="type-add">
+      <button class="btn-primary w-full">Add</button>
+    </div>
+    <div *ngIf="type === 'edit'" class="type-edit">
+      <button class="delete btn-secondary w-full">Delete</button>
+      <button class="btn-primary w-full">Save</button>
+    </div>
+  </div>
+</form>
