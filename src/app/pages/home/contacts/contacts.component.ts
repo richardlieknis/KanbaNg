@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FetchSqlService } from '../../../shared/services/fetch-sql.service';
 import { OverlayService } from '../../../shared/services/overlay.service';
+import { ContactService } from '../../../shared/services/contact.service';
 
 @Component({
   selector: 'app-contacts',
@@ -16,7 +17,7 @@ export class ContactsComponent implements OnInit {
     }
   }
 
-  private contacts = [];
+  private contacts: any[] = [];
   public showContact: boolean = true;
   public contactDictionary: { [letter: string]: any[] } = {};
 
@@ -31,6 +32,7 @@ export class ContactsComponent implements OnInit {
   constructor(
     public sql: FetchSqlService,
     public overlay: OverlayService,
+    private contactService: ContactService,
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +43,11 @@ export class ContactsComponent implements OnInit {
       this.contacts = data.contacts;
       this.processContactData(data.contacts);
     });
+    this.contactService.contactState.subscribe((contact: any) => {
+      this.contacts.push(contact);
+      this.selectedContact = contact;
+      this.processContactData(this.contacts);
+    });
   }
 
   /**
@@ -48,8 +55,9 @@ export class ContactsComponent implements OnInit {
    * @param contacts fetched contacts from sql db
    */
   processContactData(contacts: any[]) {
+    this.contactDictionary = {};
     contacts.forEach((contact: any) => {
-      const firstLetter = contact.name[0].toUpperCase();
+      const firstLetter = contact?.name[0].toUpperCase();
       if (!this.contactDictionary[firstLetter]) {
         this.contactDictionary[firstLetter] = [contact];
       } else {

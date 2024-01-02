@@ -1,10 +1,13 @@
-<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="profile-wrapper">
+<form
+  [formGroup]="contactForm"
+  (ngSubmit)="onSubmit(submitType)"
+  class="profile-wrapper"
+>
   <div class="infos">
     <div class="input-box">
       <div class="input">
         <img src="assets/images/person.svg" />
         <input
-          value="{{ contact?.name || '' }}"
           autocomplete="off"
           spellcheck="false"
           type="text"
@@ -26,7 +29,6 @@
       <div class="input">
         <img src="assets/images/mail_icon.svg" />
         <input
-          value="{{ contact?.email || '' }}"
           autocomplete="off"
           spellcheck="false"
           type="email"
@@ -47,7 +49,6 @@
       <div class="input">
         <img src="assets/images/phone.svg" />
         <input
-          value="{{ contact?.phone || '' }}"
           autocomplete="off"
           spellcheck="false"
           type="number"
@@ -55,21 +56,10 @@
           placeholder="Phone"
           formControlName="phone"
         />
-        <div
-          class="form-error"
-          *ngIf="
-            contactForm.controls['phone'].invalid &&
-            contactForm.controls['phone'].touched
-          "
-        >
-          Please enter a valid phone number (min
-          {{ minPhoneLength }} characters)
-        </div>
       </div>
       <div class="input">
         <img src="assets/images/location.svg" />
         <input
-          value="{{ contact?.location || '' }}"
           autocomplete="off"
           spellcheck="false"
           type="text"
@@ -94,27 +84,29 @@
   <div class="w-full">
     <div *ngIf="type === 'add'" class="type-add">
       <button
+        #addBtn
         class="btn-primary w-full"
         [ngClass]="{
           'btn-primary': contactForm.valid,
           'btn-primary-disabled': !contactForm.valid
         }"
-        type="submit"
         [disabled]="!contactForm.valid"
+        (click)="submitType = 'add'"
       >
         Add
       </button>
     </div>
     <div *ngIf="type === 'edit'" class="type-edit">
-      <button class="delete btn-secondary w-full">Delete</button>
+      <button type="button" class="delete btn-secondary w-full">Delete</button>
       <button
+        #updateBtn
         class="btn-primary w-full"
         [ngClass]="{
           'btn-primary': contactForm.valid,
           'btn-primary-disabled': !contactForm.valid
         }"
-        type="submit"
         [disabled]="!contactForm.valid"
+        (click)="submitType = 'update'"
       >
         Save
       </button>
