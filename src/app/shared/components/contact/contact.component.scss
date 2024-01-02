@@ -62,10 +62,19 @@
   gap: 20px;
   width: 100%;
   .input {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    .form-error {
+      position: absolute;
+      bottom: -1.125rem;
+      color: #d0021bcc;
+      font-size: 0.6875rem;
+      padding-left: 3rem;
+      // transform: translateY(-24px);
+    }
     img {
       width: fit-content;
       object-fit: cover;

@@ -14,6 +14,11 @@ export class SignUpComponent {
 
   private backendUrl = 'http://localhost/backend/';
 
+  signupForm: FormGroup = new FormGroup({
+    username: new FormControl('', [Validators.required, Validators.minLength(this.minNameLength)]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    password: new FormControl('', [Validators.required, Validators.minLength(this.minPasswordLength)]),
+  });
 
   constructor(
     private http: HttpClient,
@@ -21,11 +26,6 @@ export class SignUpComponent {
     private router: Router,
   ) { }
 
-  signupForm: FormGroup = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.minLength(this.minNameLength)]),
-    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-    password: new FormControl('', [Validators.required, Validators.minLength(this.minPasswordLength)]),
-  });
 
   /**
    * Creates a new user & contact in SQL database via PHP

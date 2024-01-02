@@ -1,4 +1,4 @@
-<form action="" class="profile-wrapper">
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="profile-wrapper">
   <div class="infos">
     <div class="input-box">
       <div class="input">
@@ -6,51 +6,118 @@
         <input
           value="{{ contact?.name || '' }}"
           autocomplete="off"
+          spellcheck="false"
           type="text"
           id="name"
           placeholder="Full Name"
+          formControlName="name"
         />
+        <div
+          class="form-error"
+          *ngIf="
+            contactForm.controls['name'].invalid &&
+            contactForm.controls['name'].touched
+          "
+        >
+          Please enter the full name (min {{ minNameLength }} characters)
+        </div>
       </div>
+
       <div class="input">
         <img src="assets/images/mail_icon.svg" />
         <input
           value="{{ contact?.email || '' }}"
           autocomplete="off"
+          spellcheck="false"
           type="email"
           id="email"
           placeholder="Email"
+          formControlName="email"
         />
+        <div
+          class="form-error"
+          *ngIf="
+            contactForm.controls['email'].invalid &&
+            contactForm.controls['email'].touched
+          "
+        >
+          Please enter a valid email
+        </div>
       </div>
       <div class="input">
         <img src="assets/images/phone.svg" />
         <input
           value="{{ contact?.phone || '' }}"
           autocomplete="off"
+          spellcheck="false"
           type="number"
           id="phone"
           placeholder="Phone"
+          formControlName="phone"
         />
+        <div
+          class="form-error"
+          *ngIf="
+            contactForm.controls['phone'].invalid &&
+            contactForm.controls['phone'].touched
+          "
+        >
+          Please enter a valid phone number (min
+          {{ minPhoneLength }} characters)
+        </div>
       </div>
       <div class="input">
         <img src="assets/images/location.svg" />
         <input
           value="{{ contact?.location || '' }}"
           autocomplete="off"
+          spellcheck="false"
           type="text"
           id="location"
           placeholder="Location"
+          formControlName="location"
         />
+        <div
+          class="form-error"
+          *ngIf="
+            contactForm.controls['location'].invalid &&
+            contactForm.controls['location'].touched
+          "
+        >
+          e.g. "Berlin, Germany" (min
+          {{ minLocationLength }} characters)
+        </div>
       </div>
     </div>
   </div>
 
   <div class="w-full">
     <div *ngIf="type === 'add'" class="type-add">
-      <button class="btn-primary w-full">Add</button>
+      <button
+        class="btn-primary w-full"
+        [ngClass]="{
+          'btn-primary': contactForm.valid,
+          'btn-primary-disabled': !contactForm.valid
+        }"
+        type="submit"
+        [disabled]="!contactForm.valid"
+      >
+        Add
+      </button>
     </div>
     <div *ngIf="type === 'edit'" class="type-edit">
       <button class="delete btn-secondary w-full">Delete</button>
-      <button class="btn-primary w-full">Save</button>
+      <button
+        class="btn-primary w-full"
+        [ngClass]="{
+          'btn-primary': contactForm.valid,
+          'btn-primary-disabled': !contactForm.valid
+        }"
+        type="submit"
+        [disabled]="!contactForm.valid"
+      >
+        Save
+      </button>
     </div>
   </div>
 </form>
