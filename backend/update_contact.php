@@ -14,12 +14,6 @@ $email = $data['email'] ?? null;
 $phone = $data['phone'] ?? null;
 $location = $data['location'] ?? null;
 
-error_log("Received Data: " . print_r($data, true));
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 $connection = new mysqli($servername, $user, $password, $dbname);
 
 if ($connection->connect_error) {
@@ -36,7 +30,6 @@ if (!$stmtUpdateContact) {
 
 $stmtUpdateContact->bind_param('ssssi', $name, $email, $phone, $location, $contact_id);
 
-error_log("SQL Query: " . $sqlUpdateContact);
 // Führe das Prepared Statement aus
 if ($stmtUpdateContact->execute()) {
   echo json_encode(['status' => 'success', 'message' => 'Contact has been updated successfully!']);
