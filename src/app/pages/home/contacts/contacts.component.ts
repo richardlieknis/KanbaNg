@@ -43,11 +43,27 @@ export class ContactsComponent implements OnInit {
       this.contacts = data.contacts;
       this.processContactData(data.contacts);
     });
-    this.contactService.contactState.subscribe((contact: any) => {
-      this.contacts.push(contact);
-      this.selectedContact = contact;
-      this.processContactData(this.contacts);
+    this.contactService.contactState.subscribe((state) => {
+      console.log(state.type);
+      if (state.type === 'update') {
+        this.replaceContact(state.contact);
+        this.selectedContact = state.contact;
+      } else {
+        this.contacts.push(state.contact);
+        this.selectedContact = state.contact;
+        this.processContactData(this.contacts);
+      }
     });
+  }
+
+  replaceContact(contact: any) {
+    this.contacts.forEach((c: any, index) => {
+      if (c.contact_id === contact.contact_id) {
+        this.contacts[index] = contact;
+      }
+    });
+    console.log(this.contacts);
+    this.processContactData(this.contacts);
   }
 
   /**

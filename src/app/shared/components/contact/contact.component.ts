@@ -55,6 +55,11 @@ export class ContactComponent implements OnInit {
     this.type = type;
   }
 
+  /**
+   * submit form, create or update contact
+   * @param submitType type of submit button
+   * @param contactId selected contact id
+   */
   onSubmit(submitType: string, contactId?: number) {
     if (submitType === 'add') {
       this.createContact();
@@ -78,13 +83,19 @@ export class ContactComponent implements OnInit {
       });
   }
 
-  // TODO: update contact, php file must be created
+  /**
+   * update contact, before update contact, we need to get contact id
+   * after that combine contact id with form data and send to backend
+   * @param contactId selected contact id
+   */
   updateContact(contactId?: number) {
+    const phoneNumber: string = this.contactForm.value.phone.toString();
+
     const formData = {
       ...this.contactForm.value,
-      contact_id: contactId
-    }
-    console.log(formData);
+      contact_id: contactId,
+      phone: phoneNumber
+    };
 
     this.http.post(this.backendUrl + 'update_contact.php',
       formData, { responseType: 'text' })
@@ -92,6 +103,7 @@ export class ContactComponent implements OnInit {
         console.log(result);
         result = JSON.parse(result);
         if (result.status === 'success') {
+          this.contactService.emitContact(formData, 'update');
           this.snackbar.show(result.message, 'success');
           this.overlay.hide();
         } else {

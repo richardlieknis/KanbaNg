@@ -15,7 +15,7 @@ export class ContactService {
    * emit contact to contacts component
    * @param contact contact to emit
    */
-  emitContact(contact: any) {
-    this.contactSubject.next(contact);
+  emitContact(contact: any, type?: string) {
+    this.contactSubject.next({ contact, type });
   }
 }
