@@ -55,13 +55,11 @@ export class ContactComponent implements OnInit {
     this.type = type;
   }
 
-  onSubmit(submitType: string) {
+  onSubmit(submitType: string, contactId?: number) {
     if (submitType === 'add') {
-      console.log("ADD CONTACT");
       this.createContact();
     } else if (submitType === 'update') {
-      console.log("UPDATE CONTACT");
-      // this.updateContact();
+      this.updateContact(contactId);
     }
   }
 
@@ -81,18 +79,24 @@ export class ContactComponent implements OnInit {
   }
 
   // TODO: update contact, php file must be created
-  updateContact() {
-    console.log("UPDATE CONTACT");
-    // this.http.post(this.backendUrl + 'update_contact.php',
-    //   this.contactForm.value, { responseType: 'text' })
-    //   .subscribe((result: any) => {
-    //     result = JSON.parse(result);
-    //     if (result.status === 'success') {
-    //       this.snackbar.show('Your contact has been updated successfully!', 'success');
-    //       this.overlay.hide();
-    //     } else {
-    //       this.snackbar.show('Something went wrong. :(', 'error');
-    //     }
-    //   });
+  updateContact(contactId?: number) {
+    const formData = {
+      ...this.contactForm.value,
+      contact_id: contactId
+    }
+    console.log(formData);
+
+    this.http.post(this.backendUrl + 'update_contact.php',
+      formData, { responseType: 'text' })
+      .subscribe((result: any) => {
+        console.log(result);
+        result = JSON.parse(result);
+        if (result.status === 'success') {
+          this.snackbar.show(result.message, 'success');
+          this.overlay.hide();
+        } else {
+          this.snackbar.show(result.message, 'error');
+        }
+      });
   }
 }

@@ -1,6 +1,6 @@
 <form
   [formGroup]="contactForm"
-  (ngSubmit)="onSubmit(submitType)"
+  (ngSubmit)="onSubmit(submitType, contact?.contact_id)"
   class="profile-wrapper"
 >
   <div class="infos">
