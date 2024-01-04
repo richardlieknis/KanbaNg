@@ -4,6 +4,7 @@ import test from 'node:test';
 import { FetchSqlService } from '../../services/fetch-sql.service';
 import { get } from 'http';
 import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-task-comp',
@@ -116,9 +117,6 @@ export class AddTaskCompComponent implements OnInit {
    * @param checkbox HTMLInputElement
    * @param id contact id
    */
-  // TODO: checkboxes are not working properly
-  // Evtl für jede einzelne Checkbox eine ID vergeben, sodass man sie auch alle clearen kann
-  // Checkboxen werden auch nicht gespeichert, sobald der dropdown zu ist
   addAssignee(checkbox: HTMLInputElement, id: number) {
     checkbox.checked = !checkbox.checked;
     const nummericId = Number(id);
@@ -127,6 +125,10 @@ export class AddTaskCompComponent implements OnInit {
     } else {
       this.assignees.splice(this.assignees.indexOf(id), 1);
     }
+  }
+
+  toNumber(id: string) {
+    return Number(id);
   }
 
   addCategory(category: any) {
