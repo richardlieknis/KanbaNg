@@ -43,11 +43,19 @@ export class ContactsComponent implements OnInit {
       this.contacts = data.contacts;
       this.processContactData(data.contacts);
     });
+    this.subscribeContactService();
+  }
+
+  /**
+   * subscribe to contact service
+   * and process update or add contact state
+   */
+  subscribeContactService() {
     this.contactService.contactState.subscribe((state) => {
-      console.log(state.type);
       if (state.type === 'update') {
         this.replaceContact(state.contact);
         this.selectedContact = state.contact;
+        this.processContactData(this.contacts);
       } else {
         this.contacts.push(state.contact);
         this.selectedContact = state.contact;
@@ -56,14 +64,16 @@ export class ContactsComponent implements OnInit {
     });
   }
 
+  /**
+   * replace contact in contacts array with updated contact
+   * @param contact contact to replace
+   */
   replaceContact(contact: any) {
     this.contacts.forEach((c: any, index) => {
       if (c.contact_id === contact.contact_id) {
         this.contacts[index] = contact;
       }
     });
-    console.log(this.contacts);
-    this.processContactData(this.contacts);
   }
 
   /**
@@ -102,7 +112,6 @@ export class ContactsComponent implements OnInit {
 
   changeContentMobile() {
     if (this.getCurrentWindowWidth() < 1024) {
-
       this.showContact = !this.showContact;
     }
   }
