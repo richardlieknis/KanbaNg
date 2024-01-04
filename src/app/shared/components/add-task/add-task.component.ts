@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SnackbarService } from '../../services/snackbar.service';
 import test from 'node:test';
 import { FetchSqlService } from '../../services/fetch-sql.service';
@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskCompComponent implements OnInit {
+  @Input() directlyAssigned: any = null;
+
   public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
   public categoryDropdown: boolean = false;
   public assigneeDropdown: boolean = false;
@@ -44,6 +46,9 @@ export class AddTaskCompComponent implements OnInit {
     this.setCurrentDate();
     this.getContacts();
     this.getCategories();
+    if (this.directlyAssigned) {
+      this.assignees.push(this.toNumber(this.directlyAssigned.contact_id));
+    }
   }
 
   getContacts() {

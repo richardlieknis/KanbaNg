@@ -23,7 +23,8 @@ export class OverlayService {
       this.overlaySubject.next({
         show: true,
         component,
-        subtitle
+        subtitle,
+        contact
       });
     } else {
       this.lastOverlay = null;
