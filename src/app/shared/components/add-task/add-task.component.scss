@@ -43,8 +43,18 @@
   gap: 5px;
   margin-bottom: 20px;
   user-select: none;
+
   .title {
     font-family: "Inter", sans-serif;
+    &::after {
+      content: "*";
+      color: rgb(215, 57, 57);
+      font-size: 0.85rem;
+      margin-left: 0.125rem;
+    }
+  }
+  .subtask::after {
+    content: "";
   }
   .select {
     position: relative;

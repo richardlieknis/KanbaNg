@@ -100,7 +100,6 @@ export class ContactComponent implements OnInit {
     this.http.post(this.backendUrl + 'update_contact.php',
       formData, { responseType: 'text' })
       .subscribe((result: any) => {
-        console.log(result);
         result = JSON.parse(result);
         if (result.status === 'success') {
           this.contactService.emitContact(formData, 'update');

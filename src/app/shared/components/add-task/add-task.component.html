@@ -1,17 +1,26 @@
-<form class="add-task-wrapper">
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="add-task-wrapper">
   <div class="left">
     <!-- Title -->
     <div class="form-input">
       <label class="title">Title</label>
       <div class="input">
-        <input type="text" id="title" />
+        <input
+          autocomplete="off"
+          spellcheck="false"
+          type="text"
+          formControlName="title"
+        />
       </div>
     </div>
     <!-- Description -->
     <div class="form-input">
       <label class="title">Description</label>
       <div class="input textarea">
-        <textarea type="text" id="description"></textarea>
+        <textarea
+          autocomplete="off"
+          type="text"
+          formControlName="description"
+        ></textarea>
       </div>
     </div>
     <!-- Catagory -->
@@ -111,9 +120,9 @@
       <div class="input">
         <input
           type="date"
-          id="date"
           [min]="currentDate"
           [value]="currentDate"
+          formControlName="due_date"
         />
       </div>
     </div>
@@ -152,7 +161,7 @@
     </div>
     <!-- Subtasks -->
     <div class="form-input">
-      <label class="title">Subtasks</label>
+      <label class="title subtask">Subtasks</label>
       <div class="input">
         <input type="text" id="subtask" />
         <div class="create-sub">
@@ -188,8 +197,17 @@
     </div>
 
     <div class="buttons">
-      <button class="btn btn-secondary">Clear</button>
-      <button class="btn btn-primary">Create Task</button>
+      <button type="button" class="btn btn-secondary">Clear</button>
+      <button
+        class="btn btn-primary"
+        [ngClass]="{
+          'btn-primary': taskForm.valid,
+          'btn-primary-disabled': !taskForm.valid
+        }"
+        [disabled]="!taskForm.valid"
+      >
+        Create Task
+      </button>
     </div>
   </div>
 </form>

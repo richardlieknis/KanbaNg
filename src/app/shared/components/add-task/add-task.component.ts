@@ -4,7 +4,7 @@ import test from 'node:test';
 import { FetchSqlService } from '../../services/fetch-sql.service';
 import { get } from 'http';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-task-comp',
@@ -13,13 +13,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddTaskCompComponent implements OnInit {
   @Input() directlyAssigned: any = null;
+  @Input() status: string = 'todo';
 
   public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
   public categoryDropdown: boolean = false;
   public assigneeDropdown: boolean = false;
   public categoryInputActive: boolean = false;
   public subtaskInputActive: boolean = false;
-  public selectedPriority: string = 'low';
+  public selectedPriority: string = '';
   public selectedColor: string = 'red';
 
   public categoryText = 'Select or create a category';
@@ -28,12 +29,23 @@ export class AddTaskCompComponent implements OnInit {
   public contacts: Array<any> = [];
 
   // data to process add task form
-  public subtasks: Array<string> = ['Subtask 1', 'Subtask 2', 'Subtask 3'];
+  public subtasks: Array<string> = [];
   public assignees: Array<number> = [];
   public category?: number;
 
   newCategory: any;
   categories: Array<any> = [];
+
+  taskForm: FormGroup = new FormGroup({
+    title: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    category: new FormControl('', [Validators.required]),
+    assignees: new FormControl([], [Validators.required]),
+    due_date: new FormControl('', [Validators.required]),
+    priority: new FormControl(this.selectedPriority, [Validators.required]),
+    subtasks: new FormControl([], []),
+    status: new FormControl(this.status, [Validators.required]),
+  });
 
 
   constructor(
@@ -47,7 +59,8 @@ export class AddTaskCompComponent implements OnInit {
     this.getContacts();
     this.getCategories();
     if (this.directlyAssigned) {
-      this.assignees.push(this.toNumber(this.directlyAssigned.contact_id));
+      //this.assignees.push(this.toNumber(this.directlyAssigned.contact_id));
+      this.taskForm.get('assignees')?.setValue([this.toNumber(this.directlyAssigned.contact_id)]);
     }
   }
 
@@ -63,12 +76,15 @@ export class AddTaskCompComponent implements OnInit {
     });
   }
 
-
-  // processContactData(contacts: any) {
-  //   contacts.forEach((contact: any) => {
-  //     this.contacts.push(contact);
-  //   });
-  // }
+  onSubmit() {
+    console.log(this.taskForm.value);
+    if (this.taskForm.valid) {
+      console.log(this.taskForm.value);
+      // this.writeOnDatabase(this.taskForm.value);
+    } else {
+      this.snackbar.show('Please fill all the required fields', 'error');
+    }
+  }
 
   createNewCategory() {
     let input = (document.getElementById('category') as HTMLInputElement).value;
@@ -113,6 +129,7 @@ export class AddTaskCompComponent implements OnInit {
     } else {
       this.subtasks.push(input);
       this.subtaskInputActive = false;
+      this.taskForm.get('subtasks')?.setValue(this.subtasks);
       (document.getElementById('subtask') as HTMLInputElement).value = '';
     }
   }
@@ -123,13 +140,18 @@ export class AddTaskCompComponent implements OnInit {
    * @param id contact id
    */
   addAssignee(checkbox: HTMLInputElement, id: string) {
-    const nummericId = Number(id);
+    const numericId = Number(id);
+    const assignees = this.taskForm.get('assignees')?.value as number[];
+
     if (!this.assignees.includes(this.toNumber(id))) {
-      this.assignees.push(nummericId);
+      //this.assignees.push(numericId);
+      assignees.push(numericId);
       checkbox.checked = true;
     } else {
-      this.assignees.splice(this.assignees.indexOf(this.toNumber(id)), 1);
+      //this.assignees.splice(this.assignees.indexOf(this.toNumber(id)), 1);
+      assignees.splice(assignees.indexOf(numericId), 1);
     }
+    this.taskForm.get('assignees')?.setValue(assignees);
     console.log(this.assignees);
   }
 
@@ -140,6 +162,7 @@ export class AddTaskCompComponent implements OnInit {
   addCategory(category: any) {
     this.categoryText = category.name;
     this.category = category.category_id;
+    this.taskForm.get('category')?.setValue(this.category);
     this.toggleCategoryDropdown();
   }
 
@@ -184,6 +207,7 @@ export class AddTaskCompComponent implements OnInit {
 
   changePriority(priority: string) {
     this.selectedPriority = priority;
+    this.taskForm.get('priority')?.setValue(this.selectedPriority);
   }
 
   changeColor(color: string) {
