@@ -117,14 +117,15 @@ export class AddTaskCompComponent implements OnInit {
    * @param checkbox HTMLInputElement
    * @param id contact id
    */
-  addAssignee(checkbox: HTMLInputElement, id: number) {
-    checkbox.checked = !checkbox.checked;
+  addAssignee(checkbox: HTMLInputElement, id: string) {
     const nummericId = Number(id);
-    if (checkbox.checked) {
+    if (!this.assignees.includes(this.toNumber(id))) {
       this.assignees.push(nummericId);
+      checkbox.checked = true;
     } else {
-      this.assignees.splice(this.assignees.indexOf(id), 1);
+      this.assignees.splice(this.assignees.indexOf(this.toNumber(id)), 1);
     }
+    console.log(this.assignees);
   }
 
   toNumber(id: string) {

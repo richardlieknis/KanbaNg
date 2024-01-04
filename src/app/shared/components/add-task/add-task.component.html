@@ -87,7 +87,6 @@
                 #checkbox
                 type="checkbox"
                 [checked]="assignees.includes(toNumber(contact.contact_id))"
-                (click)="$event.stopPropagation()"
               />
             </li>
             <li (click)="inviteContact()">
