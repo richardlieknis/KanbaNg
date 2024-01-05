@@ -89,10 +89,16 @@
       background-color: #eee;
       border-radius: 50%;
       img {
+        object-fit: cover;
         border-radius: 50%;
         width: 97%;
         height: 97%;
       }
+    }
+    .remaining-contacts {
+      background-color: #2a3647;
+      color: #fff;
+      font-size: 0.75rem;
     }
   }
 }

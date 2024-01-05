@@ -24,7 +24,7 @@
             <img src="assets/images/add.svg" alt="add" />
           </div>
         </div>
-        <div class="tasks">
+        <div class="tasks" *ngIf="toDo.length > 0">
           <app-task-box *ngFor="let task of toDo" [task]="task"></app-task-box>
         </div>
       </div>
@@ -39,7 +39,7 @@
             <img src="assets/images/add.svg" alt="add" />
           </div>
         </div>
-        <div class="tasks">
+        <div class="tasks" *ngIf="inProgress.length > 0">
           <app-task-box></app-task-box>
         </div>
       </div>
@@ -56,7 +56,7 @@
             <img src="assets/images/add.svg" alt="add" />
           </div>
         </div>
-        <div class="tasks">
+        <div class="tasks" *ngIf="inReview.length > 0">
           <app-task-box></app-task-box>
         </div>
       </div>
@@ -71,8 +71,15 @@
             <img src="assets/images/add.svg" alt="add" />
           </div>
         </div>
-        <div class="tasks">
+        <div class="tasks" *ngIf="done.length > 0">
           <app-task-box></app-task-box>
+        </div>
+        <!-- TODO: Anzeige, wenn keine Tasks vorhanden -->
+        <div class="tasks" *ngIf="done.length <= 0">
+          <div class="empty">
+            <img src="assets/images/empty.svg" alt="empty" />
+            <span>There are no tasks in this category</span>
+          </div>
         </div>
       </div>
       <!-- ENDE -->

@@ -3,12 +3,10 @@
     <div [ngClass]="getCategoryColor(task.category)" class="tag">
       {{ getCategoryName(task.category) }}
     </div>
-    <span class="title">Create a new logo</span>
+    <span class="title"> {{ task.title }}</span>
   </div>
   <span class="description">
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. In neque placeat
-    illo minima eveniet dolores itaque sint optio laudantium consectetur eaque
-    saepe vero obcaecati doloribus, iste quidem suscipit fugit eos!
+    {{ task.description }}
   </span>
   <div class="progress">
     <progress value="70" max="100" min="0"></progress>
@@ -17,11 +15,21 @@
   <div class="footer">
     <div class="contacts">
       <div
-        *ngFor="let counter of [0, 0, 0, 0]; let i = index"
+        *ngFor="let assignee of task.assignees.slice(0, 2); let i = index"
         class="contact"
         [style.left.px]="i * 20"
       >
-        <img src="assets/images/1.jpg" alt="user" />
+        <img
+          [src]="getAssigneeImage(assignee) || 'assets/images/1.jpg'"
+          alt="user"
+        />
+      </div>
+      <div
+        *ngIf="task.assignees.length > 2"
+        class="contact remaining-contacts"
+        [style.left.px]="(task.assignees.length - 1) * 20"
+      >
+        <span>+{{ task.assignees.length - 2 }}</span>
       </div>
     </div>
     <div class="priority">
