@@ -5,7 +5,7 @@ import { FetchSqlService } from '../../services/fetch-sql.service';
 import { get } from 'http';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-add-task-comp',
   templateUrl: './add-task.component.html',
@@ -36,13 +36,14 @@ export class AddTaskCompComponent implements OnInit {
   newCategory: any;
   categories: Array<any> = [];
 
+
   taskForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(5)]),
     description: new FormControl('', [Validators.required, Validators.minLength(5)]),
     category: new FormControl('', [Validators.required]),
     assignees: new FormControl([], [Validators.required]),
-    due_date: new FormControl('', [Validators.required]),
-    priority: new FormControl(this.selectedPriority, [Validators.required]),
+    due_date: new FormControl(this.currentDate, [Validators.required]),
+    priority: new FormControl('', [Validators.required]),
     subtasks: new FormControl([], []),
     status: new FormControl(this.status, [Validators.required]),
   });
@@ -144,11 +145,11 @@ export class AddTaskCompComponent implements OnInit {
     const assignees = this.taskForm.get('assignees')?.value as number[];
 
     if (!this.assignees.includes(this.toNumber(id))) {
-      //this.assignees.push(numericId);
+      this.assignees.push(numericId);
       assignees.push(numericId);
       checkbox.checked = true;
     } else {
-      //this.assignees.splice(this.assignees.indexOf(this.toNumber(id)), 1);
+      this.assignees.splice(this.assignees.indexOf(this.toNumber(id)), 1);
       assignees.splice(assignees.indexOf(numericId), 1);
     }
     this.taskForm.get('assignees')?.setValue(assignees);
@@ -215,10 +216,15 @@ export class AddTaskCompComponent implements OnInit {
   }
 
   setCurrentDate() {
+    const addLeadingZero = (number: number) => {
+      return number < 10 ? `0${number}` : `${number}`;
+    };
+
     const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
+    const day = addLeadingZero(date.getDate());
+    const month = addLeadingZero(date.getMonth() + 1);
     const year = date.getFullYear();
     this.currentDate = `${year}-${month}-${day}`;
+    this.taskForm.get('due_date')?.setValue(this.currentDate);
   }
 }
