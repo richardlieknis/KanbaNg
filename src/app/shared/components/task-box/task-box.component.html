@@ -15,7 +15,10 @@
   <div class="footer">
     <div class="contacts">
       <div
-        *ngFor="let assignee of task.assignees.slice(0, 2); let i = index"
+        *ngFor="
+          let assignee of task.assignees.slice(0, displayedAssignees);
+          let i = index
+        "
         class="contact"
         [style.left.px]="i * 20"
       >
@@ -25,15 +28,15 @@
         />
       </div>
       <div
-        *ngIf="task.assignees.length > 2"
+        *ngIf="task.assignees.length > displayedAssignees"
         class="contact remaining-contacts"
-        [style.left.px]="(task.assignees.length - 1) * 20"
+        [style.left.px]="displayedAssignees * 20"
       >
-        <span>+{{ task.assignees.length - 2 }}</span>
+        <span>+{{ task.assignees.length - displayedAssignees }}</span>
       </div>
     </div>
     <div class="priority">
-      <img src="assets/images/urgent.svg" alt="priority" />
+      <img src="assets/images/{{ task.priority }}.svg" alt="priority" />
     </div>
   </div>
 </div>
