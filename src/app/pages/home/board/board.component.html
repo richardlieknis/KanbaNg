@@ -27,6 +27,14 @@
         <div class="tasks" *ngIf="toDo.length > 0">
           <app-task-box *ngFor="let task of toDo" [task]="task"></app-task-box>
         </div>
+        <div class="tasks" *ngIf="toDo.length <= 0">
+          <div class="empty">
+            <div class="box">
+              <img src="assets/images/empty.svg" alt="empty" />
+              <span>There are no tasks in this status</span>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- In Progress -->
       <div class="task-box">
@@ -41,6 +49,14 @@
         </div>
         <div class="tasks" *ngIf="inProgress.length > 0">
           <app-task-box></app-task-box>
+        </div>
+        <div class="tasks" *ngIf="inProgress.length <= 0">
+          <div class="empty">
+            <div class="box">
+              <img src="assets/images/empty.svg" alt="empty" />
+              <span>There are no tasks in this status</span>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Awaiting Feedback -->
@@ -58,6 +74,14 @@
         </div>
         <div class="tasks" *ngIf="inReview.length > 0">
           <app-task-box></app-task-box>
+        </div>
+        <div class="tasks" *ngIf="inReview.length <= 0">
+          <div class="empty">
+            <div class="box">
+              <img src="assets/images/empty.svg" alt="empty" />
+              <span>There are no tasks in this status</span>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Done -->
@@ -77,8 +101,10 @@
         <!-- TODO: Anzeige, wenn keine Tasks vorhanden -->
         <div class="tasks" *ngIf="done.length <= 0">
           <div class="empty">
-            <img src="assets/images/empty.svg" alt="empty" />
-            <span>There are no tasks in this category</span>
+            <div class="box">
+              <img src="assets/images/empty.svg" alt="empty" />
+              <span>There are no tasks in this status</span>
+            </div>
           </div>
         </div>
       </div>

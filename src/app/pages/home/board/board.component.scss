@@ -24,7 +24,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-
+  padding-bottom: 3rem;
   .task-box {
     flex: 1;
     .head {
@@ -49,6 +49,25 @@
           &:hover {
             scale: 1.1;
           }
+        }
+      }
+    }
+  }
+  .tasks {
+    .empty {
+      width: 100%;
+      // background-color: #f00;
+      display: flex;
+      justify-content: center;
+      filter: opacity(0.3);
+      .box {
+        display: flex;
+        gap: 0.625rem;
+        background-color: #0001;
+        padding: 10px 20px;
+        border-radius: 10px;
+        img {
+          filter: opacity(0.5);
         }
       }
     }
