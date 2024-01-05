@@ -1,6 +1,8 @@
 <div class="task-box">
   <div class="head">
-    <div class="tag">Marketing</div>
+    <div [ngClass]="getCategoryColor(task.category)" class="tag">
+      {{ getCategoryName(task.category) }}
+    </div>
     <span class="title">Create a new logo</span>
   </div>
   <span class="description">
