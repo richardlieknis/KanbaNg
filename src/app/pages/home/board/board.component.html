@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="tasks">
-          <app-task-box></app-task-box>
+          <app-task-box *ngFor="let task of toDo" [task]="task"></app-task-box>
         </div>
       </div>
       <!-- In Progress -->
