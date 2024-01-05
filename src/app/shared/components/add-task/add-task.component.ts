@@ -15,6 +15,8 @@ export class AddTaskCompComponent implements OnInit {
   @Input() directlyAssigned: any = null;
   @Input() status: string = 'todo';
 
+  private backendUrl = "http://localhost/backend/";
+
   public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
   public categoryDropdown: boolean = false;
   public assigneeDropdown: boolean = false;
@@ -80,8 +82,7 @@ export class AddTaskCompComponent implements OnInit {
   onSubmit() {
     console.log(this.taskForm.value);
     if (this.taskForm.valid) {
-      console.log(this.taskForm.value);
-      // this.writeOnDatabase(this.taskForm.value);
+      this.writeTaskOnDb(this.taskForm.value);
     } else {
       this.snackbar.show('Please fill all the required fields', 'error');
     }
@@ -102,21 +103,34 @@ export class AddTaskCompComponent implements OnInit {
         color: this.selectedColor,
       };
       this.categories.push(this.newCategory);
-      this.writeOnDatabase(this.newCategory);
+      this.wirteCategoryOnDb(this.newCategory);
     }
   }
 
 
+  writeTaskOnDb(task: any) {
+    this.http.post(this.backendUrl + 'create_task.php',
+      task, { responseType: 'text' })
+      .subscribe((result: any) => {
+        console.log(result);
+        result = JSON.parse(result);
+        if (result.status === 'success') {
+          this.snackbar.show(result.message, 'success');;
+        } else {
+          this.snackbar.show(result.message, 'error');
+        }
+      });
+  }
 
-  writeOnDatabase(category: any) {
-    this.http.post('http://localhost/backend/create_category.php',
+  wirteCategoryOnDb(category: any) {
+    this.http.post(this.backendUrl + 'create_category.php',
       category, { responseType: 'text' })
       .subscribe((result: any) => {
         result = JSON.parse(result);
         if (result.status === 'success') {
-          this.snackbar.show('New category has been created successfully!', 'success');;
+          this.snackbar.show(result.message, 'success');;
         } else {
-          this.snackbar.show('Something went wrong. :(', 'error');
+          this.snackbar.show(result.message, 'error');
         }
       });
   }
