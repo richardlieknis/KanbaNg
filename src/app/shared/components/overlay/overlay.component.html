@@ -21,7 +21,10 @@
     <div *ngIf="component">
       <ng-container [ngSwitch]="component">
         <ng-container *ngSwitchCase="'add-task'">
-          <app-add-task-comp [directlyAssigned]="contact"></app-add-task-comp>
+          <app-add-task-comp
+            [directlyAssigned]="contact"
+            [status]="subtitle"
+          ></app-add-task-comp>
         </ng-container>
         <!-- // TODO: Add other Components -->
         <ng-container *ngSwitchCase="'profile'">

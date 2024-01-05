@@ -19,6 +19,7 @@
       <div class="input textarea">
         <textarea
           autocomplete="off"
+          spellcheck="false"
           type="text"
           formControlName="description"
         ></textarea>
@@ -164,7 +165,7 @@
     <div class="form-input">
       <label class="title subtask">Subtasks</label>
       <div class="input">
-        <input type="text" id="subtask" />
+        <input type="text" id="subtask" autocomplete="off" spellcheck="false" />
         <div class="create-sub">
           <img
             (click)="toggleSubtaskInput()"

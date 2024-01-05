@@ -6,6 +6,8 @@ import { get } from 'http';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
+import { stat } from 'fs';
+import { OverlayService } from '../../services/overlay.service';
 @Component({
   selector: 'app-add-task-comp',
   templateUrl: './add-task.component.html',
@@ -16,6 +18,7 @@ export class AddTaskCompComponent implements OnInit {
   @Input() status: string = 'todo';
 
   private backendUrl = "http://localhost/backend/";
+
 
   public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
   public categoryDropdown: boolean = false;
@@ -55,9 +58,11 @@ export class AddTaskCompComponent implements OnInit {
     private snackbar: SnackbarService,
     private sql: FetchSqlService,
     private http: HttpClient,
+    private overlay: OverlayService,
   ) { }
 
   ngOnInit() {
+    this.setStatus(this.status);
     this.setCurrentDate();
     this.getContacts();
     this.getCategories();
@@ -67,6 +72,19 @@ export class AddTaskCompComponent implements OnInit {
     }
   }
 
+  setStatus(status: string) {
+    if (status === 'In Progress') {
+      this.status = 'progress';
+    } else if (status === 'Awaiting Feedback') {
+      this.status = 'feedback';
+    } else if (status === 'Done') {
+      this.status = 'done';
+    } else {
+      this.status = 'todo';
+    }
+
+    this.taskForm.get('status')?.setValue(this.status);
+  }
   getContacts() {
     this.sql.getContacts().subscribe((data) => {
       this.contacts = data.contacts;
@@ -83,6 +101,7 @@ export class AddTaskCompComponent implements OnInit {
     console.log(this.taskForm.value);
     if (this.taskForm.valid) {
       this.writeTaskOnDb(this.taskForm.value);
+      this.overlay.hide();
     } else {
       this.snackbar.show('Please fill all the required fields', 'error');
     }
