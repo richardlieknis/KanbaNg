@@ -57,7 +57,7 @@ export class Overlay2Component implements OnInit, OnDestroy {
         this.component = state.component;
         this.subtitle = state.subtitle || '';
         this.image = state.image || '';
-        this.selectedContact = state.contact;
+        this.selectedContact = state.object;
         this.show = state.show;
         this.animIsRunning = true;
         this.setTitle(state.component);

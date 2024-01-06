@@ -14,6 +14,7 @@ import { OverlayService } from '../../services/overlay.service';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskCompComponent implements OnInit {
+  // TODO: directlyAssigned is not functional yet
   @Input() directlyAssigned: any = null;
   @Input() status: string = 'todo';
 

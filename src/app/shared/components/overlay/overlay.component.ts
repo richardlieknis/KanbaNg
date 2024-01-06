@@ -3,6 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { SnackbarService } from '../../services/snackbar.service';
 import { OverlayService } from '../../services/overlay.service';
 import { Subscription } from 'rxjs';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-overlay',
@@ -42,12 +43,15 @@ export class OverlayComponent implements OnInit, OnDestroy {
   public component: string | null = null;
   public title: string = '';
   public subtitle: string = '';
-  public contact: any = null;
+  public object: any = null;
   private overlaySub: Subscription = new Subscription();
+
+  public categories: any[] = [];
 
   constructor(
     private snackbarService: SnackbarService,
     public overlayService: OverlayService,
+    private taskService: TaskService
   ) { }
 
   ngOnInit() {
@@ -55,15 +59,26 @@ export class OverlayComponent implements OnInit, OnDestroy {
       .subscribe((state) => {
         this.component = state.component;
         this.subtitle = state.subtitle || '';
-        this.contact = state.contact || null;
+        this.object = state.object || null;
         this.show = state.show;
         this.animIsRunning = true;
         this.setTitle(state.component);
       });
+    this.loadCategories();
   }
 
   ngOnDestroy() {
     this.overlaySub.unsubscribe();
+  }
+
+  loadCategories() {
+    this.taskService.createCategoryDictionary().subscribe((data: any) => {
+      this.categories = data;
+    });
+  }
+
+  checkIfTask() {
+    return this.object?.task_id ? true : false;
   }
 
   /**

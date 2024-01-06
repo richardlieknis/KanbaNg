@@ -27,6 +27,20 @@ header {
       background-color: #d5c9b8;
     }
   }
+  .category-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    // background-color: #f73;
+    border-radius: 10px;
+    span {
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
   .header-title {
     display: flex;
     align-items: baseline;
@@ -40,6 +54,7 @@ header {
       line-height: 0.625rem;
     }
   }
+
   @media screen and (max-width: 768px) {
     flex-direction: row !important;
   }

@@ -13,7 +13,14 @@
   >
     <header>
       <div class="header-title">
-        <h1>{{ title }}</h1>
+        <h1 *ngIf="!checkIfTask()">{{ title }}</h1>
+        <div
+          [ngClass]="categories[object.category].color"
+          class="category-tag"
+          *ngIf="checkIfTask()"
+        >
+          <span>{{ categories[object.category].name }}</span>
+        </div>
         <h5 *ngIf="subtitle.length > 0">{{ subtitle }}</h5>
       </div>
       <img (click)="overlayService.hide()" src="assets/images/close.svg" />
@@ -22,14 +29,14 @@
       <ng-container [ngSwitch]="component">
         <ng-container *ngSwitchCase="'add-task'">
           <app-add-task-comp
-            [directlyAssigned]="contact"
+            [directlyAssigned]="object"
             [status]="subtitle"
           ></app-add-task-comp>
         </ng-container>
         <ng-container *ngSwitchCase="'profile'">
           <app-profile></app-profile>
         </ng-container>
-        <ng-container *ngSwitchCase="'show-task'">
+        <ng-container *ngSwitchCase="'task'">
           <app-show-task></app-show-task>
         </ng-container>
       </ng-container>
