@@ -26,9 +26,11 @@
             [status]="subtitle"
           ></app-add-task-comp>
         </ng-container>
-        <!-- // TODO: Add other Components -->
         <ng-container *ngSwitchCase="'profile'">
           <app-profile></app-profile>
+        </ng-container>
+        <ng-container *ngSwitchCase="'show-task'">
+          <app-show-task></app-show-task>
         </ng-container>
       </ng-container>
     </div>
