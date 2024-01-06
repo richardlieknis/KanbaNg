@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchSqlService } from '../../services/fetch-sql.service';
 import { get } from 'http';
+import { OverlayService } from '../../services/overlay.service';
 
 @Component({
   selector: 'app-task-box',
@@ -18,6 +19,7 @@ export class TaskBoxComponent implements OnInit {
 
   constructor(
     private sql: FetchSqlService,
+    public overlay: OverlayService
   ) { }
 
   ngOnInit(): void {
