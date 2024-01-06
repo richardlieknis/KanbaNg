@@ -48,7 +48,10 @@
           </div>
         </div>
         <div class="tasks" *ngIf="inProgress.length > 0">
-          <app-task-box></app-task-box>
+          <app-task-box
+            *ngFor="let progress of inProgress"
+            [task]="progress"
+          ></app-task-box>
         </div>
         <div class="tasks" *ngIf="inProgress.length <= 0">
           <div class="empty">
@@ -73,7 +76,10 @@
           </div>
         </div>
         <div class="tasks" *ngIf="inReview.length > 0">
-          <app-task-box></app-task-box>
+          <app-task-box
+            *ngFor="let review of inReview"
+            [task]="review"
+          ></app-task-box>
         </div>
         <div class="tasks" *ngIf="inReview.length <= 0">
           <div class="empty">
@@ -96,9 +102,11 @@
           </div>
         </div>
         <div class="tasks" *ngIf="done.length > 0">
-          <app-task-box></app-task-box>
+          <app-task-box
+            *ngFor="let isDone of done"
+            [task]="isDone"
+          ></app-task-box>
         </div>
-        <!-- TODO: Anzeige, wenn keine Tasks vorhanden -->
         <div class="tasks" *ngIf="done.length <= 0">
           <div class="empty">
             <div class="box">
