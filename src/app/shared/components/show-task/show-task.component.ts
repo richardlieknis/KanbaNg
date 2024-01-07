@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class ShowTaskComponent implements OnInit {
   @Input() task: any;
   public assignees: any[] = [];
+  public type: 'show' | 'edit' = 'show';
 
   private backendUrl = 'http://localhost/backend/';
 
@@ -49,6 +50,12 @@ export class ShowTaskComponent implements OnInit {
 
   getAssigneeImage(assigneeId: any) {
     return this.assignees[assigneeId]?.image;
+  }
+
+  toggleEdit() {
+    console.log(this.type);
+    this.type = this.type === 'show' ? 'edit' : 'show';
+    console.log(this.type);
   }
 
 }

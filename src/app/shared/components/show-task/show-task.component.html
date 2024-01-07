@@ -1,47 +1,52 @@
 <div class="task-wrapper">
-  <header>
-    <h2>{{ task.title }}</h2>
-    <div>
-      <label>Due date: </label>
-      <span>{{ task.due_date | date }}</span>
-    </div>
-  </header>
-  <div class="body">
-    <div class="info-box">
-      <p>{{ task.description }}</p>
-    </div>
-    <div class="info-box">
-      <label>Subtasks:</label>
-      <div
-        class="subtask"
-        *ngFor="let subtask of task.subtasks"
-        (click)="markSubtask(subtask)"
-      >
-        <input [checked]="subtask.done" type="checkbox" />
-        <span [ngClass]="subtask.done ? 'done' : ''">{{ subtask.text }}</span>
+  <div class="task-content" *ngIf="type === 'show'">
+    <header>
+      <h2>{{ task.title }}</h2>
+      <div>
+        <label>Due date: </label>
+        <span>{{ task.due_date | date }}</span>
+      </div>
+    </header>
+    <div class="body">
+      <div class="info-box">
+        <p>{{ task.description }}</p>
+      </div>
+      <div class="info-box">
+        <label>Subtasks:</label>
+        <div
+          class="subtask"
+          *ngFor="let subtask of task.subtasks"
+          (click)="markSubtask(subtask)"
+        >
+          <input [checked]="subtask.done" type="checkbox" />
+          <span [ngClass]="subtask.done ? 'done' : ''">{{ subtask.text }}</span>
+        </div>
+      </div>
+      <div class="priority info-box">
+        <label>Priority:</label>
+        <div class="tag" [ngClass]="task.priority">
+          <span>{{ task.priority }}</span>
+          <img src="assets/images/{{ task.priority }}-white.svg" alt="" />
+        </div>
+      </div>
+      <div class="info-box">
+        <label>Assigned to:</label>
+        <div class="assignee" *ngFor="let assignee of task.assignees">
+          <img
+            [src]="getAssigneeImage(assignee) || 'assets/images/1.jpg'"
+            alt=""
+          />
+          <span>{{ getAssigneeName(assignee) }}</span>
+        </div>
       </div>
     </div>
-    <div class="priority info-box">
-      <label>Priority:</label>
-      <div class="tag" [ngClass]="task.priority">
-        <span>{{ task.priority }}</span>
-        <img src="assets/images/{{ task.priority }}-white.svg" alt="" />
-      </div>
-    </div>
-    <div class="info-box">
-      <label>Assigned to:</label>
-      <div class="assignee" *ngFor="let assignee of task.assignees">
-        <img
-          [src]="getAssigneeImage(assignee) || 'assets/images/1.jpg'"
-          alt=""
-        />
-        <span>{{ getAssigneeName(assignee) }}</span>
-      </div>
+    <div (click)="toggleEdit()" class="edit-btn">
+      <button class="btn btn-primary">
+        <img src="assets/images/pencilToDo.svg" alt="" />
+      </button>
     </div>
   </div>
-  <div class="edit-btn">
-    <button class="btn btn-primary">
-      <img src="assets/images/pencilToDo.svg" alt="" />
-    </button>
+  <div class="edit-content" *ngIf="type === 'edit'">
+    <app-add-task-comp [taskEdit]="task"></app-add-task-comp>
   </div>
 </div>

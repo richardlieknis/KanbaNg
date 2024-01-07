@@ -11,11 +11,12 @@ import { TaskService } from '../../services/task.service';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskCompComponent implements OnInit {
-  // TODO: directlyAssigned is not functional yet
   @Input() directlyAssigned: any = null;
   @Input() status: string = 'todo';
+  @Input() taskEdit: any = null;
 
   private backendUrl = "http://localhost/backend/";
+  private categoryDictionary: any = {};
 
 
   public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
@@ -61,14 +62,41 @@ export class AddTaskCompComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.setStatus(this.status);
-    this.setCurrentDate();
+    this.getCategoryDict();
     this.getContacts();
     this.getCategories();
-    if (this.directlyAssigned) {
-      //this.assignees.push(this.toNumber(this.directlyAssigned.contact_id));
-      this.taskForm.get('assignees')?.setValue([this.toNumber(this.directlyAssigned.contact_id)]);
+    if (this.taskEdit) {
+      this.setInputValueEdit();
+    } else {
+      this.setStatus(this.status);
+      this.setCurrentDate();
+      console.log(this.directlyAssigned);
+      if (this.directlyAssigned) {
+        this.assignees.push(this.toNumber(this.directlyAssigned.contact_id));
+        this.taskForm.get('assignees')?.setValue([this.toNumber(this.directlyAssigned.contact_id)]);
+      }
     }
+  }
+
+  /**
+   * Set input values when editing a task
+   */
+  setInputValueEdit() {
+    const formControls = ['title', 'description', 'category',
+      'assignees', 'due_date', 'priority', 'subtasks', 'status'];
+
+    formControls.forEach(control => {
+      this.taskForm.get(control)?.setValue(this.taskEdit[control]);
+    });
+
+    this.taskService.createCategoryDictionary().subscribe((data: any) => {
+      this.categoryText = data[this.taskEdit.category].name;
+    });
+
+    this.selectedPriority = this.taskEdit.priority;
+    this.subtasks = this.taskEdit.subtasks;
+    this.assignees = this.taskEdit.assignees;
+    this.category = this.taskEdit.category;
   }
 
   setStatus(status: string) {
@@ -90,9 +118,16 @@ export class AddTaskCompComponent implements OnInit {
     });
   }
 
+
   getCategories() {
     this.sql.getCategories().subscribe((data) => {
       this.categories = data.categories;
+    });
+  }
+
+  getCategoryDict() {
+    this.taskService.createCategoryDictionary().subscribe((data: any) => {
+      this.categoryDictionary = data;
     });
   }
 
@@ -176,6 +211,9 @@ export class AddTaskCompComponent implements OnInit {
    * @param id contact id
    */
   addAssignee(checkbox: HTMLInputElement, id: string) {
+    if (!(this.directlyAssigned === this.toNumber(id))) {
+      return;
+    }
     const numericId = Number(id);
     const assignees = this.taskForm.get('assignees')?.value as number[];
 

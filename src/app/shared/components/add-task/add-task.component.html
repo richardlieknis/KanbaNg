@@ -1,4 +1,3 @@
-<!-- TODO: Overlay nicht mehr responsive???? -->
 <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="add-task-wrapper">
   <div class="left">
     <!-- Title -->
@@ -98,6 +97,9 @@
                 #checkbox
                 type="checkbox"
                 [checked]="assignees.includes(toNumber(contact.contact_id))"
+                [disabled]="
+                  !(this.directlyAssigned === this.toNumber(contact.contact_id))
+                "
               />
             </li>
             <li (click)="inviteContact()">
