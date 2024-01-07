@@ -40,6 +40,9 @@ header {
       cursor: pointer;
       background-color: #00000008;
     }
+    .done {
+      text-decoration: line-through;
+    }
   }
   .priority {
     display: flex;

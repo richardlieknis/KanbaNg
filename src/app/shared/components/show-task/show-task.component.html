@@ -12,9 +12,13 @@
     </div>
     <div class="info-box">
       <label>Subtasks:</label>
-      <div class="subtask" *ngFor="let subtask of task.subtasks">
-        <input type="checkbox" />
-        <span>{{ subtask }}</span>
+      <div
+        class="subtask"
+        *ngFor="let subtask of task.subtasks"
+        (click)="markSubtask(subtask)"
+      >
+        <input [checked]="subtask.done" type="checkbox" />
+        <span [ngClass]="subtask.done ? 'done' : ''">{{ subtask.text }}</span>
       </div>
     </div>
     <div class="priority info-box">

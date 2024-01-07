@@ -30,6 +30,11 @@ export class ShowTaskComponent implements OnInit {
     });
   }
 
+  markSubtask(subtask: any) {
+    subtask.done = !subtask.done;
+    console.log(subtask);
+  }
+
   getAssigneeName(assigneeId: any) {
     return this.assignees[assigneeId]?.name;
   }
