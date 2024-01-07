@@ -1,8 +1,12 @@
 <div class="task-box" (click)="overlay.show('task', 'standard', '', '', task)">
   <div class="head">
-    <div [ngClass]="getCategoryColor(task.category)" class="tag">
-      {{ getCategoryName(task.category) }}
+    <div class="top">
+      <div [ngClass]="getCategoryColor(task.category)" class="tag">
+        {{ getCategoryName(task.category) }}
+      </div>
+      <img src="assets/images/clickable.svg" alt="" />
     </div>
+
     <span class="title"> {{ task.title }}</span>
   </div>
   <span class="description">

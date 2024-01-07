@@ -9,6 +9,13 @@
   margin-bottom: 20px;
   &:hover {
     cursor: grab;
+    .top {
+      transition: filter 1s ease-in-out;
+      img {
+        filter: opacity(0.2);
+        scale: 1.1;
+      }
+    }
   }
 }
 
@@ -18,6 +25,13 @@
   gap: 10px;
   white-space: nowrap;
   margin-bottom: 10px;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    img {
+      filter: opacity(0.1);
+    }
+  }
   .tag {
     padding: 5px 10px;
     border-radius: 8px;
