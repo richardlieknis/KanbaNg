@@ -186,7 +186,7 @@
         <ul>
           <li *ngFor="let subtask of subtasks; let i = index">
             <div class="list-content">
-              <span>{{ subtask }}</span>
+              <span>{{ subtask.text }}</span>
               <img
                 (click)="deleteSubtask(i)"
                 src="assets/images/delete.svg"

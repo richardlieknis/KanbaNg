@@ -35,7 +35,7 @@ export class AddTaskCompComponent implements OnInit {
   public contacts: Array<any> = [];
 
   // data to process add task form
-  public subtasks: Array<string> = [];
+  public subtasks: Array<any> = [];
   public assignees: Array<number> = [];
   public category?: number;
 
@@ -44,8 +44,8 @@ export class AddTaskCompComponent implements OnInit {
 
 
   taskForm: FormGroup = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    description: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    title: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
     assignees: new FormControl([], [Validators.required]),
     due_date: new FormControl(this.currentDate, [Validators.required]),
@@ -159,10 +159,13 @@ export class AddTaskCompComponent implements OnInit {
     let input = (document.getElementById('subtask') as HTMLInputElement).value;
     if (input.length <= 0) {
       this.snackbar.show('Please enter a subtask name', 'error');
-    } else if (input.length >= 50) {
-      this.snackbar.show('Subtask name is too long. Max 50 characters', 'error');
+    } else if (input.length >= 150) {
+      this.snackbar.show('Subtask text is too long. Max 150 characters', 'error');
     } else {
-      this.subtasks.push(input);
+      this.subtasks.push({
+        text: input,
+        done: false,
+      });
       this.subtaskInputActive = false;
       this.taskForm.get('subtasks')?.setValue(this.subtasks);
       (document.getElementById('subtask') as HTMLInputElement).value = '';
@@ -190,10 +193,6 @@ export class AddTaskCompComponent implements OnInit {
     console.log(this.assignees);
   }
 
-  toNumber(id: string) {
-    return Number(id);
-  }
-
   addCategory(category: any) {
     this.categoryText = category.name;
     this.category = category.category_id;
@@ -210,6 +209,10 @@ export class AddTaskCompComponent implements OnInit {
       }
     });
     return lastId;
+  }
+
+  toNumber(id: string) {
+    return Number(id);
   }
 
   deleteSubtask(index: number) {
