@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OverlayService } from '../../../shared/services/overlay.service';
 import { FetchSqlService } from '../../../shared/services/fetch-sql.service';
+import { TaskService } from '../../../shared/services/task.service';
 
 @Component({
   selector: 'app-board',
@@ -8,6 +9,7 @@ import { FetchSqlService } from '../../../shared/services/fetch-sql.service';
   styleUrl: './board.component.scss'
 })
 export class BoardComponent implements OnInit {
+  private allTasks: any[] = [];
   public toDo: any[] = [];
   public inProgress: any[] = [];
   public inReview: any[] = [];
@@ -17,11 +19,17 @@ export class BoardComponent implements OnInit {
   constructor(
     public overlayService: OverlayService,
     private sql: FetchSqlService,
+    private taskService: TaskService,
   ) { }
 
   ngOnInit(): void {
     this.sql.getTasks().subscribe((data: any) => {
-      this.sortTasksByStatus(data.tasks);
+      this.allTasks = data.tasks;
+      this.sortTasksByStatus(this.allTasks);
+    });
+    this.taskService.taskState.subscribe((task) => {
+      this.allTasks.push(task);
+      this.sortTasksByStatus(this.allTasks);
     });
   }
 

@@ -1,13 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SnackbarService } from '../../services/snackbar.service';
-import test from 'node:test';
 import { FetchSqlService } from '../../services/fetch-sql.service';
-import { get } from 'http';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { formatDate } from '@angular/common';
-import { stat } from 'fs';
 import { OverlayService } from '../../services/overlay.service';
+import { TaskService } from '../../services/task.service';
 @Component({
   selector: 'app-add-task-comp',
   templateUrl: './add-task.component.html',
@@ -60,6 +57,7 @@ export class AddTaskCompComponent implements OnInit {
     private sql: FetchSqlService,
     private http: HttpClient,
     private overlay: OverlayService,
+    private taskService: TaskService,
   ) { }
 
   ngOnInit() {
@@ -102,6 +100,7 @@ export class AddTaskCompComponent implements OnInit {
     console.log(this.taskForm.value);
     if (this.taskForm.valid) {
       this.writeTaskOnDb(this.taskForm.value);
+      this.taskService.emitTask(this.taskForm.value);
       this.overlay.hide();
     } else {
       this.snackbar.show('Please fill all the required fields', 'error');
@@ -132,7 +131,6 @@ export class AddTaskCompComponent implements OnInit {
     this.http.post(this.backendUrl + 'create_task.php',
       task, { responseType: 'text' })
       .subscribe((result: any) => {
-        console.log(result);
         result = JSON.parse(result);
         if (result.status === 'success') {
           this.snackbar.show(result.message, 'success');;

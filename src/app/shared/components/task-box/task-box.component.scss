@@ -42,7 +42,7 @@
   .title {
     font-family: "Inter", sans-serif;
     font-size: clamp(0.875rem, 5vw, 1rem);
-    text-overflow: ellipsis;
+    text-wrap: wrap;
   }
 }
 

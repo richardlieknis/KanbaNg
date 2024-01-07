@@ -6,9 +6,9 @@ import { Observable, Subject, map } from 'rxjs';
   providedIn: 'root'
 })
 export class TaskService {
-  private subtaskSubject = new Subject<any>();
+  private taskSubject = new Subject<any>();
 
-  public subtaskState = this.subtaskSubject.asObservable();
+  public taskState = this.taskSubject.asObservable();
 
   constructor(
     private sql: FetchSqlService,
@@ -37,10 +37,10 @@ export class TaskService {
   }
 
   /**
-   * emit subtask to task-show component
-   * @param subtask subtask to emit
+   * emit task to board component
+   * @param task task to emit
    */
-  emitSubtask(subtask: any) {
-    this.subtaskSubject.next(subtask);
+  emitTask(task: any) {
+    this.taskSubject.next(task);
   }
 }
