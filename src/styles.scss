@@ -31,6 +31,12 @@ header {
     white-space: nowrap;
     color: #000c;
   }
+  h2 {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(1.5rem, 10vw, 2rem);
+    // white-space: nowrap;
+    color: #000c;
+  }
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }

@@ -37,7 +37,7 @@
           <app-profile></app-profile>
         </ng-container>
         <ng-container *ngSwitchCase="'task'">
-          <app-show-task></app-show-task>
+          <app-show-task [task]="object"></app-show-task>
         </ng-container>
       </ng-container>
     </div>

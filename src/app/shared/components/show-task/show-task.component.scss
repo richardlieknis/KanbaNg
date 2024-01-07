@@ -1,0 +1,109 @@
+.task-wrapper {
+  position: relative;
+  label {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(0.875rem, 5vw, 1rem);
+  }
+}
+
+header {
+  h2 {
+    text-align: center;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    span {
+      font-size: clamp(1rem, 5vw, 1.25rem);
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #9e2828;
+    }
+  }
+}
+
+.body {
+  .info-box {
+    margin-bottom: 1.25rem;
+    p {
+      max-width: 500px;
+    }
+  }
+  .subtask {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    &:hover {
+      cursor: pointer;
+      background-color: #00000008;
+    }
+  }
+  .priority {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .tag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 5px 10px;
+      border-radius: 10px;
+      span {
+        color: #fff;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      img {
+        width: 1rem;
+      }
+    }
+    .medium {
+      background-color: #f5a623;
+    }
+    .low {
+      background-color: #02cf2f;
+    }
+    .urgent {
+      background-color: #d0021b;
+    }
+  }
+
+  .assignee {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    span {
+      font-family: "Poppins", sans-serif;
+    }
+  }
+}
+
+.edit-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  button {
+    padding: unset !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    img {
+      width: 50%;
+      height: 50%;
+    }
+  }
+}
