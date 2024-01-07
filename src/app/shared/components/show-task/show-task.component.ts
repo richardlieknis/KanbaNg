@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchSqlService } from '../../services/fetch-sql.service';
 import { TaskService } from '../../services/task.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-show-task',
@@ -11,13 +12,15 @@ export class ShowTaskComponent implements OnInit {
   @Input() task: any;
   public assignees: any[] = [];
 
+  private backendUrl = 'http://localhost/backend/';
+
   constructor(
     private sql: FetchSqlService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private http: HttpClient,
   ) { }
 
   ngOnInit() {
-    console.log(this.task);
     this.loadAssignees();
   }
 
@@ -29,7 +32,15 @@ export class ShowTaskComponent implements OnInit {
 
   markSubtask(subtask: any) {
     subtask.done = !subtask.done;
-    console.log(subtask);
+    this.updateTask();
+  }
+
+  updateTask() {
+    this.http.post(this.backendUrl + 'update_task.php',
+      this.task, { responseType: 'text' })
+      .subscribe((result: any) => {
+        result = JSON.parse(result);
+      });
   }
 
   getAssigneeName(assigneeId: any) {
