@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchSqlService } from '../../services/fetch-sql.service';
 import { TaskService } from '../../services/task.service';
-import { formatDate } from '@angular/common';
-
-formatDate
 
 @Component({
   selector: 'app-show-task',

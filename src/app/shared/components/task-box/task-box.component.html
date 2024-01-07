@@ -13,8 +13,15 @@
     {{ task.description }}
   </span>
   <div class="progress">
-    <progress value="70" max="100" min="0"></progress>
-    <span>2 / 3 Done</span>
+    <progress
+      [value]="(getSubtaskStatus(task.subtasks) / task.subtasks.length) * 100"
+      max="100"
+      min="0"
+    ></progress>
+    <span
+      >{{ getSubtaskStatus(task.subtasks) }} /
+      {{ task.subtasks.length }} Done</span
+    >
   </div>
   <div class="footer">
     <div class="contacts">

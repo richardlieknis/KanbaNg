@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FetchSqlService } from './fetch-sql.service';
-import { Observable, map } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
+  private subtaskSubject = new Subject<any>();
+
+  public subtaskState = this.subtaskSubject.asObservable();
 
   constructor(
     private sql: FetchSqlService,
@@ -31,5 +34,13 @@ export class TaskService {
         }, {});
       })
     );
+  }
+
+  /**
+   * emit subtask to task-show component
+   * @param subtask subtask to emit
+   */
+  emitSubtask(subtask: any) {
+    this.subtaskSubject.next(subtask);
   }
 }

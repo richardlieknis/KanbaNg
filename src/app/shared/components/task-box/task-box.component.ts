@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchSqlService } from '../../services/fetch-sql.service';
-import { get } from 'http';
 import { OverlayService } from '../../services/overlay.service';
 
 @Component({
@@ -28,10 +27,19 @@ export class TaskBoxComponent implements OnInit {
 
   }
 
-  getAssignedContacts() {
-
+  getSubtaskStatus(subtasks: any) {
+    let counter = 0;
+    subtasks.forEach((e: any) => {
+      e.done ? counter++ : null;
+    });
+    return counter;
   }
 
+
+  /** fetch categories from database and create a dictionary
+   * save dictionary in this.categories
+   *  @returns dictionary of categories with category_id as key
+   */
   createCategoryDictionary() {
     this.sql.getCategories().subscribe((data: any) => {
       this.categories = data.categories.reduce((acc: any, category: any) => {
@@ -41,6 +49,10 @@ export class TaskBoxComponent implements OnInit {
     });
   }
 
+  /** fetch contacts from database and create a dictionary
+   * save dictionary in this.contacts
+   *  @returns dictionary of contacts with contact_id as key
+   */
   createAssigneeDictionary() {
     this.sql.getContacts().subscribe((data: any) => {
       this.contacts = data.contacts.reduce((acc: any, contact: any) => {
