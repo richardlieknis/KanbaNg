@@ -23,6 +23,10 @@ export class ShowTaskComponent implements OnInit {
 
   ngOnInit() {
     this.loadAssignees();
+    this.taskService.updateTaskState.subscribe((task: any) => {
+      this.task = task;
+      this.type = 'show';
+    });
   }
 
   loadAssignees() {

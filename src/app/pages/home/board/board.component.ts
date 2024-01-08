@@ -31,6 +31,15 @@ export class BoardComponent implements OnInit {
       this.allTasks.push(task);
       this.sortTasksByStatus(this.allTasks);
     });
+    this.taskService.updateTaskState.subscribe((task) => {
+      this.allTasks = this.allTasks.map((t) => {
+        if (t.task_id === task.task_id) {
+          return task;
+        }
+        return t;
+      });
+      this.sortTasksByStatus(this.allTasks);
+    });
   }
 
   /**
