@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { TaskService } from './task.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ export class OverlayService {
   public overlay2State = this.overlay2Subject.asObservable();
 
   private lastOverlay: string | null = null;
+
+  constructor(
+    private taskService: TaskService
+  ) { }
 
   /** Show overlay - 2 types: standard and overlay with banner
    * @param component as string, component name to show in overlay
@@ -40,6 +45,7 @@ export class OverlayService {
 
   /** close overlay */
   hide() {
+    this.taskService.emitAddTaskType('show');
     if (this.lastOverlay === 'standard') {
       this.overlaySubject.next({
         show: false,
@@ -52,8 +58,4 @@ export class OverlayService {
       });
     }
   }
-
-
-
-  constructor() { }
 }

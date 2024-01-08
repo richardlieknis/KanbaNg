@@ -18,7 +18,7 @@ export class AddTaskCompComponent implements OnInit {
   private backendUrl = "http://localhost/backend/";
   private categoryDictionary: any = {};
 
-
+  public addTaskType: string = 'show';
   public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
   public categoryDropdown: boolean = false;
   public assigneeDropdown: boolean = false;
@@ -76,6 +76,12 @@ export class AddTaskCompComponent implements OnInit {
         this.taskForm.get('assignees')?.setValue([this.toNumber(this.directlyAssigned.contact_id)]);
       }
     }
+    this.taskService.addTaskType.subscribe((type: string) => {
+      this.addTaskType = type;
+    });
+    this.taskService.taskStatus.subscribe((status: string) => {
+      this.taskForm.get('status')?.setValue(status);
+    });
   }
 
   /**
@@ -159,6 +165,7 @@ export class AddTaskCompComponent implements OnInit {
         this.snackbar.show(result.message, result.status);
         if (result.status === 'success') {
           this.taskService.emitUpdateTask(formData);
+          this.taskService.emitAddTaskType('show');
         }
       });
   }

@@ -57,9 +57,12 @@ export class ShowTaskComponent implements OnInit {
   }
 
   toggleEdit() {
-    console.log(this.type);
     this.type = this.type === 'show' ? 'edit' : 'show';
-    console.log(this.type);
+    this.taskService.emitAddTaskType(this.type);
+  }
+
+  onStatusUpdate(status: string) {
+
   }
 
 }
