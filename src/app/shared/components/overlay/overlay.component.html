@@ -17,9 +17,36 @@
         <div
           [ngClass]="categories[object.category].color"
           class="category-tag"
-          *ngIf="checkIfTask()"
+          *ngIf="checkIfTask() && addTaskType === 'show'"
         >
           <span>{{ categories[object.category].name }}</span>
+        </div>
+        <div
+          class="status-input"
+          *ngIf="checkIfTask() && addTaskType === 'edit'"
+        >
+          <div *ngIf="!statusInputActive" class="select">
+            <div class="input" (click)="toggleStatusDropdown()">
+              <span class="status-text">{{
+                translateStatus(object.status)
+              }}</span>
+              <img
+                [ngClass]="{ rotate180: statusDropdown }"
+                src="assets/images/dropdown.svg"
+              />
+            </div>
+            <div *ngIf="statusDropdown" class="dropdown">
+              <ul>
+                <li
+                  (click)="changeStatus(status)"
+                  *ngFor="let status of statusArray"
+                >
+                  <span class="status-text">{{ translateStatus(status) }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- OOOOOOOOOOOOOOOOOOOOOOOOOOO -->
         </div>
         <h5 *ngIf="subtitle.length > 0">{{ subtitle }}</h5>
       </div>

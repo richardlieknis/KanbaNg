@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SnackbarService } from '../../services/snackbar.service';
 import { OverlayService } from '../../services/overlay.service';
@@ -38,6 +38,7 @@ import { TaskService } from '../../services/task.service';
   ]
 })
 export class OverlayComponent implements OnInit, OnDestroy {
+  public addTaskType: 'show' | 'edit' = 'show';
   public show = false;
   public animIsRunning = false;
   public component: string | null = null;
@@ -46,7 +47,12 @@ export class OverlayComponent implements OnInit, OnDestroy {
   public object: any = null;
   private overlaySub: Subscription = new Subscription();
 
+  public statusInputActive: boolean = false;
+  public statusDropdown: boolean = false;
+
   public categories: any[] = [];
+
+  public statusArray = ['todo', 'progress', 'feedback', 'done'];
 
   constructor(
     private snackbarService: SnackbarService,
@@ -65,6 +71,9 @@ export class OverlayComponent implements OnInit, OnDestroy {
         this.setTitle(state.component);
       });
     this.loadCategories();
+    this.taskService.addTaskType.subscribe((type: 'show' | 'edit') => {
+      this.addTaskType = type;
+    });
   }
 
   ngOnDestroy() {
@@ -94,5 +103,30 @@ export class OverlayComponent implements OnInit, OnDestroy {
   setTitle(title: string) {
     title = title?.replace(/-/g, ' ');
     this.title = title;
+  }
+
+  toggleStatusDropdown() {
+    this.statusDropdown = !this.statusDropdown;
+  }
+
+  changeStatus(status: string) {
+    this.object.status = status;
+    this.toggleStatusDropdown();
+    this.taskService.emitTaskStatus(status);
+  }
+
+  translateStatus(status: string) {
+    switch (status) {
+      case 'todo':
+        return 'To Do';
+      case 'progress':
+        return 'In Progress';
+      case 'feedback':
+        return 'Awaiting Feedback';
+      case 'done':
+        return 'Done';
+      default:
+        return 'todo';
+    }
   }
 }

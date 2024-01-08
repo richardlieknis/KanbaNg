@@ -60,6 +60,96 @@ header {
   }
 }
 
+.status-input {
+  .select {
+    position: relative;
+  }
+  .status-text {
+    font-size: 0.875rem;
+  }
+  .input {
+    min-width: 12.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      background-color: #f6f7f8;
+    }
+    .status {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      transition: all 0.3s ease-in-out;
+      &.active {
+        background-color: #29abe2;
+        border: 1px solid #29abe2;
+      }
+    }
+
+    img {
+      all: unset;
+      transition: all 300ms ease-in-out;
+    }
+  }
+  .dropdown {
+    position: absolute;
+    width: 100%;
+    transform: translateY(-6px);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    animation: animate 300ms ease-in-out;
+    overflow: hidden;
+    z-index: 999;
+    @keyframes animate {
+      from {
+        opacity: 0;
+        height: 0px;
+      }
+      to {
+        opacity: 1;
+        height: 130px;
+      }
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      z-index: 10;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 16px;
+        transition: background 225ms ease-in-out;
+
+        img {
+          width: 16px;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: #f6f7f8;
+        }
+      }
+    }
+    .dropdown-add {
+      width: 20px;
+    }
+  }
+}
+
 .overlay {
   width: fit-content;
   min-width: 55rem;
