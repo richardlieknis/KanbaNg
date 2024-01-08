@@ -7,8 +7,10 @@ import { Observable, Subject, map } from 'rxjs';
 })
 export class TaskService {
   private taskSubject = new Subject<any>();
+  private updateTaskSubject = new Subject<any>();
 
   public taskState = this.taskSubject.asObservable();
+  public updateTaskState = this.updateTaskSubject.asObservable();
 
   constructor(
     private sql: FetchSqlService,
@@ -42,5 +44,9 @@ export class TaskService {
    */
   emitTask(task: any) {
     this.taskSubject.next(task);
+  }
+
+  emitUpdateTask(task: any) {
+    this.updateTaskSubject.next(task);
   }
 }
