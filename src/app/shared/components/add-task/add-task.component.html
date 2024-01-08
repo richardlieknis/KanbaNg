@@ -98,7 +98,9 @@
                 type="checkbox"
                 [checked]="assignees.includes(toNumber(contact.contact_id))"
                 [disabled]="
-                  !(this.directlyAssigned === this.toNumber(contact.contact_id))
+                  !(
+                    this.directlyAssigned === this.toNumber(contact.contact_id)
+                  ) && this.directlyAssigned !== null
                 "
               />
             </li>
@@ -200,7 +202,7 @@
       </div>
     </div>
 
-    <div class="buttons">
+    <div class="buttons" *ngIf="!taskEdit">
       <button type="button" class="btn btn-secondary">Clear</button>
       <button
         class="btn btn-primary"
@@ -211,6 +213,19 @@
         [disabled]="!taskForm.valid"
       >
         Create Task
+      </button>
+    </div>
+    <div class="buttons" *ngIf="taskEdit">
+      <button type="button" class="delete btn btn-secondary">Delete</button>
+      <button
+        class="btn btn-primary"
+        [ngClass]="{
+          'btn-primary': taskForm.valid,
+          'btn-primary-disabled': !taskForm.valid
+        }"
+        [disabled]="!taskForm.valid"
+      >
+        Accept
       </button>
     </div>
   </div>

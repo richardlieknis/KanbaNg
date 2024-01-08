@@ -132,14 +132,35 @@ export class AddTaskCompComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.taskForm.value);
-    if (this.taskForm.valid) {
-      this.writeTaskOnDb(this.taskForm.value);
-      this.taskService.emitTask(this.taskForm.value);
-      this.overlay.hide();
+    if (this.taskEdit && this.taskForm.valid) {
+      console.log("UPDATE TASK");
+      this.updateTask();
+    } else if (!this.taskEdit && this.taskForm.valid) {
+      this.createTask();
     } else {
       this.snackbar.show('Please fill all the required fields', 'error');
     }
+  }
+
+  createTask() {
+    this.writeTaskOnDb(this.taskForm.value);
+    this.taskService.emitTask(this.taskForm.value);
+    this.overlay.hide();
+  }
+
+  // TODO: Assignees werden doppelt aufgelistet beim editieren
+  updateTask() {
+    let formData = this.taskForm.value;
+    Object.assign(formData, { task_id: this.taskEdit.task_id });
+    this.http.post(this.backendUrl + 'update_task.php',
+      this.taskForm.value, { responseType: 'text' })
+      .subscribe((result: any) => {
+        result = JSON.parse(result);
+        this.snackbar.show(result.message, result.status);
+        if (result.status === 'success') {
+          this.taskService.emitUpdateTask(formData);
+        }
+      });
   }
 
   createNewCategory() {
@@ -211,7 +232,7 @@ export class AddTaskCompComponent implements OnInit {
    * @param id contact id
    */
   addAssignee(checkbox: HTMLInputElement, id: string) {
-    if (!(this.directlyAssigned === this.toNumber(id))) {
+    if (!(this.directlyAssigned === this.toNumber(id)) && this.directlyAssigned !== null) {
       return;
     }
     const numericId = Number(id);
@@ -226,7 +247,6 @@ export class AddTaskCompComponent implements OnInit {
       assignees.splice(assignees.indexOf(numericId), 1);
     }
     this.taskForm.get('assignees')?.setValue(assignees);
-    console.log(this.assignees);
   }
 
   addCategory(category: any) {
