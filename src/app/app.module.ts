@@ -27,7 +27,6 @@ import { ProfileComponent } from './shared/components/profile/profile.component'
 import { Overlay2Component } from './shared/components/overlay2/overlay2.component';
 import { ContactComponent } from './shared/components/contact/contact.component';
 import { ShowTaskComponent } from './shared/components/show-task/show-task.component';
-import { EditTaskComponent } from './shared/components/edit-task/edit-task.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +50,6 @@ import { EditTaskComponent } from './shared/components/edit-task/edit-task.compo
     Overlay2Component,
     ContactComponent,
     ShowTaskComponent,
-    EditTaskComponent,
   ],
   imports: [
     BrowserModule,
