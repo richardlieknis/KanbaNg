@@ -139,6 +139,15 @@ header {
   }
 }
 
+.delete {
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid #2a36471f;
+    background-color: rgb(244, 67, 67);
+  }
+}
+
 .btn-form {
   background-color: #fff;
   color: #2a3647;
