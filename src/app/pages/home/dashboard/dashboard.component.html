@@ -11,17 +11,17 @@
     <div class="box-row">
       <!-- Box1 -->
       <div class="box">
-        <span class="number">5</span>
+        <span class="number">{{ allTasks.length }}</span>
         <span class="text poppins">Tasks in Board</span>
       </div>
       <!-- Box 2 -->
       <div class="box">
-        <span class="number">2</span>
+        <span class="number">{{ inProgress.length }}</span>
         <span class="text poppins">Tasks in Progress</span>
       </div>
       <!-- Box 3 -->
       <div class="box">
-        <span class="number">1</span>
+        <span class="number">{{ inReview.length }}</span>
         <span class="text poppins">Awaiting Feedback</span>
       </div>
     </div>
@@ -51,7 +51,7 @@
           <img src="assets/images/pencilToDo.svg" alt="summary" />
         </div>
         <div class="info">
-          <span class="number">3</span>
+          <span class="number">{{ toDo.length }}</span>
           <span class="text poppins">To-Do</span>
         </div>
       </div>
@@ -61,7 +61,7 @@
           <img src="assets/images/doneSymbol.svg" alt="summary" />
         </div>
         <div class="info">
-          <span class="number">675</span>
+          <span class="number">{{ done.length }}</span>
           <span class="text poppins">Done</span>
         </div>
       </div>

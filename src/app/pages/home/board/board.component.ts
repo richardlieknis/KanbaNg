@@ -67,6 +67,5 @@ export class BoardComponent implements OnInit {
           break;
       }
     });
-    // console.log(this.toDo, this.inProgress, this.inReview, this.done);
   }
 }
