@@ -42,6 +42,20 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  onInputChange(event: any) {
+    const input = (event.target as HTMLInputElement).value;
+    this.filterTask(input);
+  }
+
+  filterTask(input: string) {
+    this.sortTasksByStatus(this.allTasks.filter((task) => {
+      const titleMatch = task.title.toLowerCase().includes(input.toLowerCase());
+      const descriptionMatch = task.description.toLowerCase().includes(input.toLowerCase());
+
+      return titleMatch || descriptionMatch;
+    }));
+  }
+
   /**
    * process task data
    * @param tasks 

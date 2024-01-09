@@ -3,7 +3,11 @@
     <h1>Board</h1>
     <div class="right-input">
       <div class="search">
-        <input type="text" placeholder="Find task" />
+        <input
+          type="text"
+          (input)="onInputChange($event)"
+          placeholder="Find task"
+        />
         <img src="assets/images/search.svg" alt="search" />
       </div>
       <div (click)="overlayService.show('add-task', 'standard')" class="add">

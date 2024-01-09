@@ -10,7 +10,6 @@
   &:hover {
     cursor: grab;
     .top {
-      transition: filter 1s ease-in-out;
       img {
         filter: opacity(0.2);
         scale: 1.1;
@@ -28,7 +27,10 @@
   .top {
     display: flex;
     justify-content: space-between;
+    transition: filter 1s ease-in-out;
     img {
+      width: 1.5rem;
+      height: 1.5rem;
       filter: opacity(0.1);
     }
   }
