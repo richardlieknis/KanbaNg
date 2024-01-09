@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   public upcomingDeadline: string = '';
 
   public greetings = 'Hello, ';
+  public isLoading = true;
 
   constructor(
     private sql: FetchSqlService,
@@ -35,9 +36,11 @@ export class DashboardComponent implements OnInit {
       this.allTasks = data.tasks;
       this.sortTasksByStatus(this.allTasks);
       this.getAndSortUrgentTasks(this.allTasks);
+      this.isLoading = false;
     });
   }
 
+  // NOTE: Vergangene Deadlines werden als erstes angezeigt
   getAndSortUrgentTasks(allTasks: any[]) {
     this.urgentTasks = this.sortByDate(allTasks.filter((task) =>
       task.priority === 'urgent' && task.status !== 'done'));
@@ -77,23 +80,20 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  /**
+   * format date to 'January 1, 2000'
+   * @param inputDate due_date from task
+   * @returns formatted date
+   */
   formatDate(inputDate: string): string {
     const months = [
       'January', 'February', 'March', 'April',
       'May', 'June', 'July', 'August',
       'September', 'October', 'November', 'December'
     ];
-
     const [year, month, day] = inputDate.split('-').map(Number);
-
-    // Validierung des Datums (optional)
-    if (isNaN(year) || isNaN(month) || isNaN(day)) {
-      throw new Error('Ungültiges Datumsformat');
-    }
-
     const monthName = months[month - 1];
 
-    // `toLocaleString` kann verwendet werden, um die Sprache und das Land anzupassen
     const formattedDate = new Date(year, month - 1, day).toLocaleString('en-US', {
       month: 'long',
       day: 'numeric',
