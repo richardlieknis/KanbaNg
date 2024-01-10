@@ -28,6 +28,8 @@ import { Overlay2Component } from './shared/components/overlay2/overlay2.compone
 import { ContactComponent } from './shared/components/contact/contact.component';
 import { ShowTaskComponent } from './shared/components/show-task/show-task.component';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +62,8 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CommonModule
+    CommonModule,
+    DragDropModule,
 
   ],
   providers: [],
