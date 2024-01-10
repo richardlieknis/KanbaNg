@@ -52,7 +52,7 @@ export class Overlay2Component implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.overlayService.overlay2State
+    this.overlaySub = this.overlayService.overlay2State
       .subscribe((state) => {
         this.component = state.component;
         this.subtitle = state.subtitle || '';
