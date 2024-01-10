@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OverlayService } from '../../../shared/services/overlay.service';
 import { FetchSqlService } from '../../../shared/services/fetch-sql.service';
 import { TaskService } from '../../../shared/services/task.service';
+import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-board',
@@ -16,12 +18,16 @@ export class BoardComponent implements OnInit {
   public done: any[] = [];
 
   public isLoading = true;
+  public isDragging = false;
+
+  private backendUrl = 'http://localhost/backend/';
 
 
   constructor(
     public overlayService: OverlayService,
     private sql: FetchSqlService,
     private taskService: TaskService,
+    private http: HttpClient,
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +83,32 @@ export class BoardComponent implements OnInit {
     }));
   }
 
+  dropTask(event: CdkDragDrop<any[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data,
+        event.previousIndex, event.currentIndex);
+      this.changeTaskStatus(event.container.data[event.currentIndex], event.container.id);
+    };
+  }
+
+  changeTaskStatus(task: any, status: string) {
+    task.status = status;
+    this.http.post(this.backendUrl + 'update_task.php',
+      task, { responseType: 'text' })
+      .subscribe((result: any) => {
+        result = JSON.parse(result);
+        if (result.status === 'success') {
+          this.taskService.emitUpdateTask(task);
+        }
+      });
+  }
+
+  toggleDragState() {
+    this.isDragging = !this.isDragging;
+  }
+
   /**
    * process task data
    * @param tasks 
@@ -102,5 +134,6 @@ export class BoardComponent implements OnInit {
           break;
       }
     });
+    this.isLoading = false;
   }
 }
