@@ -15,6 +15,8 @@ export class BoardComponent implements OnInit {
   public inReview: any[] = [];
   public done: any[] = [];
 
+  public isLoading = true;
+
 
   constructor(
     public overlayService: OverlayService,
@@ -23,15 +25,30 @@ export class BoardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    // TODO: Alle subscriptions in ngOnDestroy() aufräumen 
+    // (in einem Array speichern und in einer Schleife durchgehen)
     this.sql.getTasks().subscribe((data: any) => {
+      this.isLoading = true;
       this.allTasks = data.tasks;
       this.sortTasksByStatus(this.allTasks);
     });
     this.taskService.taskState.subscribe((task) => {
+      this.isLoading = true;
       this.allTasks.push(task);
       this.sortTasksByStatus(this.allTasks);
-    });
+    }, null, () => { this.isLoading = false });
+    this.listenTaskUpdate();
+
+  }
+
+  /**
+   * listen to task update and sort tasks by status
+   * @returns old or updated task
+   */
+  listenTaskUpdate() {
     this.taskService.updateTaskState.subscribe((task) => {
+      this.isLoading = true;
       this.allTasks = this.allTasks.map((t) => {
         if (t.task_id === task.task_id) {
           return task;
@@ -47,6 +64,10 @@ export class BoardComponent implements OnInit {
     this.filterTask(input);
   }
 
+  /**
+   * filter tasks by title or description
+   * @param input search input
+   */
   filterTask(input: string) {
     this.sortTasksByStatus(this.allTasks.filter((task) => {
       const titleMatch = task.title.toLowerCase().includes(input.toLowerCase());
