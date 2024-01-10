@@ -67,20 +67,5 @@
       </div>
     </div>
   </div>
-  <!-- LOADING SPINNER -->
-  <!-- //NOTE - Später outsourcen!! -->
-  <div class="load-pos" *ngIf="isLoading">
-    <div class="lds-grid">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <!-- LOADING SPINNER ENDE -->
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 </div>

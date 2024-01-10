@@ -27,6 +27,7 @@ import { ProfileComponent } from './shared/components/profile/profile.component'
 import { Overlay2Component } from './shared/components/overlay2/overlay2.component';
 import { ContactComponent } from './shared/components/contact/contact.component';
 import { ShowTaskComponent } from './shared/components/show-task/show-task.component';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { ShowTaskComponent } from './shared/components/show-task/show-task.compo
     Overlay2Component,
     ContactComponent,
     ShowTaskComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
