@@ -70,7 +70,6 @@ export class AddTaskCompComponent implements OnInit {
     } else {
       this.setStatus(this.status);
       this.setCurrentDate();
-      console.log(this.directlyAssigned);
       if (this.directlyAssigned) {
         this.assignees.push(this.toNumber(this.directlyAssigned.contact_id));
         this.taskForm.get('assignees')?.setValue([this.toNumber(this.directlyAssigned.contact_id)]);
@@ -243,17 +242,19 @@ export class AddTaskCompComponent implements OnInit {
       return;
     }
     const numericId = Number(id);
-    const assignees = this.taskForm.get('assignees')?.value as number[];
+    this.assignees = this.taskForm.get('assignees')?.value as number[];
 
     if (!this.assignees.includes(this.toNumber(id))) {
       this.assignees.push(numericId);
-      assignees.push(numericId);
       checkbox.checked = true;
     } else {
       this.assignees.splice(this.assignees.indexOf(this.toNumber(id)), 1);
-      assignees.splice(assignees.indexOf(numericId), 1);
     }
-    this.taskForm.get('assignees')?.setValue(assignees);
+    this.taskForm.get('assignees')?.setValue(this.assignees);
+  }
+
+  filterDuplicates(array: any) {
+    return [...new Set(array)]
   }
 
   addCategory(category: any) {
