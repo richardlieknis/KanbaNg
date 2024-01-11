@@ -38,7 +38,7 @@
           (cdkDropListDropped)="dropTask($event)"
         >
           <app-task-box
-            class="task"
+            class="w-full"
             *ngFor="let task of toDo"
             [task]="task"
             cdkDrag
@@ -76,6 +76,7 @@
           (cdkDropListDropped)="dropTask($event)"
         >
           <app-task-box
+            class="w-full"
             *ngFor="let progress of inProgress"
             [task]="progress"
             cdkDrag
@@ -115,6 +116,7 @@
           (cdkDropListDropped)="dropTask($event)"
         >
           <app-task-box
+            class="w-full"
             *ngFor="let review of inReview"
             [task]="review"
             cdkDrag
@@ -152,6 +154,7 @@
           (cdkDropListDropped)="dropTask($event)"
         >
           <app-task-box
+            class="w-full"
             *ngFor="let isDone of done"
             [task]="isDone"
             cdkDrag
