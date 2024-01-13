@@ -6,6 +6,7 @@ import { OverlayService } from '../../services/overlay.service';
 import { Subject } from 'rxjs';
 import { ContactService } from '../../services/contact.service';
 import e from 'express';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-contact',
@@ -39,6 +40,7 @@ export class ContactComponent implements OnInit {
     private snackbar: SnackbarService,
     private overlay: OverlayService,
     private contactService: ContactService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -112,17 +114,22 @@ export class ContactComponent implements OnInit {
   }
 
   deleteContact(contact: any) {
-    this.http.post(this.backendUrl + 'delete_contact.php',
-      { contact_id: contact.contact_id }, { responseType: 'text' })
-      .subscribe((result: any) => {
-        result = JSON.parse(result);
-        if (result.status === 'success') {
-          this.contactService.emitContact(contact, 'delete');
-          this.snackbar.show(result.message, 'success');
-          this.overlay.hide();
-        } else {
-          this.snackbar.show(result.message, 'error');
-        }
-      });
+    this.dialogService.confirm('This contact will be permanently deleted.').then((confirmed) => {
+      if (confirmed) {
+        this.http.post(this.backendUrl + 'delete_contact.php',
+          { contact_id: contact.contact_id }, { responseType: 'text' })
+          .subscribe((result: any) => {
+            result = JSON.parse(result);
+            if (result.status === 'success') {
+              this.contactService.emitContact(contact, 'delete');
+              this.snackbar.show(result.message, 'success');
+              this.overlay.hide();
+            } else {
+              this.snackbar.show(result.message, 'error');
+            }
+          });
+      }
+    });
+
   }
 }

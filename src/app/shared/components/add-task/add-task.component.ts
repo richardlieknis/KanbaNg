@@ -171,7 +171,7 @@ export class AddTaskCompComponent implements OnInit {
   }
 
   deleteTask(task: any) {
-    this.dialogService.confirm('This Task will be deleted permanently.').then((result) => {
+    this.dialogService.confirm('This task will be permanently deleted.').then((result) => {
       if (result) {
         this.http.post(this.backendUrl + 'delete_task.php',
           task, { responseType: 'text' })
