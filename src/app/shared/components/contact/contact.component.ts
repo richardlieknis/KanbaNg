@@ -75,10 +75,10 @@ export class ContactComponent implements OnInit {
         result = JSON.parse(result);
         if (result.status === 'success') {
           this.contactService.emitContact(this.contactForm.value);
-          this.snackbar.show('Your contact has been created successfully!', 'success');
+          this.snackbar.show(result.message, 'success');
           this.overlay.hide();
         } else {
-          this.snackbar.show('Something went wrong. :(', 'error');
+          this.snackbar.show(result.message, 'error');
         }
       });
   }

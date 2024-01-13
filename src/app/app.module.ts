@@ -29,6 +29,7 @@ import { ContactComponent } from './shared/components/contact/contact.component'
 import { ShowTaskComponent } from './shared/components/show-task/show-task.component';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ContactComponent,
     ShowTaskComponent,
     LoadingSpinnerComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
