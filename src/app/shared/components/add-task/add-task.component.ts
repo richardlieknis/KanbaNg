@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { OverlayService } from '../../services/overlay.service';
 import { TaskService } from '../../services/task.service';
+import { DialogService } from '../../services/dialog.service';
 @Component({
   selector: 'app-add-task-comp',
   templateUrl: './add-task.component.html',
@@ -59,6 +60,7 @@ export class AddTaskCompComponent implements OnInit {
     private http: HttpClient,
     private overlay: OverlayService,
     private taskService: TaskService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -169,16 +171,20 @@ export class AddTaskCompComponent implements OnInit {
   }
 
   deleteTask(task: any) {
-    this.http.post(this.backendUrl + 'delete_task.php',
-      task, { responseType: 'text' })
-      .subscribe((result: any) => {
-        result = JSON.parse(result);
-        this.snackbar.show(result.message, result.status);
-        if (result.status === 'success') {
-          this.taskService.emitDeleteTask(task);
-          this.overlay.hide();
-        }
-      });
+    this.dialogService.confirm('This Task will be deleted permanently.').then((result) => {
+      if (result) {
+        this.http.post(this.backendUrl + 'delete_task.php',
+          task, { responseType: 'text' })
+          .subscribe((result: any) => {
+            result = JSON.parse(result);
+            this.snackbar.show(result.message, result.status);
+            if (result.status === 'success') {
+              this.taskService.emitDeleteTask(task);
+              this.overlay.hide();
+            }
+          });
+      }
+    });
   }
 
   createNewCategory() {
