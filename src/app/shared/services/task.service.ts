@@ -10,11 +10,13 @@ export class TaskService {
   private updateTaskSubject = new Subject<any>();
   private addTaskTypeSubject = new Subject<any>();
   private taskStatusSubject = new Subject<any>();
+  private taskDeleteSubject = new Subject<any>();
 
   public taskState = this.taskSubject.asObservable();
   public updateTaskState = this.updateTaskSubject.asObservable();
   public addTaskType = this.addTaskTypeSubject.asObservable();
   public taskStatus = this.taskStatusSubject.asObservable();
+  public taskDelete = this.taskDeleteSubject.asObservable();
 
   constructor(
     private sql: FetchSqlService,
@@ -52,6 +54,10 @@ export class TaskService {
 
   emitUpdateTask(task: any) {
     this.updateTaskSubject.next(task);
+  }
+
+  emitDeleteTask(task: any) {
+    this.taskDeleteSubject.next(task);
   }
 
   emitAddTaskType(type: string) {

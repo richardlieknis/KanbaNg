@@ -138,10 +138,10 @@ export class AddTaskCompComponent implements OnInit {
 
   onSubmit() {
     if (this.taskEdit && this.taskForm.valid) {
-      console.log("UPDATE TASK");
       this.updateTask();
     } else if (!this.taskEdit && this.taskForm.valid) {
       this.createTask();
+      this.overlay.hide();
     } else {
       this.snackbar.show('Please fill all the required fields', 'error');
     }
@@ -150,10 +150,9 @@ export class AddTaskCompComponent implements OnInit {
   createTask() {
     this.writeTaskOnDb(this.taskForm.value);
     this.taskService.emitTask(this.taskForm.value);
-    this.overlay.hide();
   }
 
-  // TODO: Assignees werden doppelt aufgelistet beim editieren
+
   updateTask() {
     let formData = this.taskForm.value;
     Object.assign(formData, { task_id: this.taskEdit.task_id });
@@ -165,6 +164,19 @@ export class AddTaskCompComponent implements OnInit {
         if (result.status === 'success') {
           this.taskService.emitUpdateTask(formData);
           this.taskService.emitAddTaskType('show');
+        }
+      });
+  }
+
+  deleteTask(task: any) {
+    this.http.post(this.backendUrl + 'delete_task.php',
+      task, { responseType: 'text' })
+      .subscribe((result: any) => {
+        result = JSON.parse(result);
+        this.snackbar.show(result.message, result.status);
+        if (result.status === 'success') {
+          this.taskService.emitDeleteTask(task);
+          this.overlay.hide();
         }
       });
   }

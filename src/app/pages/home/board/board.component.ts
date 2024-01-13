@@ -45,6 +45,7 @@ export class BoardComponent implements OnInit {
       this.sortTasksByStatus(this.allTasks);
     }, null, () => { this.isLoading = false });
     this.listenTaskUpdate();
+    this.listenTaskDelete();
 
   }
 
@@ -60,6 +61,19 @@ export class BoardComponent implements OnInit {
           return task;
         }
         return t;
+      });
+      this.sortTasksByStatus(this.allTasks);
+    });
+  }
+
+  /**
+   * listen to task delete and sort tasks by status
+   */
+  listenTaskDelete() {
+    this.taskService.taskDelete.subscribe((task) => {
+      this.isLoading = true;
+      this.allTasks = this.allTasks.filter((t) => {
+        return t.task_id !== task.task_id;
       });
       this.sortTasksByStatus(this.allTasks);
     });

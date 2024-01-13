@@ -15,7 +15,7 @@
   <div class="progress">
     <progress
       [value]="
-        (getSubtaskStatus(task.subtasks) / task.subtasks.length) * 100 || 100
+        (getSubtaskStatus(task.subtasks) / task.subtasks.length) * 100 || 0
       "
       max="100"
       min="0"
