@@ -27,4 +27,8 @@
       }
     }
   }
+
+  @media screen and (max-height: 600px) {
+    padding-bottom: 80px;
+  }
 }
