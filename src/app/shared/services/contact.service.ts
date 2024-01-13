@@ -6,8 +6,10 @@ import { Subject } from 'rxjs';
 })
 export class ContactService {
   private contactSubject = new Subject<any>();
+  private deleteContactSubject = new Subject<any>();
 
   public contactState = this.contactSubject.asObservable();
+  public deleteContactState = this.deleteContactSubject.asObservable();
 
   constructor() { }
 
@@ -18,4 +20,9 @@ export class ContactService {
   emitContact(contact: any, type?: string) {
     this.contactSubject.next({ contact, type });
   }
+
+  emitDeleteContact(contact: any) {
+    this.deleteContactSubject.next(contact);
+  }
+
 }

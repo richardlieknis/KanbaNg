@@ -56,7 +56,17 @@ export class ContactsComponent implements OnInit {
         this.replaceContact(state.contact);
         this.selectedContact = state.contact;
         this.processContactData(this.contacts);
-      } else {
+      }
+      if (state.type === 'delete') {
+        console.log("DELETE CONTACT");
+        this.contacts = this.contacts.filter((contact: any) => {
+          console.log("NORMAL: ", contact);
+          console.log("STATE: ", state.contact);
+          return contact.contact_id !== state.contact.contact_id
+        });
+        this.processContactData(this.contacts);
+      }
+      else {
         this.contacts.push(state.contact);
         this.selectedContact = state.contact;
         this.processContactData(this.contacts);
@@ -100,7 +110,6 @@ export class ContactsComponent implements OnInit {
     return Object.keys(this.contactDictionary).sort();
   }
 
-  //TODO: open contact in content area
   openContact(id: number) {
     this.changeContentMobile();
     this.contacts.forEach((contact: any) => {

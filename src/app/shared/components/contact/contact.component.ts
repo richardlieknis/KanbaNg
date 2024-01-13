@@ -110,4 +110,19 @@ export class ContactComponent implements OnInit {
         }
       });
   }
+
+  deleteContact(contact: any) {
+    this.http.post(this.backendUrl + 'delete_contact.php',
+      { contact_id: contact.contact_id }, { responseType: 'text' })
+      .subscribe((result: any) => {
+        result = JSON.parse(result);
+        if (result.status === 'success') {
+          this.contactService.emitContact(contact, 'delete');
+          this.snackbar.show(result.message, 'success');
+          this.overlay.hide();
+        } else {
+          this.snackbar.show(result.message, 'error');
+        }
+      });
+  }
 }
