@@ -1,1 +1,12 @@
-<p>dialog works!</p>
+<div class="wrapper" *ngIf="show">
+  <div class="content">
+    <div class="header">
+      <h3>Are you sure?</h3>
+    </div>
+    <p>{{ object.message }}</p>
+    <div class="buttons">
+      <button (click)="cancel()" class="btn-secondary">Cancel</button>
+      <button (click)="confirm()" class="delete btn-secondary">Ok</button>
+    </div>
+  </div>
+</div>
