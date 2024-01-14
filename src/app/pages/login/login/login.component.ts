@@ -23,22 +23,17 @@ export class LoginComponent {
   });
 
 
-  //TODO: Error handling
   onSubmit() {
     this.http.post('http://localhost/backend/verify_user.php', this.signinForm.value)
       .subscribe((result: any) => {
         if (result.status === 'success') {
-          this.snackbar.show('You logged in seccussfully.', 'success');
+          this.snackbar.show(result.message, 'success');
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 1000);
         } else {
-          this.snackbar.show('Something went wrong. Wrong password?', 'error');
+          this.snackbar.show(result.message, 'error');
         }
       });
-  }
-
-  showSnackbar() {
-    this.snackbar.show('This is a test message', 'success');
   }
 }

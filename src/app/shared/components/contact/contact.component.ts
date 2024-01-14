@@ -113,6 +113,7 @@ export class ContactComponent implements OnInit {
       });
   }
 
+  //TODO: zeige namen des zu löschenden Kontakts an
   deleteContact(contact: any) {
     this.dialogService.confirm('This contact will be permanently deleted.').then((confirmed) => {
       if (confirmed) {

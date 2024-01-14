@@ -11,6 +11,8 @@ import { DialogService } from '../../services/dialog.service';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
+//TODO: Clear funtion hinzufügen
+//TODO: Speichern vom input in localstorage
 export class AddTaskCompComponent implements OnInit {
   @Input() directlyAssigned: any = null;
   @Input() status: string = 'todo';
@@ -171,7 +173,8 @@ export class AddTaskCompComponent implements OnInit {
   }
 
   deleteTask(task: any) {
-    this.dialogService.confirm('This task will be permanently deleted.').then((result) => {
+    console.log(task);
+    this.dialogService.confirm('"' + task.title + '"-Task will be permanently deleted.').then((result) => {
       if (result) {
         this.http.post(this.backendUrl + 'delete_task.php',
           task, { responseType: 'text' })
