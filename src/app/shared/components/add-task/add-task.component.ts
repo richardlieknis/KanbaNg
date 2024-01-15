@@ -19,7 +19,7 @@ export class AddTaskCompComponent implements OnInit {
   @Input() taskEdit: any = null;
 
   private backendUrl = "http://localhost/backend/";
-  private categoryDictionary: any = {};
+  // private categoryDictionary: any = {};
 
   public addTaskType: string = 'show';
   public categoryColors = ['red', 'blue', 'orange', 'green', 'yellow', 'purple', 'pink', 'brown'];
@@ -66,7 +66,7 @@ export class AddTaskCompComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getCategoryDict();
+    // this.getCategoryDict();
     this.getContacts();
     this.getCategories();
     if (this.taskEdit) {
@@ -74,17 +74,32 @@ export class AddTaskCompComponent implements OnInit {
     } else {
       this.setStatus(this.status);
       this.setCurrentDate();
-      if (this.directlyAssigned) {
-        this.assignees.push(this.toNumber(this.directlyAssigned.contact_id));
-        this.taskForm.get('assignees')?.setValue([this.toNumber(this.directlyAssigned.contact_id)]);
-      }
+      this.processDirectlyAssigned();
     }
+    this.listenToTaskType();
+    this.listenToTaskStatus();
+  }
+
+  listenToTaskType() {
     this.taskService.addTaskType.subscribe((type: string) => {
       this.addTaskType = type;
     });
+  }
+
+  listenToTaskStatus() {
     this.taskService.taskStatus.subscribe((status: string) => {
       this.taskForm.get('status')?.setValue(status);
     });
+  }
+
+  /**
+   * Process task when it is directly assigned to a contact
+   */
+  processDirectlyAssigned() {
+    if (this.directlyAssigned) {
+      this.assignees.push(this.toNumber(this.directlyAssigned.contact_id));
+      this.taskForm.get('assignees')?.setValue([this.toNumber(this.directlyAssigned.contact_id)]);
+    }
   }
 
   /**
@@ -118,9 +133,10 @@ export class AddTaskCompComponent implements OnInit {
     } else {
       this.status = 'todo';
     }
-
     this.taskForm.get('status')?.setValue(this.status);
   }
+
+
   getContacts() {
     this.sql.getContacts().subscribe((data) => {
       this.contacts = data.contacts;
@@ -134,11 +150,13 @@ export class AddTaskCompComponent implements OnInit {
     });
   }
 
-  getCategoryDict() {
-    this.taskService.createCategoryDictionary().subscribe((data: any) => {
-      this.categoryDictionary = data;
-    });
-  }
+
+  // getCategoryDict() {
+  //   this.taskService.createCategoryDictionary().subscribe((data: any) => {
+  //     this.categoryDictionary = data;
+  //   });
+  // }
+
 
   onSubmit() {
     if (this.taskEdit && this.taskForm.valid) {
@@ -150,6 +168,7 @@ export class AddTaskCompComponent implements OnInit {
       this.snackbar.show('Please fill all the required fields', 'error');
     }
   }
+
 
   createTask() {
     this.writeTaskOnDb(this.taskForm.value);
@@ -172,31 +191,31 @@ export class AddTaskCompComponent implements OnInit {
       });
   }
 
+
   deleteTask(task: any) {
-    console.log(task);
-    this.dialogService.confirm('"' + task.title + '"-Task will be permanently deleted.').then((result) => {
-      if (result) {
-        this.http.post(this.backendUrl + 'delete_task.php',
-          task, { responseType: 'text' })
-          .subscribe((result: any) => {
-            result = JSON.parse(result);
-            this.snackbar.show(result.message, result.status);
-            if (result.status === 'success') {
-              this.taskService.emitDeleteTask(task);
-              this.overlay.hide();
-            }
-          });
-      }
-    });
+    this.dialogService.confirm('"' + task.title + '"-Task will be permanently deleted.')
+      .then((result) => {
+        if (result) {
+          this.http.post(this.backendUrl + 'delete_task.php',
+            task, { responseType: 'text' })
+            .subscribe((result: any) => {
+              result = JSON.parse(result);
+              this.snackbar.show(result.message, result.status);
+              if (result.status === 'success') {
+                this.taskService.emitDeleteTask(task);
+                this.overlay.hide();
+              }
+            });
+        }
+      });
   }
+
 
   createNewCategory() {
     let input = (document.getElementById('category') as HTMLInputElement).value;
-    if (input.length <= 0) {
-      this.snackbar.show('Please enter a category name', 'error');
-    } else if (input.length >= 10) {
-      this.snackbar.show('Category name is too long. Max 10 characters', 'error');
-    } else {
+    if (input.length <= 0) { this.snackbar.show('Please enter a category name', 'error'); }
+    else if (input.length >= 10) { this.snackbar.show('Category name is too long. Max 10 characters', 'error'); }
+    else {
       this.snackbar.show('Category created', 'success');
       this.categoryInputActive = false;
       this.newCategory = {
@@ -223,6 +242,7 @@ export class AddTaskCompComponent implements OnInit {
       });
   }
 
+
   wirteCategoryOnDb(category: any) {
     this.http.post(this.backendUrl + 'create_category.php',
       category, { responseType: 'text' })
@@ -235,6 +255,7 @@ export class AddTaskCompComponent implements OnInit {
         }
       });
   }
+
 
   addSubtask() {
     let input = (document.getElementById('subtask') as HTMLInputElement).value;
@@ -253,30 +274,33 @@ export class AddTaskCompComponent implements OnInit {
     }
   }
 
+
   /**
    * Add or remove assignee with its ID
    * @param checkbox HTMLInputElement
    * @param id contact id
    */
   addAssignee(checkbox: HTMLInputElement, id: string) {
-    if (!(this.directlyAssigned === this.toNumber(id)) && this.directlyAssigned !== null) {
-      return;
-    }
+    // if task is directly assigned to a contact, only this contact can be assigned at first
+    if (!(this.directlyAssigned === this.toNumber(id))
+      && this.directlyAssigned !== null) { return; }
+
     const numericId = Number(id);
-    this.assignees = this.taskForm.get('assignees')?.value as number[];
+    this.taskEdit ? this.assignees = this.taskForm.get('assignees')?.value as number[] : null;
+    // this.assignees = this.taskForm.get('assignees')?.value as number[];
 
     if (!this.assignees.includes(this.toNumber(id))) {
       this.assignees.push(numericId);
       checkbox.checked = true;
-    } else {
-      this.assignees.splice(this.assignees.indexOf(this.toNumber(id)), 1);
-    }
+    } else { this.assignees.splice(this.assignees.indexOf(this.toNumber(id)), 1); }
     this.taskForm.get('assignees')?.setValue(this.assignees);
   }
+
 
   filterDuplicates(array: any) {
     return [...new Set(array)]
   }
+
 
   addCategory(category: any) {
     this.categoryText = category.name;
@@ -295,6 +319,21 @@ export class AddTaskCompComponent implements OnInit {
     });
     return lastId;
   }
+
+
+  clearAddTaskInput() {
+    this.assignees = [];
+    this.subtasks = [];
+    this.category = undefined;
+    this.categoryText = 'Select or create a category';
+    this.selectedPriority = '';
+    this.selectedColor = 'red';
+    this.taskForm.reset();
+    this.taskForm.get('status')?.setValue(this.status);
+    this.setCurrentDate();
+    this.snackbar.show('Task input cleared.', 'success');
+  }
+
 
   toNumber(id: string) {
     return Number(id);

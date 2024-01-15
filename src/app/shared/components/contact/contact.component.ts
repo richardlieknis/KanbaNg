@@ -22,7 +22,7 @@ export class ContactComponent implements OnInit {
   private backendUrl = 'http://localhost/backend/';
 
   public minNameLength = 5;
-  public minPhoneLength = 10;
+  public minPhoneLength = 5;
   public minLocationLength = 5;
 
   public submitType: string = '';
@@ -31,7 +31,7 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(this.minNameLength)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-    phone: new FormControl('', []),
+    phone: new FormControl('', [Validators.pattern("^[0-9]*$"), Validators.minLength(this.minPhoneLength)]),
     location: new FormControl('', [Validators.minLength(this.minLocationLength)]),
   });
 
@@ -76,7 +76,7 @@ export class ContactComponent implements OnInit {
       .subscribe((result: any) => {
         result = JSON.parse(result);
         if (result.status === 'success') {
-          this.contactService.emitContact(this.contactForm.value);
+          this.contactService.emitContact(this.contactForm.value, 'add');
           this.snackbar.show(result.message, 'success');
           this.overlay.hide();
         } else {

@@ -58,15 +58,12 @@ export class ContactsComponent implements OnInit {
         this.processContactData(this.contacts);
       }
       if (state.type === 'delete') {
-        console.log("DELETE CONTACT");
         this.contacts = this.contacts.filter((contact: any) => {
-          console.log("NORMAL: ", contact);
-          console.log("STATE: ", state.contact);
           return contact.contact_id !== state.contact.contact_id
         });
         this.processContactData(this.contacts);
       }
-      else {
+      if (state.type === 'add') {
         this.contacts.push(state.contact);
         this.selectedContact = state.contact;
         this.processContactData(this.contacts);
