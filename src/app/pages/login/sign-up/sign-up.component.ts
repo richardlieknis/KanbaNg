@@ -12,10 +12,10 @@ export class SignUpComponent {
   public minNameLength = 5;
   public minPasswordLength = 5;
 
-  private backendUrl = 'http://localhost/backend/';
+  private backendUrl = 'http://localhost:8000/api/';
 
   signupForm: FormGroup = new FormGroup({
-    username: new FormControl('', [Validators.required, Validators.minLength(this.minNameLength)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(this.minNameLength)]),
     email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     password: new FormControl('', [Validators.required, Validators.minLength(this.minPasswordLength)]),
   });
@@ -31,19 +31,36 @@ export class SignUpComponent {
    * Creates a new user & contact in SQL database via PHP
    * and returns a success/error message via snackbar
    */
+  // onSubmit() {
+  //   this.http.post(this.backendUrl + 'create_user.php',
+  //     this.signupForm.value, { responseType: 'text' })
+  //     .subscribe((result: any) => {
+  //       result = JSON.parse(result);
+  //       if (result.status === 'success') {
+  //         this.snackbar.show('Your account has been created successfully!', 'success');
+  //         setTimeout(() => {
+  //           this.router.navigate(['/login']);
+  //         }, 1000);
+  //       } else {
+  //         this.snackbar.show('Something went wrong. :(', 'error');
+  //       }
+  //     });
+  // }
+
   onSubmit() {
-    this.http.post(this.backendUrl + 'create_user.php',
-      this.signupForm.value, { responseType: 'text' })
-      .subscribe((result: any) => {
-        result = JSON.parse(result);
-        if (result.status === 'success') {
-          this.snackbar.show('Your account has been created successfully!', 'success');
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 1000);
-        } else {
-          this.snackbar.show('Something went wrong. :(', 'error');
-        }
-      });
+    const http$ = this.http.post(this.backendUrl + 'register',
+      this.signupForm.value);
+
+    http$.subscribe({
+      next: (result: any) => {
+        this.snackbar.show('Your account has been created successfully!', 'success');
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1000);
+      },
+      error: (error: any) => {
+        this.snackbar.show(error.error.detail, 'error');
+      }
+    });
   }
 }
