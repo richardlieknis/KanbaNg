@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchSqlService } from '../../../shared/services/fetch-sql.service';
 import { TaskService } from '../../../shared/services/task.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +9,7 @@ import { TaskService } from '../../../shared/services/task.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
+  public loggedUsername = 'Guest';
   public allTasks: any[] = [];
 
   public toDo: any[] = [];
@@ -24,11 +26,20 @@ export class DashboardComponent implements OnInit {
   constructor(
     private sql: FetchSqlService,
     private taskService: TaskService,
+    private http: HttpClient,
   ) { }
 
   ngOnInit() {
     this.setCurrentTimeGreeting();
     this.getAllTasks();
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    this.http.get('http://localhost:8000/api/user', { withCredentials: true })
+      .subscribe((result: any) => {
+        this.loggedUsername = result.name;
+      });
   }
 
   getAllTasks() {
