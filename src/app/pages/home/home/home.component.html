@@ -54,7 +54,7 @@
       </div>
       <div (click)="toggleMenuDropdown()" class="user">
         <div id="menu" class="user-button">
-          <div class="user-name">John Doe</div>
+          <div class="user-name">{{ loggedUsername }}</div>
           <div class="user-avatar">
             <img src="assets/images/1.jpg" alt="avatar" />
           </div>
@@ -69,7 +69,7 @@
               <img src="assets/images/help.svg" alt="" />
               <span>Help</span>
             </li>
-            <li routerLink="login">
+            <li (click)="logout()">
               <img src="assets/images/logout.svg" alt="" />
               <span>Logout</span>
             </li>
