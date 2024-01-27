@@ -3,7 +3,6 @@ import { Component, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { Router } from '@angular/router';
-import { CsrfTokenService } from '../../../shared/services/csrf-token.service';
 import e from 'express';
 
 @Component({
@@ -17,8 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private snackbar: SnackbarService,
-    private router: Router,
-    private csrfTokenService: CsrfTokenService
+    private router: Router
   ) { }
 
   signinForm: FormGroup = new FormGroup({
@@ -46,7 +44,8 @@ export class LoginComponent implements OnInit {
   // }
 
   onSubmit() {
-    const http$ = this.http.post(this.backendUrl + 'login', this.signinForm.value);
+    const http$ = this.http.post(this.backendUrl + 'login', this.signinForm.value,
+      { withCredentials: true });
     http$.subscribe({
       next: (result: any) => {
         this.snackbar.show(result.message, 'success');
