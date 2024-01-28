@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { Router } from '@angular/router';
 import e from 'express';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private snackbar: SnackbarService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) { }
 
   signinForm: FormGroup = new FormGroup({
@@ -44,18 +46,20 @@ export class LoginComponent implements OnInit {
   // }
 
   onSubmit() {
-    const http$ = this.http.post(this.backendUrl + 'login', this.signinForm.value,
-      { withCredentials: true });
-    http$.subscribe({
-      next: (result: any) => {
-        this.snackbar.show(result.message, 'success');
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 1000);
-      },
-      error: (error: any) => {
-        this.snackbar.show(error.error.detail, 'error');
-      }
-    });
+    this.authService.login(this.signinForm.value);
+    // const http$ = this.http.post(this.backendUrl + 'login', this.signinForm.value,
+    //   { withCredentials: true });
+    // http$.subscribe({
+    //   next: (result: any) => {
+    //     console.log("result: ", result.jwt);
+    //     this.snackbar.show(result.message, 'success');
+    //     setTimeout(() => {
+    //       this.router.navigate(['/home']);
+    //     }, 1000);
+    //   },
+    //   error: (error: any) => {
+    //     this.snackbar.show(error.error.detail, 'error');
+    //   }
+    // });
   }
 }

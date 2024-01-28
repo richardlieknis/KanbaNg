@@ -12,6 +12,7 @@ import { AddTaskComponent } from './pages/home/add-task/add-task.component';
 import { ContactsComponent } from './pages/home/contacts/contacts.component';
 import { LegalNoticeComponent } from './pages/home/legal-notice/legal-notice.component';
 import { HelpComponent } from './pages/home/help/help.component';
+import { authGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: '', component: HomeComponent, children: [
+    path: '', component: HomeComponent, canActivate: [authGuard], children: [
       { path: 'home', component: DashboardComponent },
       { path: 'board', component: BoardComponent },
       { path: 'add-task', component: AddTaskComponent },
