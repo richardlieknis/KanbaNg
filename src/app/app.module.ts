@@ -32,6 +32,7 @@ import { ContactComponent } from './shared/components/contact/contact.component'
 import { ShowTaskComponent } from './shared/components/show-task/show-task.component';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
+import { authGuard } from './shared/guard/auth.guard';
 
 @NgModule({
   declarations: [
