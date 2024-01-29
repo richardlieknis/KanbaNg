@@ -4,6 +4,7 @@ import { SnackbarService } from '../../../shared/services/snackbar.service';
 import e from 'express';
 import { OverlayService } from '../../../shared/services/overlay.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
     private snackbar: SnackbarService,
     public overlayService: OverlayService,
     private http: HttpClient,
+    public authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -52,21 +54,6 @@ export class HomeComponent implements OnInit {
       .subscribe((result: any) => {
         this.loggedUsername = result.name;
       });
-  }
-
-  logout() {
-    const http$ = this.http.post('http://localhost:8000/api/logout', { withCredentials: true });
-    http$.subscribe({
-      next: (result: any) => {
-        this.snackbar.show(result.message, 'success');
-        setTimeout(() => {
-          this.router.navigate(['/login']);
-        }, 1000);
-      },
-      error: (error: any) => {
-        this.snackbar.show(error.error.detail, 'error');
-      }
-    });
   }
 
   // Close menu dropdown when click outside or on a link
