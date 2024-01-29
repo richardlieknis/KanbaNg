@@ -31,4 +31,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.signinForm.value);
   }
+
+  loginAsGuest() {
+    this.signinForm.setValue({
+      email: this.authService.guestEmail,
+      password: this.authService.guestPassword
+    });
+    this.onSubmit();
+  }
 }

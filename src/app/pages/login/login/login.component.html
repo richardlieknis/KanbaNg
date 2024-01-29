@@ -49,7 +49,10 @@
       </button>
       <!-- Guest Login -->
     </form>
-    <button routerLink="/home" class="btn-secondary w-full text-center mb-3">
+    <button
+      (click)="loginAsGuest()"
+      class="btn-secondary w-full text-center mb-3"
+    >
       Guest
     </button>
   </div>
