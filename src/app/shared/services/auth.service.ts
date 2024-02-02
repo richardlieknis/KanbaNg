@@ -55,4 +55,35 @@ export class AuthService {
     });
   }
 
+  resetPassword(data: any) {
+    return this.http.post(this.backendUrl + 'reset-password', data, { withCredentials: true, responseType: 'json' })
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.snackbar.show(res.message, 'success');
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1000);
+        },
+        error: (err: any) => {
+          this.snackbar.show(err.error.detail, 'error');
+        }
+      });
+  }
+
+  changePassword(data: any) {
+    return this.http.patch(this.backendUrl + 'complete-reset-password', data, { withCredentials: true, responseType: 'json' })
+      .subscribe({
+        next: (res: any) => {
+          this.snackbar.show(res.message, 'success');
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1000);
+        },
+        error: (err: any) => {
+          this.snackbar.show(err.error.detail, 'error');
+        }
+      });
+  }
+
 }
