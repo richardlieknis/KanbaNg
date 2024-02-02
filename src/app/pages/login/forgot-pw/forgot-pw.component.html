@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="login-container">
+  <form (ngSubmit)="onSubmit()" class="login-container">
     <div class="headline poppins">
       Don't worry! We will send you an email with the instructions to reset your
       password.
@@ -7,23 +7,28 @@
     <div class="login-input">
       <div class="input-box">
         <div class="input">
-          <input type="email" placeholder="Email" spellcheck="false" />
+          <input
+            [formControl]="emailForm"
+            type="email"
+            placeholder="Email"
+            spellcheck="false"
+          />
         </div>
         <div class="icon">
           <img src="assets/images/mail_icon.svg" alt="email" />
         </div>
       </div>
       <!-- Login Button -->
-      <button routerLink="" class="btn-primary w-full text-center mb-3">
+      <button type="submit" class="btn-primary w-full text-center mb-3">
         Reset my password
       </button>
       <!-- Guest Login -->
-      <button routerLink="" class="btn-secondary w-full text-center mb-3">
+      <button class="btn-secondary w-full text-center mb-3">
         <div class="flex items-center justify-center gap-2">
           <!-- <img src="assets/images/arrow_left.svg" alt="arrow-back" /> -->
           <span> Nevermind </span>
         </div>
       </button>
     </div>
-  </div>
+  </form>
 </div>
