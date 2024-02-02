@@ -1,10 +1,18 @@
 <div class="wrapper">
-  <div class="login-container">
+  <form
+    [formGroup]="passwordForm"
+    (ngSubmit)="onSubmit()"
+    class="login-container"
+  >
     <div class="headline poppins">Reset your password</div>
     <div class="login-input">
       <div class="input-box">
         <div class="input">
-          <input type="password" placeholder="New Password" />
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="New Password"
+          />
         </div>
         <div class="icon">
           <img src="assets/images/key_icon.svg" alt="email" />
@@ -13,7 +21,11 @@
       <!--  -->
       <div class="input-box">
         <div class="input">
-          <input type="password" placeholder="Confirm Password" />
+          <input
+            formControlName="password2"
+            type="password"
+            placeholder="Confirm Password"
+          />
         </div>
         <div class="icon">
           <img src="assets/images/key_icon.svg" alt="key" />
@@ -21,12 +33,10 @@
       </div>
     </div>
     <!-- Login Button -->
-    <button routerLink="/sign-in" class="btn-primary w-full text-center mb-3">
+    <button type="submit" class="btn-primary w-full text-center mb-3">
       Change Password
     </button>
     <!-- Guest Login -->
-    <button routerLink="" class="btn-secondary w-full text-center mb-3">
-      Nevermind
-    </button>
-  </div>
+    <button class="btn-secondary w-full text-center mb-3">Nevermind</button>
+  </form>
 </div>
