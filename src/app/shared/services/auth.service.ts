@@ -27,6 +27,7 @@ export class AuthService {
       .subscribe({
         next: (res: any) => {
           this._isLoggedIn$.next(true);
+          localStorage.setItem('jwt', res.token);
           this.snackbar.show(res.message, 'success');
           setTimeout(() => {
             this.router.navigate(['/home']);
@@ -43,6 +44,7 @@ export class AuthService {
     http$.subscribe({
       next: (result: any) => {
         this._isLoggedIn$.next(false);
+        localStorage.removeItem('jwt');
         document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; //NOTE: funtioniert nicht
         this.snackbar.show(result.message, 'success');
         setTimeout(() => {
@@ -72,7 +74,7 @@ export class AuthService {
   }
 
   changePassword(data: any) {
-    return this.http.patch(this.backendUrl + 'complete-reset-password', data, { withCredentials: true, responseType: 'json' })
+    return this.http.patch(this.backendUrl + 'complete-reset-password/' + data.token + "/", data.password)
       .subscribe({
         next: (res: any) => {
           this.snackbar.show(res.message, 'success');
